@@ -7,7 +7,7 @@ namespace Pet.Repository.Infrastructure
 {
     public class PetContext : DbContext
     {
-        private AzureSqlConnection _connection;
+        private readonly AzureSqlConnection _connection;
         public PetContext()
         {
 
@@ -19,6 +19,8 @@ namespace Pet.Repository.Infrastructure
 
         //public DbSet<Client> Clients { get; set; }
         public DbSet<ClientPet> Pets { get; set; }
+        public DbSet<EnderecosPrestador> EnderecosPrestadores { get; set; }
+        public DbSet<Prestador> Prestadores { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

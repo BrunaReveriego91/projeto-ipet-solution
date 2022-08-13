@@ -7,6 +7,7 @@ using Pet.WebAPI.Repositories;
 using Pet.WebAPI.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Pet.WebAPI.Controllers;
 
 namespace Pet.WebAPI
 {
@@ -26,18 +27,21 @@ namespace Pet.WebAPI
         {
 
             services.AddControllers().AddNewtonsoftJson();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-
             services.Configure<AzureSqlConnection>(options => Configuration.GetSection("AzureSQLConnection").Bind(options)).ToString();
-            //services.AddDbContext<PetContext>(options =>
-            //    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddDbContext<PetContext>(options =>
+                options.UseSqlServer(Configuration.GetSection("AzureSQLConnection")["DefaultConnection"]));
 
             //TODO extension method for register services
             services.AddScoped<IClientPetRepository, ClientPetRepository>();
             services.AddTransient<IClientPetService, ClientPetService>();
+
+            //services.AddTransient<IPrestadoresController, PrestadoresController>();
+            services.AddScoped<IPrestadoresRepository, PrestadoresRepository>();
+            services.AddTransient<IPrestadoresService, PrestadoresService>();
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
@@ -46,19 +50,12 @@ namespace Pet.WebAPI
             app.UseSwaggerUI();
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-
-            app.UseAuthorization();
-
-
         }
-
-
-
     }
 }
