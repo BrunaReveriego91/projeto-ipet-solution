@@ -4,7 +4,7 @@ namespace Pet.WebAPI.Interfaces.Repositories
 {
     public interface IClientesRepository
     {
-        Task<Cliente> Add(Cliente clientPet);
+        Task<Cliente> Add(Cliente clientePet);
         Cliente? Get(int id);
         Task Update(Cliente clientPet);
         Task Delete(Cliente cliente);

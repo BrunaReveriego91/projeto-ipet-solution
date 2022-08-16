@@ -20,12 +20,6 @@ namespace Pet.WebAPI.Repositories
         }
 
 
-        public override async Task<Cliente> Add(Cliente clientPet)
-        {
-            return await base.Add(clientPet);
-
-        }
-
         public override async Task Delete(Cliente cliente)
         {
             await base.Delete(cliente);

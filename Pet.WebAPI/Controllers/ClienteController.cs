@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pet.WebAPI.Domain;
 using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Domain.Model;
 using Pet.WebAPI.Interfaces.Controllers;
 using Pet.WebAPI.Interfaces.Services;
 
@@ -21,7 +22,7 @@ namespace Pet.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCliente([FromBody] Cliente clientPet)
+        public async Task<IActionResult> PostCliente([FromBody] NovoCliente clientPet)
         {
             var result = await _clientPetService.Add(clientPet);
             return CreatedAtAction(nameof(GetCliente), new { id = result.Id }, result);
@@ -40,7 +41,7 @@ namespace Pet.WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        public async Task<IActionResult> PutCliente(int id, AlterarCliente cliente)
         {
             try
             {
