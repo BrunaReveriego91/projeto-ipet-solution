@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -11,9 +12,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220816013916_FkServicosPrestador")]
+    partial class FkServicosPrestador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,9 +110,6 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -130,17 +129,10 @@ namespace Pet.WebAPI.Migrations
                     b.Property<bool>("SemNumero")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UF")
                         .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
-
-                    b.Property<bool>("WhatApp")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -162,20 +154,10 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("WhatApp")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -189,9 +171,6 @@ namespace Pet.WebAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -215,9 +194,6 @@ namespace Pet.WebAPI.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("PrestadorId")
                         .HasColumnType("int");
