@@ -39,12 +39,12 @@ namespace Pet.WebAPI.Repositories
 
         public async Task Update(ClientPet clientPet)
         {
-            var clientPetObj = context.Pets.Where(x => 
-            x.Owner == clientPet.Owner &&
-            x.Name == clientPet.Name
+            var clientPetObj = context.Pets.Where(x =>
+            x.IdCliente == clientPet.IdCliente &&
+            x.NomeCompleto == clientPet.NomeCompleto
             ).FirstOrDefault();
 
-            if(clientPetObj != null)
+            if (clientPetObj != null)
             {
                 context.Pets.Update(clientPetObj);
                 await context.SaveChangesAsync();

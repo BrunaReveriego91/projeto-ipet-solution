@@ -17,7 +17,7 @@ namespace Pet.Repository.Infrastructure
             _connection = conn.Value;
         }
 
-        //public DbSet<Client> Clients { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<ClientPet> Pets { get; set; }
         public DbSet<EnderecoPrestador> EnderecosPrestadores { get; set; }
         public DbSet<Prestador> Prestadores { get; set; }
@@ -44,19 +44,7 @@ namespace Pet.Repository.Infrastructure
 
         private void ConfigureClientPet(ModelBuilder constructorModel)
         {
-            constructorModel.Entity<ClientPet>(entity =>
-            {
-                entity.ToTable("tbPet");
-                entity.HasKey(c => c.Id).HasName("id");
-                entity.Property(c => c.Id).HasColumnName("id").ValueGeneratedOnAdd();
-                entity.Property(c => c.Name).HasColumnName("name").HasMaxLength(100);
-                entity.Property(c => c.Type).HasColumnName("type").HasMaxLength(50);
-                entity.Property(c => c.Gender).HasColumnName("gender").HasMaxLength(2);
-                entity.Property(c => c.Color).HasColumnName("color").HasMaxLength(30);
-                entity.Property(c => c.Birthday).HasColumnName("birthday").HasMaxLength(20);
-                entity.Property(c => c.Owner).HasColumnName("owner").HasMaxLength(100);
-                entity.Property(c => c.Breed).HasColumnName("breed").HasMaxLength(50);
-            });
+       
         }
 
 
