@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class EnderecoPrestador
+    public class EnderecoCliente
     {
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Prestador))]
-        public int PrestadorId { get; set; }
+        [ForeignKey(nameof(Cliente))]
+        public int ClienteId { get; set; }
 
         [Required]
         [StringLength(256)]
@@ -36,10 +36,10 @@ namespace Pet.WebAPI.Domain.Entities
 
         [Required]
         [StringLength(2)]
-        public string? UF { get; set; } 
+        public string? UF { get; set; }
 
         [Required]
         [StringLength(8)]
-        public string? CEP { get; set; } 
+        public string? CEP { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace Pet.WebAPI.Domain.Entities
 
         [Required]
         [StringLength(256)]
-        public string NomeCompleto { get; set; } = "";
+        public string? NomeCompleto { get; set; } 
 
         [Required]
         [StringLength(14)]

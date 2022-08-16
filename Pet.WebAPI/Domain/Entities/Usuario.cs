@@ -9,13 +9,19 @@ namespace Pet.WebAPI.Domain.Entities
 
         [Required]
         [StringLength(256)]
-        public string NomeCompleto { get; set; } = "";
+        public string? NomeCompleto { get; set; }
 
         [Required]
-        public DateTime DataNascimento { get; set; }
+        [StringLength(256)]
+        public string? Senha { get; set; }
 
         [Required]
         [EmailAddress]
-        public string EMail { get; set; } = "";
+        public string? Email { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string? DataCadastro { get; set; }
+
     }
 }
