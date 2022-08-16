@@ -18,7 +18,7 @@ namespace Pet.Repository.Infrastructure
         }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<ClientPet> Pets { get; set; }
+        public DbSet<Pets> Pets { get; set; }
         public DbSet<EnderecoPrestador> EnderecosPrestadores { get; set; }
         public DbSet<Prestador> Prestadores { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }

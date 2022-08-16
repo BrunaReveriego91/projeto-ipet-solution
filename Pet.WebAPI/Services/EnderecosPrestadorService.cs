@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
-using Pet.WebAPI.Repositories;
-using System.Linq.Expressions;
+using Pet.WebAPI.Interfaces.Repositories;
 
 namespace Pet.WebAPI.Services
 {

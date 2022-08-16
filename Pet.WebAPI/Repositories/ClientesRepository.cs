@@ -4,14 +4,14 @@ using Pet.WebAPI.Interfaces.Repositories;
 
 namespace Pet.WebAPI.Repositories
 {
-    public class ClientPetRepository : IClientPetRepository, IDisposable
+    public class ClientesRepository : IClienteRepository, IDisposable
     {
         private PetContext context;
-        public ClientPetRepository()
+        public ClientesRepository()
         {
             this.context = new PetContext();
         }
-        public async Task Add(ClientPet clientPet)
+        public async Task Add(Cliente clientPet)
         {
 
             context.Add(clientPet);
@@ -21,9 +21,9 @@ namespace Pet.WebAPI.Repositories
 
         public async Task Delete(int id)
         {
-            ClientPet clientPet = new ClientPet() { Id = id };
-            context.Pets.Attach(clientPet);
-            context.Pets.Remove(clientPet);
+            Cliente clientPet = new Cliente() { Id = id };
+            context.Clientes.Attach(clientPet);
+            context.Clientes.Remove(clientPet);
             await context.SaveChangesAsync();
         }
 
@@ -32,21 +32,21 @@ namespace Pet.WebAPI.Repositories
             context.Dispose();
         }
 
-        public async Task<List<ClientPet>> ListClientPets()
+        public async Task<List<Cliente>> ListClientPets()
         {
-            return await Task.Run(() => context.Pets.ToList());
+            return await Task.Run(() => context.Clientes.ToList());
         }
 
-        public async Task Update(ClientPet clientPet)
+        public async Task Update(Cliente clientPet)
         {
             var clientPetObj = context.Pets.Where(x =>
-            x.IdCliente == clientPet.IdCliente &&
+            x.IdCliente == clientPet.Id &&
             x.NomeCompleto == clientPet.NomeCompleto
             ).FirstOrDefault();
 
             if (clientPetObj != null)
             {
-                context.Pets.Update(clientPetObj);
+                context.Clientes.Update(clientPetObj);
                 await context.SaveChangesAsync();
             }
         }

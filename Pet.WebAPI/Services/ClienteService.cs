@@ -4,16 +4,16 @@ using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Services
 {
-    public class ClientPetService : IClientPetService
+    public class ClienteService : IClienteService
     {
-        private IClientPetRepository _clientPetRepository;
+        private IClienteRepository _clientPetRepository;
 
-        public ClientPetService(IClientPetRepository clientPetRepository)
+        public ClienteService(IClienteRepository clientPetRepository)
         {
             _clientPetRepository = clientPetRepository;
         }
 
-        public async Task Add(ClientPet clientPet)
+        public async Task Add(Cliente clientPet)
         {
             await _clientPetRepository.Add(clientPet);
         }
@@ -23,12 +23,12 @@ namespace Pet.WebAPI.Services
             await _clientPetRepository.Delete(id);
         }
 
-        public async Task<List<ClientPet>> ListClientPets()
+        public async Task<List<Cliente>> ListClientPets()
         {
             return await Task.Run(() => _clientPetRepository.ListClientPets());
         }
 
-        public async Task Update(ClientPet clientPet)
+        public async Task Update(Cliente clientPet)
         {
             await _clientPetRepository.Update(clientPet);
         }

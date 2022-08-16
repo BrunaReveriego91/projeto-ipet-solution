@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class ClientPet
+    public class Pets
     {
         [Key]
         public int Id { get; set; }

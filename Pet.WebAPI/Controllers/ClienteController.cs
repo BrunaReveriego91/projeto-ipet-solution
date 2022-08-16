@@ -5,34 +5,34 @@ using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
 {
-    [Route("petclient")]
-    [ControllerName("ClientPet")]
+    [Route("cliente")]
+    [ControllerName("Cliente")]
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
-    public class ClientPetController : Controller
+    public class ClienteController : Controller
     {
-        private readonly IClientPetService _clientPetService;
+        private readonly IClienteService _clientPetService;
 
-        public ClientPetController(IClientPetService clientPetService)
+        public ClienteController(IClienteService clientPetService)
         {
             _clientPetService = clientPetService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddClientPetAsync([FromBody] ClientPet clientPet)
+        public async Task<IActionResult> AddClientPetAsync([FromBody] Cliente clientPet)
         {
             await _clientPetService.Add(clientPet);
             return Ok();
         }
 
         [HttpGet]
-        public async Task<List<ClientPet>> GetClientPetAsync()
+        public async Task<List<Cliente>> GetClientPetAsync()
         {
             return await _clientPetService.ListClientPets();
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateClientPetAsync([FromBody] ClientPet clientPet)
+        public async Task<IActionResult> UpdateClientPetAsync([FromBody] Cliente clientPet)
         {
             await _clientPetService.Update(clientPet);
             return Ok();
