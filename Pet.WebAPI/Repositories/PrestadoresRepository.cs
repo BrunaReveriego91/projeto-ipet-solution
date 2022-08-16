@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pet.Repository.Infrastructure;
 using Pet.WebAPI.Domain.Entities;
-using System.Linq.Expressions;
 
 namespace Pet.WebAPI.Repositories
 {
@@ -29,6 +28,11 @@ namespace Pet.WebAPI.Repositories
         {
             await base.Delete(prestador);
         }
+
+        public override IEnumerable<Prestador> GetAll()
+        {
+            return base.GetAll();
+        }
     }
 
     public interface IPrestadoresRepository
@@ -37,5 +41,6 @@ namespace Pet.WebAPI.Repositories
         Prestador? Get(int id);
         Task Update(Prestador prestador);
         Task Delete(Prestador prestador);
+        IEnumerable<Prestador> GetAll();
     }
 }

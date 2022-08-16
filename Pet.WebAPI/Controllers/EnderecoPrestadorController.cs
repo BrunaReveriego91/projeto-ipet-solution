@@ -32,8 +32,8 @@ namespace Pet.WebAPI.Controllers
             return Ok();
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<List<EnderecoPrestador>> GetEnderecosPrestador(int prestador_id) 
+        [HttpGet("{prestador_id}")]
+        public ActionResult<List<EnderecoPrestador>> GetEnderecosPrestador(int prestador_id)
         {
             var dados = _service.GetAll(prestador_id);
             if (dados is null) return NoContent();
@@ -43,8 +43,8 @@ namespace Pet.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostEnderecoPrestador([FromBody] NovoEnderecoPrestador endereco)
         {
-            await _service.Add(endereco);
-            return Ok();
+            var result = await _service.Add(endereco);
+            return CreatedAtAction(nameof(GetEnderecosPrestador), new { id = result.PrestadorId }, result);
         }
 
         [HttpPut("{id}")]

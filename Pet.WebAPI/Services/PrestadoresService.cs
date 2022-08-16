@@ -42,6 +42,11 @@ namespace Pet.WebAPI.Services
             return _repository.Get(id);
         }
 
+        public IEnumerable<Prestador> GetPrestadores()
+        {
+            return _repository.GetAll();
+        }
+
         public async Task Update(int id, AlterarPrestador entity)
         {
             var entry = _repository.Get(id);
@@ -71,5 +76,6 @@ namespace Pet.WebAPI.Services
         Prestador? Get(int id);
         Task Update(int id, AlterarPrestador entity);
         Task Delete(int id);
+        IEnumerable<Prestador> GetPrestadores();
     }
 }

@@ -15,7 +15,7 @@ namespace Pet.WebAPI.Services
             _repository = repository;
         }
 
-        public async Task Add(NovoEnderecoPrestador novoEndereco)
+        public async Task<EnderecoPrestador> Add(NovoEnderecoPrestador novoEndereco)
         {
             var endereco = new EnderecoPrestador()
             {
@@ -31,7 +31,7 @@ namespace Pet.WebAPI.Services
                 UF = novoEndereco.UF
             };
 
-            await _repository.Add(endereco);
+            return await _repository.Add(endereco);
         }
 
         public async Task Delete(int id)
@@ -78,7 +78,7 @@ namespace Pet.WebAPI.Services
 
     public interface IEnderecosPrestadorService
     {
-        Task Add(NovoEnderecoPrestador novo);
+        Task<EnderecoPrestador> Add(NovoEnderecoPrestador novo);
 
         /// <summary>
         /// Obtém todos os endereços do Prestador.

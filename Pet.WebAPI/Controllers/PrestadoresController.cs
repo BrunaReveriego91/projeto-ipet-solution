@@ -33,10 +33,11 @@ namespace Pet.WebAPI.Controllers
             return Ok();
         }
 
-        //public IActionResult GetAllPrestador()
-        //{
-        //    //return Ok(_service.Get)
-        //}
+        [HttpGet]
+        public IActionResult GetAllPrestadores()
+        {
+            return Ok(_service.GetPrestadores());
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetPrestador(int id)
@@ -73,7 +74,7 @@ namespace Pet.WebAPI.Controllers
         Task<IActionResult> PostPrestador([FromBody] NovoPrestador prestador);
         Task<IActionResult> PutPrestador(int id, AlterarPrestador prestador);
         IActionResult DeletePrestador(int id);
-        //IActionResult GetAllPrestador();
+        IActionResult GetAllPrestadores();
     }
 
 }

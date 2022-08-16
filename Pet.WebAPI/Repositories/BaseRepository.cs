@@ -37,17 +37,18 @@ namespace Pet.WebAPI.Repositories
             return _context.Find<TEntity>(id);
         }
 
-        public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression = null)
+        public virtual IEnumerable<TEntity> GetAll()
+        {
+            return _context.Set<TEntity>().AsEnumerable();
+        }
+
+        public virtual IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression)
         {
             if (expression is null)
             {
-                return _context.Set<TEntity>().AsEnumerable();
+                throw new ArgumentNullException(nameof(expression));
             }
-            else
-            {
-
-                return _context.Set<TEntity>().Where(expression).AsEnumerable();
-            }
+            return _context.Set<TEntity>().Where(expression).AsEnumerable();
         }
 
         public virtual TEntity? Single(Expression<Func<TEntity, bool>> predicate)
