@@ -12,15 +12,24 @@ namespace Pet.WebAPI.Repositories
             _context = context;
         }
 
-        public virtual async Task Add(TEntity entity)
+        protected TContext DataContext => _context;
+
+        public virtual async Task<TEntity> Add(TEntity entity)
         {
-            await _context.AddAsync(entity);
+            var result = await _context.AddAsync(entity);
             await Commit();
+            return result.Entity;
         }
 
         public async Task Commit()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public virtual async Task Delete(TEntity entity)
+        {
+            _context.Set<TEntity>().Remove(entity);
+            await Commit();
         }
 
         public virtual TEntity? Get(int id)
@@ -45,14 +54,24 @@ namespace Pet.WebAPI.Repositories
         {
             return _context.Set<TEntity>().FirstOrDefault(predicate);
         }
+
+        public virtual async Task Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Attach(entity);
+            var entry = _context.Entry(entity);
+            entry.State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
     }
 
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        Task Add(TEntity entity);
+        Task<TEntity> Add(TEntity entity);
         TEntity? Get(int id);
         TEntity? Single(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression = null);
         Task Commit();
+        Task Update(TEntity entity);
+        Task Delete(TEntity entity);
     }
 }

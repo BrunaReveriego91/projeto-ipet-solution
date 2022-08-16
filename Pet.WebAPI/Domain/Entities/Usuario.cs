@@ -2,7 +2,7 @@
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class Prestador
+    public class Usuario
     {
         [Key]
         public int Id { get; set; }
@@ -12,14 +12,10 @@ namespace Pet.WebAPI.Domain.Entities
         public string NomeCompleto { get; set; } = "";
 
         [Required]
-        [StringLength(14)]
-        public string CPF_CNPJ { get; set; } = "";
+        public DateTime DataNascimento { get; set; }
 
-        public List<EnderecoPrestador> Enderecos { get; set; } 
-
-        public Prestador()
-        {
-            Enderecos = new List<EnderecoPrestador>();
-        }
+        [Required]
+        [EmailAddress]
+        public string EMail { get; set; } = "";
     }
 }

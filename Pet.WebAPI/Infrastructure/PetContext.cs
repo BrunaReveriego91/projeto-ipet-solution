@@ -19,8 +19,9 @@ namespace Pet.Repository.Infrastructure
 
         //public DbSet<Client> Clients { get; set; }
         public DbSet<ClientPet> Pets { get; set; }
-        public DbSet<EnderecosPrestador> EnderecosPrestadores { get; set; }
+        public DbSet<EnderecoPrestador> EnderecosPrestadores { get; set; }
         public DbSet<Prestador> Prestadores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

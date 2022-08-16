@@ -1,12 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class EnderecosPrestador
+    public class EnderecoPrestador
     {
         [Key]
         public int Id { get; set; }
-        
+
+        [ForeignKey(nameof(Prestador))]
+        public int PrestadorId { get; set; }
+
         [Required]
         [StringLength(256)]
         public string Logradouro { get; set; } = "";

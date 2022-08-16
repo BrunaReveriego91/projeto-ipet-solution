@@ -1,4 +1,5 @@
-﻿using Pet.WebAPI.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
 using Pet.WebAPI.Repositories;
 
@@ -13,7 +14,7 @@ namespace Pet.WebAPI.Services
             _repository = repository;
         }
 
-        public async Task Add(NovoPrestador novoPrestador)
+        public async Task<Prestador> Add(NovoPrestador novoPrestador)
         {
             var prestador = new Prestador()
             {
@@ -21,18 +22,54 @@ namespace Pet.WebAPI.Services
                 CPF_CNPJ = novoPrestador.CPF_CNPJ
             };
             
-            await _repository.Add(prestador);
+            return await _repository.Add(prestador);
+        }
+
+        public async Task Delete(int id)
+        {
+            var entry = _repository.Get(id);
+
+            if (entry is null)
+            {
+                throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            }
+
+            await _repository.Delete(entry);
         }
 
         public Prestador? Get(int id)
         {
             return _repository.Get(id);
         }
+
+        public async Task Update(int id, AlterarPrestador entity)
+        {
+            var entry = _repository.Get(id);
+
+            if (entry is null)
+            {
+                throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            }
+
+            entry.NomeCompleto = entity.NomeCompleto;
+            entry.CPF_CNPJ = entity.CPF_CNPJ;
+
+            try
+            {
+                await _repository.Update(entry);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+        }
     }
 
     public interface IPrestadoresService
     {
-        Task Add(NovoPrestador novoPrestador);
+        Task<Prestador> Add(NovoPrestador novoPrestador);
         Prestador? Get(int id);
+        Task Update(int id, AlterarPrestador entity);
+        Task Delete(int id);
     }
 }

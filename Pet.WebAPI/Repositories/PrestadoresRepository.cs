@@ -1,4 +1,5 @@
-﻿using Pet.Repository.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using Pet.Repository.Infrastructure;
 using Pet.WebAPI.Domain.Entities;
 using System.Linq.Expressions;
 
@@ -12,13 +13,29 @@ namespace Pet.WebAPI.Repositories
 
         public override Prestador? Get(int id)
         {
-            return base.Get(id);
+            var query = (from p in DataContext.Prestadores
+                         where p.Id == id
+                         select p)
+                         .Include(e => e.Enderecos).FirstOrDefault();
+            return query;
+        }
+
+        public override Task Update(Prestador prestador)
+        {
+            return base.Update(prestador);
+        }
+
+        public override async Task Delete(Prestador prestador)
+        {
+            await base.Delete(prestador);
         }
     }
 
     public interface IPrestadoresRepository
     {
-        Task Add(Prestador prestador);
+        Task<Prestador> Add(Prestador prestador);
         Prestador? Get(int id);
+        Task Update(Prestador prestador);
+        Task Delete(Prestador prestador);
     }
 }

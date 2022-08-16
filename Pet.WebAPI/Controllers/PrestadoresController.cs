@@ -19,25 +19,61 @@ namespace Pet.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public IActionResult Get(int id)
+        [HttpDelete("{id}")]
+        public IActionResult DeletePrestador(int id)
+        {
+            try
+            {
+                _service.Delete(id);
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+            return Ok();
+        }
+
+        //public IActionResult GetAllPrestador()
+        //{
+        //    //return Ok(_service.Get)
+        //}
+
+        [HttpGet("{id}")]
+        public IActionResult GetPrestador(int id)
         {
             return Ok(_service.Get(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> NovoPrestador([FromBody] NovoPrestador prestador)
+        public async Task<IActionResult> PostPrestador([FromBody] NovoPrestador prestador)
         {
-            await _service.Add(prestador);
-            return Ok();
+            var result = await _service.Add(prestador);
+            return CreatedAtAction(nameof(GetPrestador), new { id = result.Id }, result);
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutPrestador(int id, AlterarPrestador prestador)
+        {
+            try
+            {
+                await _service.Update(id, prestador);
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+
+            return Ok();
+        }
     }
 
     public interface IPrestadoresController
     {
-        IActionResult Get(int id);
-        Task<IActionResult> NovoPrestador([FromBody] NovoPrestador prestador);
+        IActionResult GetPrestador(int id);
+        Task<IActionResult> PostPrestador([FromBody] NovoPrestador prestador);
+        Task<IActionResult> PutPrestador(int id, AlterarPrestador prestador);
+        IActionResult DeletePrestador(int id);
+        //IActionResult GetAllPrestador();
     }
 
 }

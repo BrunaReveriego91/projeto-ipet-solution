@@ -43,6 +43,10 @@ namespace Pet.WebAPI
             services.AddScoped<IPrestadoresRepository, PrestadoresRepository>();
             services.AddTransient<IPrestadoresService, PrestadoresService>();
 
+            //services.AddScoped<IEnderecoPrestadorController, EnderecoPrestadorController>();
+            services.AddScoped<IEnderecosPrestadorRepository, EnderecosPrestadorRepository>();
+            services.AddTransient<IEnderecosPrestadorService, EnderecosPrestadorService>();
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
         {

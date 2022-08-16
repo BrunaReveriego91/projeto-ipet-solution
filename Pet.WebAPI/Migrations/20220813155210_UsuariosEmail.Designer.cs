@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -11,9 +12,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220813155210_UsuariosEmail")]
+    partial class UsuariosEmail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,7 +82,7 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("tbPet", "projetoimpacta");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecosPrestador", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -116,7 +118,7 @@ namespace Pet.WebAPI.Migrations
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<int>("PrestadorId")
+                    b.Property<int?>("PrestadorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Referencia")
@@ -187,13 +189,11 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("Usuarios", "projetoimpacta");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecosPrestador", b =>
                 {
                     b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", null)
                         .WithMany("Enderecos")
-                        .HasForeignKey("PrestadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PrestadorId");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Prestador", b =>
