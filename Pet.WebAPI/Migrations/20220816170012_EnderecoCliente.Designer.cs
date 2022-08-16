@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -10,9 +11,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220816170012_EnderecoCliente")]
+    partial class EnderecoCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
