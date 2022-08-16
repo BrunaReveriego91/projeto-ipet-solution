@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
-using Pet.WebAPI.Services;
+using Pet.WebAPI.Interfaces.Controllers;
+using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
 {
@@ -61,13 +62,5 @@ namespace Pet.WebAPI.Controllers
 
             return Ok();
         }
-    }
-
-    internal interface IEnderecoPrestadorController
-    {
-        Task<IActionResult> PostEnderecoPrestador(NovoEnderecoPrestador endereco);
-        ActionResult<List<EnderecoPrestador>> GetEnderecosPrestador(int prestador_id);
-        Task<IActionResult> PutEnderecoPrestador(int id, AlterarEnderecoPrestador endereco);
-        IActionResult DeleteEnderecoPrestador(int id);
     }
 }

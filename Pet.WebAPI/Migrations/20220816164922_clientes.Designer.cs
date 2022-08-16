@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -10,9 +11,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220816164922_clientes")]
+    partial class clientes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,60 +108,6 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("Pets", "projetoimpacta");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoCliente", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Bairro")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("CEP")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("nvarchar(8)");
-
-                    b.Property<string>("Cidade")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Complemento")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Logradouro")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<int>("Numero")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Referencia")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<bool>("SemNumero")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UF")
-                        .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EnderecosClientes", "projetoimpacta");
-                });
-
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>
                 {
                     b.Property<int>("Id")
@@ -186,9 +134,6 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -207,17 +152,10 @@ namespace Pet.WebAPI.Migrations
                     b.Property<bool>("SemNumero")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("UF")
                         .IsRequired()
                         .HasMaxLength(2)
                         .HasColumnType("nvarchar(2)");
-
-                    b.Property<bool>("WhatApp")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -239,74 +177,14 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<string>("Telefone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("WhatApp")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Prestadores", "projetoimpacta");
-                });
-
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Servico", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Servicos", "projetoimpacta");
-                });
-
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PrestadorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrestadorId");
-
-                    b.ToTable("ServicosPrestador", "projetoimpacta");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Usuario", b =>
@@ -317,20 +195,19 @@ namespace Pet.WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DataCadastro")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nome")
+                    b.Property<string>("NomeCompleto")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -351,20 +228,9 @@ namespace Pet.WebAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
-                {
-                    b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", null)
-                        .WithMany("Servicos")
-                        .HasForeignKey("PrestadorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Prestador", b =>
                 {
                     b.Navigation("Enderecos");
-
-                    b.Navigation("Servicos");
                 });
 #pragma warning restore 612, 618
         }

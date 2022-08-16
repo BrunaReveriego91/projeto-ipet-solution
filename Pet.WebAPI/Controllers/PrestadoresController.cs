@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
+using Pet.WebAPI.Interfaces.Controllers;
 using Pet.WebAPI.Interfaces.Services;
-using Pet.WebAPI.Services;
 
 namespace Pet.WebAPI.Controllers
 {
@@ -67,14 +66,4 @@ namespace Pet.WebAPI.Controllers
             return Ok();
         }
     }
-
-    public interface IPrestadoresController
-    {
-        IActionResult GetPrestador(int id);
-        Task<IActionResult> PostPrestador([FromBody] NovoPrestador prestador);
-        Task<IActionResult> PutPrestador(int id, AlterarPrestador prestador);
-        IActionResult DeletePrestador(int id);
-        IActionResult GetAllPrestadores();
-    }
-
 }
