@@ -37,7 +37,7 @@ namespace Pet.WebAPI.Services
 
             if (entry is null)
             {
-                throw new Exception($"Prestador não encontrado pelo Id {id}.");
+                throw new Exception($"Cliente não encontrado pelo Id {id}.");
             }
             await _clientPetRepository.Delete(entry);
         }
