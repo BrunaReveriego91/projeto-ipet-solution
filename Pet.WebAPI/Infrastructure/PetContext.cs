@@ -7,7 +7,8 @@ namespace Pet.Repository.Infrastructure
 {
     public class PetContext : DbContext
     {
-        private readonly AzureSqlConnection _connection;
+
+        private readonly AzureSqlConnection? _connection;
         public PetContext()
         {
 
@@ -17,13 +18,13 @@ namespace Pet.Repository.Infrastructure
             _connection = conn.Value;
         }
 
-        public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<Pets> Pets { get; set; }
-        public DbSet<EnderecoPrestador> EnderecosPrestadores { get; set; }
-        public DbSet<Prestador> Prestadores { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Cliente>? Clientes { get; set; }
+        public DbSet<Pets>? Pets { get; set; }
+        public DbSet<EnderecoPrestador>? EnderecosPrestadores { get; set; }
+        public DbSet<Prestador>? Prestadores { get; set; }
+        public DbSet<Usuario>? Usuarios { get; set; }
 
-        public DbSet<EnderecoCliente> EnderecosClientes { get; set; }
+        public DbSet<EnderecoCliente>? EnderecosClientes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,14 +42,10 @@ namespace Pet.Repository.Infrastructure
         protected override void OnModelCreating(ModelBuilder constructorModel)
         {
             constructorModel.HasDefaultSchema("projetoimpacta");
-            ConfigureClientPet(constructorModel);
+        
         }
 
-        private void ConfigureClientPet(ModelBuilder constructorModel)
-        {
-       
-        }
-
+   
 
     }
 }

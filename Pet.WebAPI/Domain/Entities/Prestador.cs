@@ -13,7 +13,7 @@ namespace Pet.WebAPI.Domain.Entities
 
         [Required]
         [StringLength(14)]
-        public string CPF_CNPJ { get; set; } = "";
+        public string? CPF_CNPJ { get; set; }
 
         public List<EnderecoPrestador> Enderecos { get; set; } 
 

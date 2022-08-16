@@ -6,7 +6,7 @@ namespace Pet.WebAPI.Repositories
 {
     public class ClientesRepository : IClienteRepository, IDisposable
     {
-        private PetContext context;
+        private readonly PetContext context;
         public ClientesRepository()
         {
             this.context = new PetContext();
@@ -21,9 +21,9 @@ namespace Pet.WebAPI.Repositories
 
         public async Task Delete(int id)
         {
-            Cliente clientPet = new Cliente() { Id = id };
-            context.Clientes.Attach(clientPet);
-            context.Clientes.Remove(clientPet);
+            Cliente clientPet = new() { Id = id };
+            context.Clientes?.Attach(clientPet);
+            context.Clientes?.Remove(clientPet);
             await context.SaveChangesAsync();
         }
 
@@ -39,14 +39,14 @@ namespace Pet.WebAPI.Repositories
 
         public async Task Update(Cliente clientPet)
         {
-            var clientPetObj = context.Pets.Where(x =>
-            x.IdCliente == clientPet.Id &&
+            var clientPetObj = context.Clientes?.Where(x =>
+            x.Id == clientPet.Id &&
             x.NomeCompleto == clientPet.NomeCompleto
             ).FirstOrDefault();
 
             if (clientPetObj != null)
             {
-                context.Clientes.Update(clientPetObj);
+                context.Clientes?.Update(clientPetObj);
                 await context.SaveChangesAsync();
             }
         }
