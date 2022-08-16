@@ -36,8 +36,8 @@ namespace Pet.WebAPI
                 options.UseSqlServer(Configuration.GetSection("AzureSQLConnection")["DefaultConnection"]));
 
             //TODO extension method for register services
-            services.AddScoped<IClienteRepository, ClientesRepository>();
-            services.AddTransient<IClienteService, ClienteService>();
+            services.AddScoped<IClientesRepository, ClientesRepository>();
+            services.AddTransient<IClientesService, ClientesService>();
 
             //services.AddTransient<IPrestadoresController, PrestadoresController>();
             services.AddScoped<IPrestadoresRepository, PrestadoresRepository>();

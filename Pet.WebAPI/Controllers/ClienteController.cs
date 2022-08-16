@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Pet.WebAPI.Domain;
 using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Interfaces.Controllers;
 using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
@@ -10,40 +11,61 @@ namespace Pet.WebAPI.Controllers
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
-    public class ClienteController : Controller
+    public class ClienteController : Controller, IClienteController
     {
-        private readonly IClienteService _clientPetService;
+        private readonly IClientesService _clientPetService;
 
-        public ClienteController(IClienteService clientPetService)
+        public ClienteController(IClientesService clientPetService)
         {
             _clientPetService = clientPetService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddClientPetAsync([FromBody] Cliente clientPet)
+        public async Task<IActionResult> PostCliente([FromBody] Cliente clientPet)
         {
-            await _clientPetService.Add(clientPet);
-            return Ok();
+            var result = await _clientPetService.Add(clientPet);
+            return CreatedAtAction(nameof(GetCliente), new { id = result.Id }, result);
         }
 
         [HttpGet]
-        public async Task<List<Cliente>> GetClientPetAsync()
+        public IActionResult GetAllClientes()
         {
-            return await _clientPetService.ListClientPets();
+            return Ok(_clientPetService.GetClientes());
         }
-        [HttpPut]
-        public async Task<IActionResult> UpdateClientPetAsync([FromBody] Cliente clientPet)
+
+        [HttpGet("{id}")]
+        public IActionResult GetCliente(int id)
         {
-            await _clientPetService.Update(clientPet);
+            return Ok(_clientPetService.Get(id));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCliente(int id, Cliente cliente)
+        {
+            try
+            {
+                await _clientPetService.Update(id, cliente);
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+
             return Ok();
         }
 
-
-        [HttpDelete]
-        public async Task<IActionResult> DeleteClientPetAsync([FromQuery] QueryParameters queryParameters)
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCliente(int id)
         {
+            try
+            {
+                _clientPetService.Delete(id);
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
 
-            await _clientPetService.Delete(queryParameters.Id);
             return Ok();
         }
     }

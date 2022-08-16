@@ -4,51 +4,42 @@ using Pet.WebAPI.Interfaces.Repositories;
 
 namespace Pet.WebAPI.Repositories
 {
-    public class ClientesRepository : IClienteRepository, IDisposable
+    public class ClientesRepository : BaseRepository<Cliente, PetContext>, IClientesRepository
     {
-        private readonly PetContext context;
-        public ClientesRepository()
+        public ClientesRepository(PetContext context) : base(context)
         {
-            this.context = new PetContext();
-        }
-        public async Task Add(Cliente clientPet)
-        {
-
-            context.Add(clientPet);
-            await context.SaveChangesAsync();
-
         }
 
-        public async Task Delete(int id)
+        public override Cliente? Get(int id)
         {
-            Cliente clientPet = new() { Id = id };
-            context.Clientes?.Attach(clientPet);
-            context.Clientes?.Remove(clientPet);
-            await context.SaveChangesAsync();
+            var query = (from p in DataContext.Clientes
+                         where p.Id == id
+                         select p).FirstOrDefault();
+
+            return query;
         }
 
-        public void Dispose()
+
+        public override async Task<Cliente> Add(Cliente clientPet)
         {
-            context.Dispose();
+            return await base.Add(clientPet);
+
         }
 
-        public async Task<List<Cliente>> ListClientPets()
+        public override async Task Delete(Cliente cliente)
         {
-            return await Task.Run(() => context.Clientes.ToList());
+            await base.Delete(cliente);
         }
 
-        public async Task Update(Cliente clientPet)
-        {
-            var clientPetObj = context.Clientes?.Where(x =>
-            x.Id == clientPet.Id &&
-            x.NomeCompleto == clientPet.NomeCompleto
-            ).FirstOrDefault();
 
-            if (clientPetObj != null)
-            {
-                context.Clientes?.Update(clientPetObj);
-                await context.SaveChangesAsync();
-            }
+        public override IEnumerable<Cliente> GetAll()
+        {
+            return base.GetAll();
+        }
+
+        public override Task Update(Cliente cliente)
+        {
+            return base.Update(cliente);
         }
     }
 }
