@@ -27,6 +27,7 @@ namespace Pet.Repository.Infrastructure
         public DbSet<EnderecoPrestador>? EnderecosPrestadores { get; set; }
         public DbSet<Prestador>? Prestadores { get; set; }
         public DbSet<Usuario>? Usuarios { get; set; }
+        public DbSet<UsuarioPrestador>? UsuariosPrestadores { get; set; }
 
         public DbSet<EnderecoCliente>? EnderecosClientes { get; set; }
 
