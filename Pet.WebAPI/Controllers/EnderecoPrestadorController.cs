@@ -45,7 +45,7 @@ namespace Pet.WebAPI.Controllers
         public async Task<IActionResult> PostEnderecoPrestador([FromBody] NovoEnderecoPrestador endereco)
         {
             var result = await _service.Add(endereco);
-            return CreatedAtAction(nameof(GetEnderecosPrestador), new { id = result.PrestadorId }, result);
+            return CreatedAtAction(nameof(GetEnderecosPrestador), new { prestador_id = result.PrestadorId }, result);
         }
 
         [HttpPut("{id}")]

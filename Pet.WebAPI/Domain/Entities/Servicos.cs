@@ -3,24 +3,20 @@
 namespace Pet.WebAPI.Domain.Entities
 {
     /// <summary>
-    /// Classe que representa um Usuário do Sistema
+    /// Serviços
     /// </summary>
-    /// <remarks>Representa um Usuário ou Prestador</remarks>
-    public class Usuario : IBaseRecord
+    public class Servico : IBaseRecord
     {
         [Key]
         public int Id { get; set; }
 
         [Required]
+        [StringLength(100)]
         public string Nome { get; set; } = "";
 
         [Required]
-        public string Password { get; set; } = "";
-
-        [Required]
-        [EmailAddress]
-        public string EMail { get; set; } = "";
-
+        [StringLength(256)]
+        public string Descricao { get; set; } = "";
         public DateTime Data_Cadastro { get; set; }
     }
 }

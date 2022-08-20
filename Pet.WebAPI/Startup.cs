@@ -31,7 +31,7 @@ namespace Pet.WebAPI
             services.AddSwaggerGen();
 
             services.Configure<AzureSqlConnection>(options => Configuration.GetSection("AzureSQLConnection").Bind(options)).ToString();
-            
+
             services.AddDbContext<PetContext>(options =>
                 options.UseSqlServer(Configuration.GetSection("AzureSQLConnection")["DefaultConnection"]));
 
@@ -46,6 +46,12 @@ namespace Pet.WebAPI
             //services.AddScoped<IEnderecoPrestadorController, EnderecoPrestadorController>();
             services.AddScoped<IEnderecosPrestadorRepository, EnderecosPrestadorRepository>();
             services.AddTransient<IEnderecosPrestadorService, EnderecosPrestadorService>();
+
+            services.AddScoped<IUsuariosRepository, UsuariosRepository>();
+            services.AddTransient<IUsuariosService, UsuariosService>();
+
+            services.AddScoped<IUsuariosPrestadoresRepository, UsuariosPrestadoresRepository>();
+            //services.AddTransient<IUsuariosService, UsuariosService>();
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)

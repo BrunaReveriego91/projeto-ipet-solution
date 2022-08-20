@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -11,9 +12,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220817114404_UsuariosPrestadores")]
+    partial class UsuariosPrestadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -182,31 +184,6 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("EnderecosPrestadores", "projetoimpacta");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Genero", b =>
-                {
-                    b.Property<int>("GeneroId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("GeneroId");
-
-                    b.ToTable("Generos", "projetoimpacta");
-
-                    b.HasData(
-                        new
-                        {
-                            GeneroId = 0,
-                            Descricao = "Feminino"
-                        },
-                        new
-                        {
-                            GeneroId = 1,
-                            Descricao = "Masculino"
-                        });
-                });
-
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Pets", b =>
                 {
                     b.Property<int>("Id")
@@ -285,39 +262,28 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("Prestadores", "projetoimpacta");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.TamanhoPet", b =>
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
                 {
-                    b.Property<int>("TamanhoPetId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.HasKey("TamanhoPetId");
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("TamanhosPet", "projetoimpacta");
+                    b.Property<int>("PrestadorId")
+                        .HasColumnType("int");
 
-                    b.HasData(
-                        new
-                        {
-                            TamanhoPetId = 0,
-                            Descricao = "Mini"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 1,
-                            Descricao = "Pequeno"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 2,
-                            Descricao = "Medio"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 3,
-                            Descricao = "Grande"
-                        });
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrestadorId");
+
+                    b.ToTable("ServicoPrestador", "projetoimpacta");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Usuario", b =>

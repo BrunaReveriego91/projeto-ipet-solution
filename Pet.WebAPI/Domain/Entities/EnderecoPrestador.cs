@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class EnderecoPrestador
+    public class EnderecoPrestador : BaseEntity
     {
         [Key]
         public int Id { get; set; }
