@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pet.Repository.Infrastructure;
 
@@ -10,9 +11,10 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    partial class PetContextModelSnapshot : ModelSnapshot
+    [Migration("20220817130520_TabelaGeneros")]
+    partial class TabelaGeneros
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -262,41 +264,6 @@ namespace Pet.WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Prestadores", "projetoimpacta");
-                });
-
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.TamanhoPet", b =>
-                {
-                    b.Property<int>("TamanhoPetId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TamanhoPetId");
-
-                    b.ToTable("TamanhosPet", "projetoimpacta");
-
-                    b.HasData(
-                        new
-                        {
-                            TamanhoPetId = 0,
-                            Descricao = "Mini"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 1,
-                            Descricao = "Pequeno"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 2,
-                            Descricao = "Medio"
-                        },
-                        new
-                        {
-                            TamanhoPetId = 3,
-                            Descricao = "Grande"
-                        });
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Usuario", b =>

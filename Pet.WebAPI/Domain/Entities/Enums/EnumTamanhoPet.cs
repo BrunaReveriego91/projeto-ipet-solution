@@ -1,10 +1,10 @@
 ﻿namespace Pet.WebAPI.Domain.Entities.Enums
 {
-    public enum EnumTamanhoPet
+    public enum EnumTamanhoPet : int
     {
-        Mini,
-        Pequeno,
-        Medio,
-        Grande
+        Mini = 0,
+        Pequeno = 1,
+        Medio = 2,
+        Grande = 3
     }
 }

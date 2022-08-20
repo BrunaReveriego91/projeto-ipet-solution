@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Domain.Entities.Enums;
 using Pet.WebAPI.Domain.Settings;
 
 namespace Pet.Repository.Infrastructure
@@ -19,6 +20,9 @@ namespace Pet.Repository.Infrastructure
         }
 
         public DbSet<Cliente>? Clientes { get; set; }
+        public DbSet<Genero> Generos { get; set; }
+        public DbSet<TamanhoPet> TamanhosPet { get; set; }
+
         public DbSet<Pets>? Pets { get; set; }
         public DbSet<EnderecoPrestador>? EnderecosPrestadores { get; set; }
         public DbSet<Prestador>? Prestadores { get; set; }
@@ -42,10 +46,31 @@ namespace Pet.Repository.Infrastructure
         protected override void OnModelCreating(ModelBuilder constructorModel)
         {
             constructorModel.HasDefaultSchema("projetoimpacta");
-        
+
+            constructorModel
+                .Entity<Genero>().HasData(
+                    Enum.GetValues(typeof(EnumGenero))
+                    .Cast<EnumGenero>()
+                    .Select(e => new Genero()
+                    {
+                        GeneroId = e,
+                        Descricao = e.ToString()
+                    })
+                    );
+
+            constructorModel
+            .Entity<TamanhoPet>().HasData(
+                Enum.GetValues(typeof(EnumTamanhoPet))
+                .Cast<EnumTamanhoPet>()
+                .Select(e => new TamanhoPet()
+                {
+                    TamanhoPetId = e,
+                    Descricao = e.ToString()
+                })
+                );
+
+
+
         }
-
-   
-
     }
 }

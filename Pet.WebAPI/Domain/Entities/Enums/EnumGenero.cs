@@ -1,8 +1,8 @@
 ﻿namespace Pet.WebAPI.Domain.Entities.Enums
 {
-    public enum EnumGenero
+    public enum EnumGenero : int
     {
-        Feminino,
-        Masculino
+        Feminino = 0,
+        Masculino = 1
     }
 }
