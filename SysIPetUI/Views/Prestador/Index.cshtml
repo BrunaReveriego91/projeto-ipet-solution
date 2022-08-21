@@ -1,0 +1,181 @@
+﻿@model IEnumerable<SysIPetUI.Models.PrestadorViewModel>
+
+@{
+    ViewData["Title"] = "Prestador";
+}
+
+
+<div class="wrapper">
+
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+                            
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-7 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-0">
+
+                                        <h3 class="card-title">
+
+                                            <span class="brand-text font-weight-light">
+                                                <b class="text-gray">Prestadores</b>
+                                            </span>
+
+                                        </h3>
+
+                                        <div class="card-tools">
+
+                                            <button type="button"
+                                                    class="btn btn-tool"
+                                                    data-toggle="ajax-modal"
+                                                    data-target="#modalIncluirPrestador"
+                                                    data-url="@Url.Action("CreatePrestador")">
+                                                <i class="fas fa-plus-circle" title="Adicionar Novo Prestador"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <table class="table table-hover">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Nome
+                                                    </th>
+                                                    <th>
+                                                        CPF-CNPJ
+                                                    </th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="todo-list" data-widget="todo-list">
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.NomeCompleto)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.CPF_CNPJ)
+                                                        </td>
+                                                        <td>
+                                                            @*<div class="tools">
+                                                            <a asp-action="Edit" asp-route-id="@item.Id">
+                                                            <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
+                                                            </a>
+                                                            <a asp-action="Details" asp-route-id="@item.Id">
+                                                            <i class="btn-tool fas fa-file-alt" title="Detalhes"></i>
+                                                            </a>
+                                                            <a asp-action="Delete" asp-route-id="@item.Id">
+                                                            <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                            </a>
+                                                            </div>*@
+
+                                                            <!-- Ferramentas gerais, como editar ou excluir-->
+                                                            <span class="tools">
+
+                                                                <button type="button"
+                                                                    class="btn btn-tool"
+                                                                    data-toggle="ajax-modal"
+                                                                    data-target="#modalEditarPrestador"
+                                                                    data-url="@Url.Action("Alterar", new { id = @item.Id })">
+                                                                    <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
+                                                                </button>
+
+                                                                <button type="button"
+                                                                    class="btn btn-tool"
+                                                                    data-toggle="ajax-modal"
+                                                                    data-target="#modalExcluirPrestador"
+                                                                    data-url="@Url.Action("Excluir", new { id = @item.Id })">
+                                                                    <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                                </button>
+
+                                                            </span>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+                                        
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Incluir Prestador -->
+<div id="modalIncluirPrestador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Editar Prestador -->
+<div id="modalEditarPrestador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Excluir Prestador -->
+<div id="modalExcluirPrestador" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>

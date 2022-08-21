@@ -1,0 +1,92 @@
+﻿@model SysIPetUI.Models.PrestadorViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "CreatePrestador";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-warning text-lg">
+                    <i class="ion ion-ios-cart-outline"></i> +
+                </b>
+
+                <b class="text-gray text-lg">
+                    Incluir Prestador
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <label class="control-label col-md-auto">
+                        <span class="brand-text font-weight-light">
+                            <b class="text-blue">Nome do Prestador</b>
+                            <b class="text-red">*</b>
+                        </span>
+                    </label>
+
+                    <div class="col-md-auto" title="Digite um novo Prestador.">
+
+                        <input asp-for="NomeCompleto" class="form-control" />
+                        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+
+                    </div>
+
+                    <label class="control-label col-md-auto">
+                        <span class="brand-text font-weight-light">
+                            <b class="text-blue">CPF/CNPJ</b>
+                            <b class="text-red">*</b>
+                        </span>
+                    </label>
+
+                    <div class="col-md-auto" title="Digite um CPF ou CNPJ.">
+
+                        <input asp-for="CPF_CNPJ" class="form-control" />
+                        <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
+
+                    </div>                   
+                    
+                </div>
+
+            </div>
+
+        </div>        
+
+        <p>Você está prestes a Incluir um novo Prestador. Você Confirma a inclusão?</p>
+
+    </div>
+
+    <div class="modal-footer justify-content-between">
+
+        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+        <button id="buttonConfirmarVisible" type="submit" value="Incluir" class="btn btn-success">Confirmar</button>
+        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+    </div>
+
+}
