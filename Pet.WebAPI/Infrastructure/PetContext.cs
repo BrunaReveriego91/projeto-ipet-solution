@@ -46,7 +46,7 @@ namespace Pet.Repository.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder constructorModel)
         {
-            constructorModel.HasDefaultSchema("projetoimpacta");
+            constructorModel.HasDefaultSchema("dbo");
 
             constructorModel
                 .Entity<Genero>().HasData(
@@ -69,7 +69,16 @@ namespace Pet.Repository.Infrastructure
                     Descricao = e.ToString()
                 })
                 );
-
+            constructorModel
+            .Entity<TipoPet>().HasData(
+             Enum.GetValues(typeof(EnumTipoPet))
+             .Cast<EnumTipoPet>()
+             .Select(e => new TipoPet()
+             {
+                 TipoPetId = e,
+                 Descricao = e.ToString()
+             })
+             );
 
 
         }
