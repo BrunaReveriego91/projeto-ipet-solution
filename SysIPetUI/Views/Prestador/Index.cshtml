@@ -22,7 +22,7 @@
 
                         <!--Main Row-->
                         <div class="row">
-                            
+
                             <!-- Divisão da Pág Lado Esquerdo -->
                             <section class="col-lg-7 connectedSortable">
 
@@ -79,17 +79,6 @@
                                                             @Html.DisplayFor(modelItem => item.CPF_CNPJ)
                                                         </td>
                                                         <td>
-                                                            @*<div class="tools">
-                                                            <a asp-action="Edit" asp-route-id="@item.Id">
-                                                            <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
-                                                            </a>
-                                                            <a asp-action="Details" asp-route-id="@item.Id">
-                                                            <i class="btn-tool fas fa-file-alt" title="Detalhes"></i>
-                                                            </a>
-                                                            <a asp-action="Delete" asp-route-id="@item.Id">
-                                                            <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
-                                                            </a>
-                                                            </div>*@
 
                                                             <!-- Ferramentas gerais, como editar ou excluir-->
                                                             <span class="tools">
@@ -98,7 +87,7 @@
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
                                                                     data-target="#modalEditarPrestador"
-                                                                    data-url="@Url.Action("Alterar", new { id = @item.Id })">
+                                                                    data-url="@Url.Action("EditPrestador", new { id = @item.Id })">
                                                                     <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
                                                                 </button>
 
@@ -106,9 +95,13 @@
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
                                                                     data-target="#modalExcluirPrestador"
-                                                                    data-url="@Url.Action("Excluir", new { id = @item.Id })">
+                                                                    data-url="@Url.Action("ExcluirPrestador", new { id = @item.Id })">
                                                                     <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
                                                                 </button>
+
+                                                                @*<a asp-action="ExcluirPrestador" asp-route-id="@item.Id">
+                                                            <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                            </a>*@
 
                                                             </span>
 
@@ -120,7 +113,7 @@
                                             </tbody>
 
                                         </table>
-                                        
+
                                     </div>
 
                                 </div>
