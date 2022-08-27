@@ -285,30 +285,6 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("Prestadores", "dbo");
                 });
 
-            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("Data_Cadastro")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PrestadorId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PrestadorId");
-
-                    b.ToTable("ServicoPrestador", "dbo");
-                });
-
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Servico", b =>
                 {
                     b.Property<int>("Id")
@@ -335,7 +311,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Servicos", "projetoimpacta");
+                    b.ToTable("Servicos", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
@@ -362,7 +338,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("ServicosPrestador", "projetoimpacta");
+                    b.ToTable("ServicosPrestador", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.TamanhoPet", b =>

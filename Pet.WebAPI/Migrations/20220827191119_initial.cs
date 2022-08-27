@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Pet.WebAPI.Migrations
 {
-    public partial class Migrations1 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -99,12 +99,29 @@ namespace Pet.WebAPI.Migrations
                     NomeCompleto = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     CPF_CNPJ = table.Column<string>(type: "nvarchar(14)", maxLength: 14, nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WhatApp = table.Column<bool>(type: "bit", nullable: false),
+                    WhatsApp = table.Column<bool>(type: "bit", nullable: false),
                     Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Prestadores", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Servicos",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
+                    Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Servicos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,7 +200,7 @@ namespace Pet.WebAPI.Migrations
                     UF = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
                     CEP = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    WhatApp = table.Column<bool>(type: "bit", nullable: false),
+                    WhatsApp = table.Column<bool>(type: "bit", nullable: false),
                     Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -199,7 +216,7 @@ namespace Pet.WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServicoPrestador",
+                name: "ServicosPrestador",
                 schema: "dbo",
                 columns: table => new
                 {
@@ -207,13 +224,14 @@ namespace Pet.WebAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PrestadorId = table.Column<int>(type: "int", nullable: false),
                     ServicoId = table.Column<int>(type: "int", nullable: false),
+                    Ativo = table.Column<bool>(type: "bit", nullable: false),
                     Data_Cadastro = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServicoPrestador", x => x.Id);
+                    table.PrimaryKey("PK_ServicosPrestador", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ServicoPrestador_Prestadores_PrestadorId",
+                        name: "FK_ServicosPrestador_Prestadores_PrestadorId",
                         column: x => x.PrestadorId,
                         principalSchema: "dbo",
                         principalTable: "Prestadores",
@@ -266,9 +284,9 @@ namespace Pet.WebAPI.Migrations
                 column: "PrestadorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ServicoPrestador_PrestadorId",
+                name: "IX_ServicosPrestador_PrestadorId",
                 schema: "dbo",
-                table: "ServicoPrestador",
+                table: "ServicosPrestador",
                 column: "PrestadorId");
         }
 
@@ -295,7 +313,11 @@ namespace Pet.WebAPI.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "ServicoPrestador",
+                name: "Servicos",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "ServicosPrestador",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

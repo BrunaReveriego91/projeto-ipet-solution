@@ -8,12 +8,12 @@ namespace Pet.Repository.Infrastructure
 {
     public class PetContext : DbContext
     {
-
         private readonly AzureSqlConnection? _connection;
+
         public PetContext()
         {
-
         }
+
         public PetContext(DbContextOptions<PetContext> options, IOptions<AzureSqlConnection> conn) : base(options)
         {
             _connection = conn.Value;
@@ -40,16 +40,18 @@ namespace Pet.Repository.Infrastructure
                    .SetBasePath(Directory.GetCurrentDirectory())
                    .AddJsonFile("appsettings.json")
                    .Build();
+
                 var connectionString = configuration.GetSection("AzureSqlConnection:DefaultConnection").Value;
                 optionsBuilder.UseSqlServer(connectionString);
+
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder constructorModel)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            constructorModel.HasDefaultSchema("dbo");
+            modelBuilder.HasDefaultSchema("dbo");
 
-            constructorModel
+            modelBuilder
                 .Entity<Genero>().HasData(
                     Enum.GetValues(typeof(EnumGenero))
                     .Cast<EnumGenero>()
@@ -60,7 +62,7 @@ namespace Pet.Repository.Infrastructure
                     })
                     );
 
-            constructorModel
+            modelBuilder
             .Entity<TamanhoPet>().HasData(
                 Enum.GetValues(typeof(EnumTamanhoPet))
                 .Cast<EnumTamanhoPet>()
@@ -70,7 +72,7 @@ namespace Pet.Repository.Infrastructure
                     Descricao = e.ToString()
                 })
                 );
-            constructorModel
+            modelBuilder
             .Entity<TipoPet>().HasData(
              Enum.GetValues(typeof(EnumTipoPet))
              .Cast<EnumTipoPet>()
@@ -81,7 +83,15 @@ namespace Pet.Repository.Infrastructure
              })
              );
 
-
+            // Seed
+            //modelBuilder.Entity<Prestador>()
+            //    .HasData(new Prestador()
+            //    {
+            //        CPF_CNPJ = "12355589778",
+            //        NomeCompleto = "Fofinho Pet Shop",
+            //        Telefone = "11-94569-1235",
+            //        WhatsApp = true
+            //    });
         }
     }
 }

@@ -12,14 +12,14 @@ using Pet.Repository.Infrastructure;
 namespace Pet.WebAPI.Migrations
 {
     [DbContext(typeof(PetContext))]
-    [Migration("20220821162627_AcertoNomeWhatsApp")]
-    partial class AcertoNomeWhatsApp
+    [Migration("20220827191119_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("projetoimpacta")
+                .HasDefaultSchema("dbo")
                 .HasAnnotation("ProductVersion", "6.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
@@ -61,7 +61,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clientes", "projetoimpacta");
+                    b.ToTable("Clientes", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoCliente", b =>
@@ -115,7 +115,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("EnderecosClientes", "projetoimpacta");
+                    b.ToTable("EnderecosClientes", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>
@@ -181,7 +181,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("EnderecosPrestadores", "projetoimpacta");
+                    b.ToTable("EnderecosPrestadores", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Genero", b =>
@@ -194,7 +194,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("GeneroId");
 
-                    b.ToTable("Generos", "projetoimpacta");
+                    b.ToTable("Generos", "dbo");
 
                     b.HasData(
                         new
@@ -251,7 +251,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Pets", "projetoimpacta");
+                    b.ToTable("Pets", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Prestador", b =>
@@ -284,7 +284,36 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Prestadores", "projetoimpacta");
+                    b.ToTable("Prestadores", "dbo");
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Servico", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Servicos", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
@@ -311,7 +340,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasIndex("PrestadorId");
 
-                    b.ToTable("ServicosPrestador", "projetoimpacta");
+                    b.ToTable("ServicosPrestador", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.TamanhoPet", b =>
@@ -324,7 +353,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("TamanhoPetId");
 
-                    b.ToTable("TamanhosPet", "projetoimpacta");
+                    b.ToTable("TamanhosPet", "dbo");
 
                     b.HasData(
                         new
@@ -346,6 +375,61 @@ namespace Pet.WebAPI.Migrations
                         {
                             TamanhoPetId = 3,
                             Descricao = "Grande"
+                        });
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.TipoPet", b =>
+                {
+                    b.Property<int>("TipoPetId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TipoPetId");
+
+                    b.ToTable("TipoPet", "dbo");
+
+                    b.HasData(
+                        new
+                        {
+                            TipoPetId = 0,
+                            Descricao = "Canino"
+                        },
+                        new
+                        {
+                            TipoPetId = 1,
+                            Descricao = "Felino"
+                        },
+                        new
+                        {
+                            TipoPetId = 2,
+                            Descricao = "Roedor"
+                        },
+                        new
+                        {
+                            TipoPetId = 3,
+                            Descricao = "Reptil"
+                        },
+                        new
+                        {
+                            TipoPetId = 4,
+                            Descricao = "Ave"
+                        },
+                        new
+                        {
+                            TipoPetId = 5,
+                            Descricao = "Peixe"
+                        },
+                        new
+                        {
+                            TipoPetId = 6,
+                            Descricao = "Equino"
+                        },
+                        new
+                        {
+                            TipoPetId = 7,
+                            Descricao = "Outros"
                         });
                 });
 
@@ -374,7 +458,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Usuarios", "projetoimpacta");
+                    b.ToTable("Usuarios", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.UsuarioPrestador", b =>
@@ -393,7 +477,7 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UsuariosPrestadores", "projetoimpacta");
+                    b.ToTable("UsuariosPrestadores", "dbo");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>

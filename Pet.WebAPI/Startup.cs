@@ -30,7 +30,7 @@ namespace Pet.WebAPI
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.Configure<AzureSqlConnection>(options => Configuration.GetSection("AzureSQLConnection").Bind(options)).ToString();
+            //services.Configure<AzureSqlConnection>(options => Configuration.GetSection("AzureSQLConnection").Bind(options)).ToString();
 
             services.AddDbContext<PetContext>(options =>
                 options.UseSqlServer(Configuration.GetSection("AzureSQLConnection")["DefaultConnection"]));
@@ -58,7 +58,7 @@ namespace Pet.WebAPI
             services.AddTransient<IServicosPrestadorService, ServicosPrestadorService>();
 
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment,PetContext context)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment, PetContext context)
         {
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -71,9 +71,10 @@ namespace Pet.WebAPI
                 endpoints.MapControllers();
             });
 
+            //context.Database.EnsureDeleted();
+
             // Create the database if it doesn't exist
             context.Database.EnsureCreated();
- 
         }
     }
 }
