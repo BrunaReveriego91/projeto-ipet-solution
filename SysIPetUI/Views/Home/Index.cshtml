@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="wrapper">
+
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                    <!-- Título -->
+                    <div class="col-sm-6">
+                        <h1 class="m-0">
+                            Bem-vindo ao
+                            <span class="brand-text font-weight-light">
+                                <i class="text-yellow" translate="no">i</i>
+                                <i class="text-blue" translate="no">Pet's</i>
+                            </span>
+                        </h1>
+                    </div>
+
+                    <!-- Data de Hoje na Home -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item active">@DateTime.Now.ToString("F")</li>
+                        </ol>
+                    </div>
+
+                </div>
+
+                <hr />
+                <!-- Frase deslisante -->
+                <marquee class="comment-text"><h5>Agende um Serviço com a gente! Acesse o Sistema<i translate="no"> iPet's </i>e confira! :)</h5></marquee>
+
+                <!-- Sub Título -->
+                @*<div class="col-sm-6 text-primary"><i>Notícias e anúncios aparecem aqui! :)</i></div>*@
+
+                <hr />
+                <p class="mb-1">
+                    <h4 class="m-0">Acesse nosso Sistema!</h4>
+                    <hr />
+                    Aqui você encontra diversos serviços para o seu amigão!
+                    Use o iPet's e solicite um serviço com nossos Parceiros 24 horas por dia, 7 dias por semana.
+                </p>
+
+                <!-- Conteúdo principal -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <!-- Essa section que movimenta os cards -->
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-8 connectedSortable">
+
+                                <!--Fotos de Novidades do Sistema-->
+                                <div class="row mt-4">
+
+                                    <!--Animação-->
+                                    <!--<div class="col-sm-4 animation__shake">-->
+                                    <div class="position-relative col-sm-8">
+                                        <img src="lib/image/iPet_Page.png" alt="Photo 1" class="img-fluid elevation-3">
+                                        <div class="ribbon-wrapper ribbon-lg">
+                                            <div class="ribbon bg-success text-lg elevation-2">
+                                                Novo!
+                                            </div>
+                                        </div>
+                                    </div>                                    
+
+                                </div>
+
+                            </section>
+
+                            <!-- Divisão da Pág Lado Direito -->
+                            <section class="col-lg-4 connectedSortable">
+
+                                
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

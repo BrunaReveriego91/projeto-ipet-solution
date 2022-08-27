@@ -1,0 +1,89 @@
+﻿@model SysIPetUI.Models.PrestadorViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "ExcluirPrestador";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-danger text-lg">
+                    <i class="fas fa-trash-alt"></i>
+                </b>
+
+                <b class="text-gray text-lg">
+                    Excluir Prestador
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <!--Detalhes da Conta-->
+            <div class="col-lg-auto">
+
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <ul class="nav nav-pills nav-sidebar flex-column">
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Nome:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.NomeCompleto)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">CPF_CNPJ:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.CPF_CNPJ)
+                        </li>                                              
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <p>Tem certeza que deseja excluir o Prestador: <b>@Html.DisplayFor(model => model.NomeCompleto)</b>?</p>
+            <p>Esse registro será excluído desta e de todas as outras páginas. <b>Essa ação não poderá ser desfeita.</b></p>
+
+        </div>        
+        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+
+    </div>
+
+    <div class="modal-footer justify-content-between">
+
+        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+        <button id="buttonConfirmarVisible" type="submit" value="Excluir" class="btn btn-danger">Confirmar</button>
+        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+    </div>
+}

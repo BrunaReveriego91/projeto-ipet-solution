@@ -58,7 +58,7 @@ namespace Pet.WebAPI
             services.AddTransient<IServicosPrestadorService, ServicosPrestadorService>();
 
         }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment environment,PetContext context)
         {
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -70,6 +70,10 @@ namespace Pet.WebAPI
             {
                 endpoints.MapControllers();
             });
+
+            // Create the database if it doesn't exist
+            context.Database.EnsureCreated();
+ 
         }
     }
 }
