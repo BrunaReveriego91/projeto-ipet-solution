@@ -39,11 +39,9 @@ namespace Pet.WebAPI
             services.AddScoped<IClientesRepository, ClientesRepository>();
             services.AddTransient<IClientesService, ClientesService>();
 
-            //services.AddTransient<IPrestadoresController, PrestadoresController>();
             services.AddScoped<IPrestadoresRepository, PrestadoresRepository>();
             services.AddTransient<IPrestadoresService, PrestadoresService>();
 
-            //services.AddScoped<IEnderecoPrestadorController, EnderecoPrestadorController>();
             services.AddScoped<IEnderecosPrestadorRepository, EnderecosPrestadorRepository>();
             services.AddTransient<IEnderecosPrestadorService, EnderecosPrestadorService>();
 
@@ -51,7 +49,13 @@ namespace Pet.WebAPI
             services.AddTransient<IUsuariosService, UsuariosService>();
 
             services.AddScoped<IUsuariosPrestadoresRepository, UsuariosPrestadoresRepository>();
-            //services.AddTransient<IUsuariosService, UsuariosService>();
+            services.AddTransient<IUsuariosService, UsuariosService>();
+
+            services.AddScoped<IServicosRepository, ServicosRepository>();
+            services.AddTransient<IServicosServices, ServicosService>();
+
+            services.AddScoped<IServicosPrestadorRepository, ServicosPrestadorRepository>();
+            services.AddTransient<IServicosPrestadorService, ServicosPrestadorService>();
 
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment)

@@ -34,7 +34,14 @@ namespace Pet.WebAPI.Repositories
 
         public virtual TEntity? Get(int id)
         {
-            return _context.Find<TEntity>(id);
+            var result = _context.Find<TEntity>(id);
+
+            //if (result is null)
+            //{
+            //    throw new Exception($"Registro {nameof(TEntity)} não encontrado pelo Id {id}.");
+            //}
+
+            return result;
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -46,7 +53,7 @@ namespace Pet.WebAPI.Repositories
         {
             if (expression is null)
             {
-                throw new ArgumentNullException(nameof(expression));
+                return _context.Set<TEntity>().AsEnumerable();
             }
             return _context.Set<TEntity>().Where(expression).AsEnumerable();
         }

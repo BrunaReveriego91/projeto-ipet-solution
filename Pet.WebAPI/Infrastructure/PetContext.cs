@@ -22,14 +22,15 @@ namespace Pet.Repository.Infrastructure
         public DbSet<Cliente>? Clientes { get; set; }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<TamanhoPet> TamanhosPet { get; set; }
-
         public DbSet<Pets>? Pets { get; set; }
         public DbSet<EnderecoPrestador>? EnderecosPrestadores { get; set; }
         public DbSet<Prestador>? Prestadores { get; set; }
         public DbSet<Usuario>? Usuarios { get; set; }
+        public DbSet<Servico>? Servicos { get; set; }
         public DbSet<UsuarioPrestador>? UsuariosPrestadores { get; set; }
-
+        public DbSet<ServicoPrestador>? ServicosPrestador { get; set; }
         public DbSet<EnderecoCliente>? EnderecosClientes { get; set; }
+        //public DbSet<UsuarioCliente>? UsuariosClientes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

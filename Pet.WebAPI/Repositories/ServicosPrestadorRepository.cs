@@ -1,5 +1,6 @@
 ﻿using Pet.Repository.Infrastructure;
 using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Interfaces.Repositories;
 
 namespace Pet.WebAPI.Repositories
 {
@@ -8,9 +9,16 @@ namespace Pet.WebAPI.Repositories
         public ServicosPrestadorRepository(PetContext context) : base(context)
         {
         }
-    }
 
-    public interface IServicosPrestadorRepository
-    {
+        public async Task Activate(int id, bool activate = true)
+        {
+            var entry = base.Get(id);
+
+            if (entry != null)
+            {
+                entry.Ativo = activate;
+                await base.Update(entry);
+            }
+        }
     }
 }

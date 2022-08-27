@@ -36,7 +36,7 @@ namespace Pet.WebAPI.Repositories
                 NomeCompleto = novo_usuario.Dados_Prestador.Nome_Completo,
                 CPF_CNPJ = novo_usuario.Dados_Prestador.CPF_CNPJ,
                 Telefone = novo_usuario.Dados_Prestador.Telefone,
-                WhatApp = novo_usuario.Dados_Prestador.WhatsApp,
+                WhatsApp = novo_usuario.Dados_Prestador.WhatsApp,
                 //Enderecos = new List<EnderecoPrestador>()
                 //{
                 //    {

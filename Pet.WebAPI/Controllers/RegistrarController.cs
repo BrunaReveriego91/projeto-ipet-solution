@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Pet.WebAPI.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
 using Pet.WebAPI.Domain.Model;
-using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers

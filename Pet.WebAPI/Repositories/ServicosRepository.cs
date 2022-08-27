@@ -1,5 +1,6 @@
 ﻿using Pet.Repository.Infrastructure;
 using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Interfaces.Repositories;
 
 namespace Pet.WebAPI.Repositories
 {
@@ -8,9 +9,5 @@ namespace Pet.WebAPI.Repositories
         public ServicosRepository(PetContext context) : base(context)
         {
         }
-    }
-
-    public interface IServicosRepository
-    {
     }
 }
