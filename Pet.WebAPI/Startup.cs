@@ -22,10 +22,8 @@ namespace Pet.WebAPI
             Environment = env;
         }
 
-
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers().AddNewtonsoftJson();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();

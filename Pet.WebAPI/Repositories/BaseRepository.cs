@@ -17,31 +17,26 @@ namespace Pet.WebAPI.Repositories
         public virtual async Task<TEntity> Add(TEntity entity)
         {
             var result = await _context.AddAsync(entity);
-            await Commit();
+            //await Commit();
+            await _context.SaveChangesAsync();
             return result.Entity;
         }
 
-        public async Task Commit()
-        {
-            await _context.SaveChangesAsync();
-        }
+        //public async Task Commit()
+        //{
+        //    await _context.SaveChangesAsync();
+        //}
 
         public virtual async Task Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            await Commit();
+            //await Commit();
+            await _context.SaveChangesAsync();
         }
 
         public virtual TEntity? Get(int id)
         {
-            var result = _context.Find<TEntity>(id);
-
-            //if (result is null)
-            //{
-            //    throw new Exception($"Registro {nameof(TEntity)} não encontrado pelo Id {id}.");
-            //}
-
-            return result;
+            return _context.Find<TEntity>(id);
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -78,7 +73,7 @@ namespace Pet.WebAPI.Repositories
         TEntity? Get(int id);
         TEntity? Single(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression = null);
-        Task Commit();
+        //Task Commit();
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
     }

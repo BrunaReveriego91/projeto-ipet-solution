@@ -2,7 +2,7 @@
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class Prestador : BaseEntity
+    public class Prestador : BaseEFObject
     {
         [Key]
         public int Id { get; set; }
@@ -14,6 +14,12 @@ namespace Pet.WebAPI.Domain.Entities
         [Required]
         [StringLength(14)]
         public string? CPF_CNPJ { get; set; }
+
+        [Required]
+        [Phone]
+        public string Telefone { get; set; } = "";
+
+        public bool WhatsApp { get; set; } = false;
 
         public List<EnderecoPrestador> Enderecos { get; set; }
         public List<ServicoPrestador> Servicos { get; set; }

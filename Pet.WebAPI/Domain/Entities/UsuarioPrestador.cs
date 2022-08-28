@@ -6,7 +6,7 @@ namespace Pet.WebAPI.Domain.Entities
     /// <summary>
     /// Relacionamento entre o Usuário e o Prestador
     /// </summary>
-    public class UsuarioPrestador
+    public class UsuarioPrestador : BaseEFObject
     {
         [Key]
         public int Id { get; internal set; }

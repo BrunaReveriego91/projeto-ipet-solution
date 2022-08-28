@@ -22,7 +22,6 @@ namespace Pet.WebAPI.Services
                 NomeCompleto = novoPrestador.NomeCompleto,
                 CPF_CNPJ = novoPrestador.CPF_CNPJ
             };
-            
             return await _repository.Add(prestador);
         }
 

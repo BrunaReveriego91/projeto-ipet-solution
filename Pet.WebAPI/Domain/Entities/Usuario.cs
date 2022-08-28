@@ -6,7 +6,7 @@ namespace Pet.WebAPI.Domain.Entities
     /// Classe que representa um Usuário do Sistema
     /// </summary>
     /// <remarks>Representa um Usuário ou Prestador</remarks>
-    public class Usuario : IBaseRecord
+    public class Usuario : BaseEFObject
     {
         [Key]
         public int Id { get; set; }
@@ -20,7 +20,5 @@ namespace Pet.WebAPI.Domain.Entities
         [Required]
         [EmailAddress]
         public string EMail { get; set; } = "";
-
-        public DateTime Data_Cadastro { get; set; }
     }
 }

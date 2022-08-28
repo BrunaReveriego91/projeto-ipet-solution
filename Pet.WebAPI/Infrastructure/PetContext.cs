@@ -32,6 +32,24 @@ namespace Pet.Repository.Infrastructure
         public DbSet<EnderecoCliente>? EnderecosClientes { get; set; }
         //public DbSet<UsuarioCliente>? UsuariosClientes { get; set; }
 
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var addedItems = this.ChangeTracker.Entries()
+                .Where(x => x.State == EntityState.Added).ToList();
+
+            addedItems.ForEach(e =>
+            {
+                var data_cadastro = e.Entity.GetType().GetProperty("Data_Cadastro");
+
+                if (data_cadastro != null)
+                {
+                    data_cadastro.SetValue(e.Entity, DateTime.Now);
+                }
+            });
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

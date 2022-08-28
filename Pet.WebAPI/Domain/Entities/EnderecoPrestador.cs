@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Pet.WebAPI.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class EnderecoPrestador : BaseEntity
+    public class EnderecoPrestador : BaseEFObject
     {
         [Key]
         public int Id { get; set; }
@@ -40,6 +41,12 @@ namespace Pet.WebAPI.Domain.Entities
 
         [Required]
         [StringLength(8)]
-        public string? CEP { get; set; } 
+        public string? CEP { get; set; }
+
+        [Required]
+        [Phone]
+        public string Telefone { get; set; } = "";
+
+        public bool WhatsApp { get; set; } = false;
     }
 }

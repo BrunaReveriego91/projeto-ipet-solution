@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Pet.WebAPI.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class EnderecoCliente
+    public class EnderecoCliente : BaseEFObject
     {
         [Key]
         public int Id { get; set; }

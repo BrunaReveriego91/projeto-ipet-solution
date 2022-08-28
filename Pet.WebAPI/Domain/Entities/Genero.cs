@@ -6,6 +6,5 @@ namespace Pet.WebAPI.Domain.Entities
     {
         public EnumGenero GeneroId { get; set; }
         public string? Descricao { get; set; }
-
     }
 }

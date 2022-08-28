@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Pet.WebAPI.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pet.WebAPI.Domain.Entities
 {
     /// <summary>
     /// Serviços
     /// </summary>
-    public class Servico : IBaseRecord
+    public class Servico : BaseEFObject
     {
         [Key]
         public int Id { get; set; }
@@ -19,13 +20,6 @@ namespace Pet.WebAPI.Domain.Entities
         public string Descricao { get; set; } = "";
 
         public bool Ativo { get; set; } = false;
-
-        public DateTime Data_Cadastro { get; set; }
-
-        public Servico()
-        {
-
-        }
 
         public Servico(string nome, string descricao, bool ativo) : base()
         {

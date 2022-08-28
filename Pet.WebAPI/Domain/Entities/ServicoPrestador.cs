@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Pet.WebAPI.Domain.Entities
 {
-    public class ServicoPrestador : IBaseRecord
+    public class ServicoPrestador : BaseEFObject
     {
         [Key]
         public int Id { get; set; }
@@ -18,8 +18,6 @@ namespace Pet.WebAPI.Domain.Entities
         /// Indica se o Serviço está ativado para o Prestador.
         /// </summary>
         public bool Ativo { get; set; } = false;
-
-        public DateTime Data_Cadastro { get; set; }
 
         public ServicoPrestador()
         {

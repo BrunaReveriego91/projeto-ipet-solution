@@ -9,12 +9,10 @@ namespace Pet.WebAPI.Services
     public class ServicosPrestadorService : IServicosPrestadorService
     {
         private readonly IServicosPrestadorRepository _repository;
-        
         public ServicosPrestadorService(IServicosPrestadorRepository repository)
         {
             _repository = repository;
         }
-        
         public async Task<ServicoPrestador> Add(NovoServicoPrestador servico)
         {
             var result = await _repository.Add(new ServicoPrestador(servico.PrestadorId, servico.ServicoId, servico.Ativo));
