@@ -21,7 +21,14 @@ namespace Pet.WebAPI.Domain.Entities
 
         public bool Ativo { get; set; } = false;
 
-        public Servico(string nome, string descricao, bool ativo) : base()
+        public Servico()
+        {
+            Nome = "";
+            Descricao = "";
+            Ativo = false;
+        }
+
+        public Servico(string nome, string descricao, bool ativo) : this()
         {
             Nome = nome;
             Descricao = descricao;

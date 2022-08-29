@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Entities.Enums;
 using Pet.WebAPI.Domain.Settings;
+using System.Reflection.Metadata;
 
 namespace Pet.Repository.Infrastructure
 {
@@ -19,18 +20,20 @@ namespace Pet.Repository.Infrastructure
             _connection = conn.Value;
         }
 
-        public DbSet<Cliente>? Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Genero> Generos { get; set; }
         public DbSet<TamanhoPet> TamanhosPet { get; set; }
-        public DbSet<Pets>? Pets { get; set; }
-        public DbSet<EnderecoPrestador>? EnderecosPrestadores { get; set; }
-        public DbSet<Prestador>? Prestadores { get; set; }
-        public DbSet<Usuario>? Usuarios { get; set; }
-        public DbSet<Servico>? Servicos { get; set; }
-        public DbSet<UsuarioPrestador>? UsuariosPrestadores { get; set; }
-        public DbSet<ServicoPrestador>? ServicosPrestador { get; set; }
-        public DbSet<EnderecoCliente>? EnderecosClientes { get; set; }
+        public DbSet<Pets> Pets { get; set; }
+        public DbSet<EnderecoPrestador> EnderecosPrestadores { get; set; }
+        public DbSet<Prestador> Prestadores { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Servico> Servicos { get; set; }
+        public DbSet<UsuarioPrestador> UsuariosPrestadores { get; set; }
+        public DbSet<ServicoPrestador> ServicosPrestador { get; set; }
+        public DbSet<EnderecoCliente> EnderecosClientes { get; set; }
         //public DbSet<UsuarioCliente>? UsuariosClientes { get; set; }
+        public DbSet<Agenda> Agendamentos { get; set; }
+        public DbSet<ServicoAgenda> ServicosAgendamento { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -110,6 +113,30 @@ namespace Pet.Repository.Infrastructure
             //        Telefone = "11-94569-1235",
             //        WhatsApp = true
             //    });
+
+            modelBuilder
+               .Entity<UsuarioPrestador>()
+               .HasOne(e => e.Usuario)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+               .Entity<UsuarioPrestador>()
+               .HasOne(e => e.Prestador)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+               .Entity<Agenda>()
+               .HasOne(e => e.Cliente)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+               .Entity<Agenda>()
+               .HasOne(e => e.Prestador)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -8,11 +8,15 @@ namespace Pet.WebAPI.Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Prestador))]
         public int PrestadorId { get; set; }
 
-        [ForeignKey(nameof(Servico))]
+        [ForeignKey("PrestadorId")]
+        public Prestador Prestador { get; set; }
+
         public int ServicoId { get; set; }
+
+        [ForeignKey("ServicoId")]
+        public Servico Servico { get; set; }
 
         /// <summary>
         /// Indica se o Serviço está ativado para o Prestador.
@@ -21,10 +25,11 @@ namespace Pet.WebAPI.Domain.Entities
 
         public ServicoPrestador()
         {
-
+            Servico = new Servico();
+            Prestador = new Prestador();
         }
 
-        public ServicoPrestador(int prestador_id, int servico_id, bool ativo) : base()
+        public ServicoPrestador(int prestador_id, int servico_id, bool ativo) : this()
         {
             PrestadorId = prestador_id;
             ServicoId = servico_id;

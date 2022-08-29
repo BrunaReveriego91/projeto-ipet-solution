@@ -23,6 +23,38 @@ namespace Pet.WebAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Agenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data_Agenda")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Data_Cancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("PrestadorId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.HasIndex("PrestadorId");
+
+                    b.ToTable("Agendamentos", "dbo");
+                });
+
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Cliente", b =>
                 {
                     b.Property<int>("Id")
@@ -39,6 +71,9 @@ namespace Pet.WebAPI.Migrations
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("NomeCompleto")
                         .IsRequired()
@@ -91,6 +126,9 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -112,6 +150,8 @@ namespace Pet.WebAPI.Migrations
                         .HasColumnType("nvarchar(2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("EnderecosClientes", "dbo");
                 });
@@ -223,6 +263,9 @@ namespace Pet.WebAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("Genero")
                         .HasColumnType("int");
 
@@ -314,6 +357,53 @@ namespace Pet.WebAPI.Migrations
                     b.ToTable("Servicos", "dbo");
                 });
 
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoAgenda", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AgendaId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Data_Cancelamento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Data_Conclusao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EnderecoPrestadorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mensagem_Cliente")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("Mensagem_Profissional_Executante")
+                        .IsRequired()
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<int>("ServicoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgendaId");
+
+                    b.HasIndex("EnderecoPrestadorId");
+
+                    b.HasIndex("ServicoId");
+
+                    b.ToTable("ServicosAgendamento", "dbo");
+                });
+
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
                 {
                     b.Property<int>("Id")
@@ -337,6 +427,8 @@ namespace Pet.WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PrestadorId");
+
+                    b.HasIndex("ServicoId");
 
                     b.ToTable("ServicosPrestador", "dbo");
                 });
@@ -467,6 +559,9 @@ namespace Pet.WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<DateTime>("Data_Cadastro")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("PrestadorId")
                         .HasColumnType("int");
 
@@ -475,7 +570,41 @@ namespace Pet.WebAPI.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PrestadorId");
+
+                    b.HasIndex("UsuarioId");
+
                     b.ToTable("UsuariosPrestadores", "dbo");
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Agenda", b =>
+                {
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", "Prestador")
+                        .WithMany()
+                        .HasForeignKey("PrestadorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
+
+                    b.Navigation("Prestador");
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoCliente", b =>
+                {
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Cliente", "Cliente")
+                        .WithMany()
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.EnderecoPrestador", b =>
@@ -487,13 +616,72 @@ namespace Pet.WebAPI.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoAgenda", b =>
+                {
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Agenda", null)
+                        .WithMany("Servicos")
+                        .HasForeignKey("AgendaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pet.WebAPI.Domain.Entities.EnderecoPrestador", "EnderecoPrestador")
+                        .WithMany()
+                        .HasForeignKey("EnderecoPrestadorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EnderecoPrestador");
+
+                    b.Navigation("Servico");
+                });
+
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.ServicoPrestador", b =>
                 {
-                    b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", null)
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", "Prestador")
                         .WithMany("Servicos")
                         .HasForeignKey("PrestadorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Servico", "Servico")
+                        .WithMany()
+                        .HasForeignKey("ServicoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Prestador");
+
+                    b.Navigation("Servico");
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.UsuarioPrestador", b =>
+                {
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Prestador", "Prestador")
+                        .WithMany()
+                        .HasForeignKey("PrestadorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Pet.WebAPI.Domain.Entities.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Prestador");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Agenda", b =>
+                {
+                    b.Navigation("Servicos");
                 });
 
             modelBuilder.Entity("Pet.WebAPI.Domain.Entities.Prestador", b =>

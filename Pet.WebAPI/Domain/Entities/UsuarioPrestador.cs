@@ -11,13 +11,23 @@ namespace Pet.WebAPI.Domain.Entities
         [Key]
         public int Id { get; internal set; }
 
-        [ForeignKey(nameof(Usuario))]
         public int UsuarioId { get; set; }
 
-        [ForeignKey(nameof(Prestador))]
+        [ForeignKey("UsuarioId")]
+        public Usuario Usuario { get; set; }
+
         public int PrestadorId { get; set; }
 
-        public UsuarioPrestador(int usuarioId, int prestadorId)
+        [ForeignKey("PrestadorId")]
+        public Prestador Prestador { get; set; }
+
+        public UsuarioPrestador()
+        {
+            Usuario = new Usuario();
+            Prestador = new Prestador();
+        }
+
+        public UsuarioPrestador(int usuarioId, int prestadorId) : this()
         {
             UsuarioId = usuarioId;
             PrestadorId = prestadorId;
