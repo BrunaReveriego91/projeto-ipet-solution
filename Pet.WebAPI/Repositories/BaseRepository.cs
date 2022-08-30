@@ -17,20 +17,13 @@ namespace Pet.WebAPI.Repositories
         public virtual async Task<TEntity> Add(TEntity entity)
         {
             var result = await _context.AddAsync(entity);
-            //await Commit();
             await _context.SaveChangesAsync();
             return result.Entity;
         }
 
-        //public async Task Commit()
-        //{
-        //    await _context.SaveChangesAsync();
-        //}
-
         public virtual async Task Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            //await Commit();
             await _context.SaveChangesAsync();
         }
 
@@ -73,7 +66,6 @@ namespace Pet.WebAPI.Repositories
         TEntity? Get(int id);
         TEntity? Single(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression = null);
-        //Task Commit();
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
     }
