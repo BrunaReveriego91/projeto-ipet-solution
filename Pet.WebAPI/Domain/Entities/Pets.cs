@@ -10,8 +10,11 @@ namespace Pet.WebAPI.Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey(nameof(Cliente))]
-        public int IdCliente { get; set; }
+        [ForeignKey("Cliente")]
+        public int ClienteId { get; set; }
+
+        [ForeignKey("ClienteId")]
+        public Cliente Cliente { get; set; }
 
         [Required]
         [StringLength(256)]
