@@ -55,6 +55,10 @@ namespace Pet.WebAPI
             services.AddScoped<IServicosPrestadorRepository, ServicosPrestadorRepository>();
             services.AddTransient<IServicosPrestadorService, ServicosPrestadorService>();
 
+            services.AddScoped<IPetsRepository, PetsRepository>();
+            services.AddTransient<IPetsService, PetsService>();
+
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment, PetContext context)
         {
