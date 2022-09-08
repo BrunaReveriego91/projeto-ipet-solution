@@ -1,5 +1,4 @@
 ﻿using Pet.WebAPI.Domain.Entities.Enums;
-using Pet.WebAPI.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,7 +35,7 @@ namespace Pet.WebAPI.Domain.Entities
         public string? Cor { get; set; }
 
         [StringLength(20)]
-        public string? Aniversario { get; set; }
+        public string? DataNascimento { get; set; }
 
         [StringLength(50)]
         public string? Raca { get; set; }
