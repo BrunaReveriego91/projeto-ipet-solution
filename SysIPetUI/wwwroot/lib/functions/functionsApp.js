@@ -1,8 +1,4 @@
-﻿//------------------------------------------------------------------
-//- Funções Gerais do App
-//------------------------------------------------------------------
-
-$(function () {
+﻿$(function () {
     'use strict'
 
     //------------------------------------------------------------------
@@ -25,7 +21,6 @@ $(function () {
         exibirSenha.attr("type", "password");
     }
 
-
     //------------------------------------------------------------------
     // Bloqueio de duplo click no Login
     //------------------------------------------------------------------
@@ -41,7 +36,6 @@ $(function () {
         mostrarOlhoFechado();
     }
 
-
     //------------------------------------------------------------------
     // Função CapsLock
     //------------------------------------------------------------------
@@ -52,47 +46,6 @@ $(function () {
             //$('#msnCapsLock').toggle();
         }
     });
-
-
-    //------------------------------------------------------------------
-    // Função clicar e arrastar os Cards
-    //------------------------------------------------------------------
-    $('.connectedSortable').sortable({
-        placeholder: 'sort-highlight',
-        connectWith: '.connectedSortable',
-        handle: '.card-header, .nav-tabs',
-        forcePlaceholderSize: true,
-        zIndex: 999999
-    })
-    $('.connectedSortable .card-header').css('cursor', 'move')
-
-
-    //------------------------------------------------------------------
-    // Função clicar e arrastar a lista de tarefas
-    //------------------------------------------------------------------
-    $('.todo-list').sortable({
-        placeholder: 'sort-highlight',
-        handle: '.handle',
-        forcePlaceholderSize: true,
-        zIndex: 999999
-    })
-
-
-    //------------------------------------------------------------------
-    // Ocultar Exibir Botões
-    //------------------------------------------------------------------
-    $('#buttonConfirmarVisible').click(mostrarOcultarButtons);
-
-    //Função mostrarOcultarButtons - Bloqueio de duplo click
-    function mostrarOcultarButtons() {
-
-        $('#buttonConfirmarVisible').toggle();
-        $('#buttonConfirmarDisabled').toggle();
-
-        $('#buttonCancelarVisible').toggle();
-        $('#buttonCancelarDisabled').toggle();
-    }
-
 
     //----------------------------------------------------------------------
     //-- Função Exibir Modal -----------------------------------------------
@@ -109,7 +62,6 @@ $(function () {
             }
         );
     });
-
 
     //------------------------------------------------------------------
     // Dark Mode
@@ -130,7 +82,6 @@ $(function () {
         $('#buttonDarkMode').toggle();
         $('#buttonLightMode').toggle();
         $('body').removeClass('dark-mode');
-    }   
+    }
 
 });
-

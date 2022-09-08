@@ -8,11 +8,12 @@ using System.Text;
 
 namespace SysIPetUI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class PrestadorController : Controller
     {
         // Pegando o endereço com HttpClient
         //private readonly string url = "https://localhost:7271/api/Prestadores";
+        //private readonly string url = "https://669e-201-150-112-139.sa.ngrok.io/api/Prestadores";
         private readonly string url = "https://localhost:44321/api/Prestadores";
 
         // GET: PrestadorController
