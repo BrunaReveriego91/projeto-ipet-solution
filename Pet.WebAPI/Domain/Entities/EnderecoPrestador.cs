@@ -44,7 +44,7 @@ namespace Pet.WebAPI.Domain.Entities
         public string? CEP { get; set; }
 
         [Required]
-        [Phone]
+        [StringLength(11)]  // 11963981794
         public string Telefone { get; set; } = "";
 
         public bool WhatsApp { get; set; } = false;

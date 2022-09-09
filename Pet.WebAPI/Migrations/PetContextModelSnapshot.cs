@@ -426,6 +426,9 @@ namespace Pet.WebAPI.Migrations
                     b.Property<int>("ServicoId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("money");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PrestadorId");
