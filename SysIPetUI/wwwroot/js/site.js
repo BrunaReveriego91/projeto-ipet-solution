@@ -1,4 +1,7 @@
-﻿
+﻿//------------------------------------------------------------------
+//- Funções Gerais do App - Não mexer
+//------------------------------------------------------------------
+
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('jquery')) :
         typeof define === 'function' && define.amd ? define(['exports', 'jquery'], factory) :
@@ -6,6 +9,8 @@
 }(this, (function (exports, $) {
     'use strict';
 
+
+    //Funções de Layout, Menus, Cards, etc
     function _interopDefaultLegacy(e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
     var $__default = /*#__PURE__*/_interopDefaultLegacy($);
@@ -13,7 +18,7 @@
     /**
      * --------------------------------------------
      * CardRefresh.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -22,7 +27,7 @@
      */
 
     var NAME$e = 'CardRefresh';
-    var DATA_KEY$e = 'lte.cardrefresh';
+    var DATA_KEY$e = 'ipet.cardrefresh';
     var EVENT_KEY$7 = "." + DATA_KEY$e;
     var JQUERY_NO_CONFLICT$e = $__default['default'].fn[NAME$e];
     var EVENT_LOADED = "loaded" + EVENT_KEY$7;
@@ -167,7 +172,7 @@
     /**
      * --------------------------------------------
      * CardWidget.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -176,7 +181,7 @@
      */
 
     var NAME$d = 'CardWidget';
-    var DATA_KEY$d = 'lte.cardwidget';
+    var DATA_KEY$d = 'ipet.cardwidget';
     var EVENT_KEY$6 = "." + DATA_KEY$d;
     var JQUERY_NO_CONFLICT$d = $__default['default'].fn[NAME$d];
     var EVENT_EXPANDED$3 = "expanded" + EVENT_KEY$6;
@@ -393,7 +398,7 @@
     /**
      * --------------------------------------------
      * ControlSidebar.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -402,7 +407,7 @@
      */
 
     var NAME$c = 'ControlSidebar';
-    var DATA_KEY$c = 'lte.controlsidebar';
+    var DATA_KEY$c = 'ipet.controlsidebar';
     var EVENT_KEY$5 = "." + DATA_KEY$c;
     var JQUERY_NO_CONFLICT$c = $__default['default'].fn[NAME$c];
     var EVENT_COLLAPSED$3 = "collapsed" + EVENT_KEY$5;
@@ -691,7 +696,7 @@
     /**
      * --------------------------------------------
      * DirectChat.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -700,7 +705,7 @@
      */
 
     var NAME$b = 'DirectChat';
-    var DATA_KEY$b = 'lte.directchat';
+    var DATA_KEY$b = 'ipet.directchat';
     var EVENT_KEY$4 = "." + DATA_KEY$b;
     var JQUERY_NO_CONFLICT$b = $__default['default'].fn[NAME$b];
     var EVENT_TOGGLED = "toggled" + EVENT_KEY$4;
@@ -770,7 +775,7 @@
     /**
      * --------------------------------------------
      * Dropdown.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -779,7 +784,7 @@
      */
 
     var NAME$a = 'Dropdown';
-    var DATA_KEY$a = 'lte.dropdown';
+    var DATA_KEY$a = 'ipet.dropdown';
     var JQUERY_NO_CONFLICT$a = $__default['default'].fn[NAME$a];
     var SELECTOR_NAVBAR = '.navbar';
     var SELECTOR_DROPDOWN_MENU = '.dropdown-menu';
@@ -910,7 +915,7 @@
     /**
      * --------------------------------------------
      * ExpandableTable.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -919,7 +924,7 @@
       */
 
     var NAME$9 = 'ExpandableTable';
-    var DATA_KEY$9 = 'lte.expandableTable';
+    var DATA_KEY$9 = 'ipet.expandableTable';
     var EVENT_KEY$3 = "." + DATA_KEY$9;
     var JQUERY_NO_CONFLICT$9 = $__default['default'].fn[NAME$9];
     var EVENT_EXPANDED$1 = "expanded" + EVENT_KEY$3;
@@ -1020,11 +1025,11 @@
         return ExpandableTable._jQueryInterface;
     };
 
-    
+
     /**
      * --------------------------------------------
      * IFrame.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -1033,7 +1038,7 @@
      */
 
     var NAME$7 = 'IFrame';
-    var DATA_KEY$7 = 'lte.iframe';
+    var DATA_KEY$7 = 'ipet.iframe';
     var JQUERY_NO_CONFLICT$7 = $__default['default'].fn[NAME$7];
     var SELECTOR_DATA_TOGGLE$1 = '[data-widget="iframe"]';
     var SELECTOR_DATA_TOGGLE_CLOSE = '[data-widget="iframe-close"]';
@@ -1473,7 +1478,7 @@
     /**
      * --------------------------------------------
      * Layout.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -1482,7 +1487,7 @@
      */
 
     var NAME$6 = 'Layout';
-    var DATA_KEY$6 = 'lte.layout';
+    var DATA_KEY$6 = 'ipet.layout';
     var JQUERY_NO_CONFLICT$6 = $__default['default'].fn[NAME$6];
     var SELECTOR_HEADER = '.main-header';
     var SELECTOR_MAIN_SIDEBAR = '.main-sidebar';
@@ -1613,7 +1618,7 @@
                 setInterval(this.fixLoginRegisterHeight, this._config.loginRegisterAutoHeight);
             }
 
-            $__default['default'](SELECTOR_SIDEBAR$1).on('collapsed.lte.treeview expanded.lte.treeview', function () {
+            $__default['default'](SELECTOR_SIDEBAR$1).on('collapsed.ipet.treeview expanded.ipet.treeview', function () {
                 _this.fixLayoutHeight();
             });
             $__default['default'](SELECTOR_MAIN_SIDEBAR).on('mouseenter mouseleave', function () {
@@ -1621,14 +1626,14 @@
                     _this.fixLayoutHeight();
                 }
             });
-            $__default['default'](SELECTOR_PUSHMENU_BTN).on('collapsed.lte.pushmenu shown.lte.pushmenu', function () {
+            $__default['default'](SELECTOR_PUSHMENU_BTN).on('collapsed.ipet.pushmenu shown.ipet.pushmenu', function () {
                 setTimeout(function () {
                     _this.fixLayoutHeight();
                 }, 300);
             });
-            $__default['default'](SELECTOR_CONTROL_SIDEBAR_BTN).on('collapsed.lte.controlsidebar', function () {
+            $__default['default'](SELECTOR_CONTROL_SIDEBAR_BTN).on('collapsed.ipet.controlsidebar', function () {
                 _this.fixLayoutHeight();
-            }).on('expanded.lte.controlsidebar', function () {
+            }).on('expanded.ipet.controlsidebar', function () {
                 _this.fixLayoutHeight('control_sidebar');
             });
             $__default['default'](window).resize(function () {
@@ -1720,7 +1725,7 @@
     /**
      * --------------------------------------------
      * PushMenu.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -1729,7 +1734,7 @@
      */
 
     var NAME$5 = 'PushMenu';
-    var DATA_KEY$5 = 'lte.pushmenu';
+    var DATA_KEY$5 = 'ipet.pushmenu';
     var EVENT_KEY$2 = "." + DATA_KEY$5;
     var JQUERY_NO_CONFLICT$5 = $__default['default'].fn[NAME$5];
     var EVENT_COLLAPSED$1 = "collapsed" + EVENT_KEY$2;
@@ -1939,7 +1944,7 @@
     /**
      * --------------------------------------------
      * SidebarSearch.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -1948,7 +1953,7 @@
      */
 
     var NAME$4 = 'SidebarSearch';
-    var DATA_KEY$4 = 'lte.sidebar-search';
+    var DATA_KEY$4 = 'ipet.sidebar-search';
     var JQUERY_NO_CONFLICT$4 = $__default['default'].fn[NAME$4];
     var CLASS_NAME_OPEN$2 = 'sidebar-search-open';
     var CLASS_NAME_ICON_SEARCH = 'fa-search';
@@ -2234,7 +2239,7 @@
     /**
      * --------------------------------------------
      * NavbarSearch.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -2243,7 +2248,7 @@
      */
 
     var NAME$3 = 'NavbarSearch';
-    var DATA_KEY$3 = 'lte.navbar-search';
+    var DATA_KEY$3 = 'ipet.navbar-search';
     var JQUERY_NO_CONFLICT$3 = $__default['default'].fn[NAME$3];
     var SELECTOR_TOGGLE_BUTTON = '[data-widget="navbar-search"]';
     var SELECTOR_SEARCH_BLOCK = '.navbar-search-block';
@@ -2342,7 +2347,7 @@
     /**
      * --------------------------------------------
      * Toasts.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -2351,7 +2356,7 @@
      */
 
     var NAME$2 = 'Toasts';
-    var DATA_KEY$2 = 'lte.toasts';
+    var DATA_KEY$2 = 'ipet.toasts';
     var EVENT_KEY$1 = "." + DATA_KEY$2;
     var JQUERY_NO_CONFLICT$2 = $__default['default'].fn[NAME$2];
     var EVENT_INIT = "init" + EVENT_KEY$1;
@@ -2544,7 +2549,7 @@
     /**
      * --------------------------------------------
      * TodoList.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -2553,7 +2558,7 @@
      */
 
     var NAME$1 = 'TodoList';
-    var DATA_KEY$1 = 'lte.todolist';
+    var DATA_KEY$1 = 'ipet.todolist';
     var JQUERY_NO_CONFLICT$1 = $__default['default'].fn[NAME$1];
     var SELECTOR_DATA_TOGGLE = '[data-widget="todo-list"]';
     var CLASS_NAME_TODO_LIST_DONE = 'done';
@@ -2658,7 +2663,7 @@
     /**
      * --------------------------------------------
      * Treeview.js
-     * License MIT
+     *
      * --------------------------------------------
      */
     /**
@@ -2667,7 +2672,7 @@
      */
 
     var NAME = 'Treeview';
-    var DATA_KEY = 'lte.treeview';
+    var DATA_KEY = 'ipet.treeview';
     var EVENT_KEY = "." + DATA_KEY;
     var JQUERY_NO_CONFLICT = $__default['default'].fn[NAME];
     var EVENT_EXPANDED = "expanded" + EVENT_KEY;

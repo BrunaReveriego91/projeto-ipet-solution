@@ -21,7 +21,7 @@ namespace Pet.WebAPI.Services
             {
                 NomeCompleto = clientPet.NomeCompleto,
                 CPF = clientPet.CPF,
-                Aniversario = clientPet.Aniversario,
+                DataNascimento = clientPet.DataNascimento,
                 Telefone1 = clientPet.Telefone1,
                 WhatsApp = clientPet.WhatsApp,
                 Telefone2 = clientPet.Telefone2
@@ -64,7 +64,7 @@ namespace Pet.WebAPI.Services
 
             entry.NomeCompleto = clientPet.NomeCompleto;
             entry.CPF = clientPet.CPF;
-            entry.Aniversario = clientPet.Aniversario;
+            entry.DataNascimento = clientPet.DataNascimento;
             entry.Telefone1 = clientPet.Telefone1;
             entry.WhatsApp = clientPet.WhatsApp;
             entry.Telefone2 = clientPet.Telefone2;

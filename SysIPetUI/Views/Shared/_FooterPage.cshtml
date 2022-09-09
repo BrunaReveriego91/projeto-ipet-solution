@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <footer class="main-footer">
+
+        <div class="d-md-block" style="text-align:center">
+
+            <p class="comment-text">
+
+                <a class="text-gray" translate="no"><i>Sys iPet's</i> | Copyright &copy; 2022 - @DateTime.Now.Year | </a>
+                <a href="@Url.Action("Privacy","Home")" class="btn-link text-cyan">Política de Privacidade</a>
+            </p>
+
+        </div>
+
+    </footer>
+
+}
+else
+{
+    <footer class="main-footer">
+
+        <div class="d-md-block" style="text-align:center">
+
+            <p class="comment-text">
+
+                <a class="text-gray" translate="no"><i>Portal iPet's</i> | Copyright &copy; 2022 - @DateTime.Now.Year | </a>
+                <a href="@Url.Action("Privacy","Home")" class="btn-link text-cyan">Política de Privacidade</a>
+            </p>
+
+        </div>
+
+    </footer>
+}

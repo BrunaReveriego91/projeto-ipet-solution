@@ -17,7 +17,7 @@ namespace Pet.WebAPI.Domain.Entities
         public string? CPF { get; set; }
         
         [StringLength(20)]
-        public string? Aniversario { get; set; }
+        public string? DataNascimento { get; set; }
         
         [Required]
         [StringLength(15)]
