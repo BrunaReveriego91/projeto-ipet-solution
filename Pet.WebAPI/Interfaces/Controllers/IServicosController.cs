@@ -11,7 +11,5 @@ namespace Pet.WebAPI.Interfaces.Controllers
         IActionResult DeleteServico(int id);
         ActionResult<List<Servico>> GetServicos();
         ActionResult<Servico?> GetServico(int id);
-        //ActionResult<List<Servico>> GetServicosFromPrestador(int prestador_id);
-
     }
 }

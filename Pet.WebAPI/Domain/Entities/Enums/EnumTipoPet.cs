@@ -10,6 +10,5 @@
         Peixe = 5,
         Equino = 6,
         Outros = 7
-
     }
 }

@@ -1,5 +1,7 @@
 ﻿1 - Apagar pasta Migrations
 
+2 - Dropar Banco no SQL Management
+
 2 - na linha de cmd:
 	
 	2.1) dotnet-ef migrations add inicial

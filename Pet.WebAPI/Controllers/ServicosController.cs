@@ -50,14 +50,6 @@ namespace Pet.WebAPI.Controllers
             return Ok(dados);
         }
 
-        //[HttpPost("Prestador/{id}")]
-        //public ActionResult<List<Servico>> GetServicosFromPrestador(int id)
-        //{
-        //    var dados = _service.GetAllFromPrestador(id);
-        //    if (dados is null) return NoContent();
-        //    return Ok(dados);
-        //}
-
         [HttpPost]
         public async Task<IActionResult> PostServico([FromBody] NovoServico servico)
         {

@@ -19,9 +19,6 @@ namespace Pet.WebAPI.Domain.Entities
         [ForeignKey("PrestadorId")]
         public Prestador Prestador { get; set; }
 
-        //[ForeignKey(nameof(EnderecoPrestador))]
-        //public int EnderecoPrestadorId { get; set; }
-
         public DateTime Data_Agenda { get; set; }
 
         public DateTime Data_Cancelamento { get; set; }

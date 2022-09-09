@@ -9,12 +9,10 @@ namespace Pet.WebAPI.Services
     public class ServicosService : IServicosServices
     {
         private readonly IServicosRepository _repository;
-        private readonly IServicosPrestadorRepository _servicosPrestadorRepository;
 
-        public ServicosService(IServicosRepository servicosRepository, IServicosPrestadorRepository servicosPrestadorRepository)
+        public ServicosService(IServicosRepository servicosRepository)
         {
             _repository = servicosRepository;
-            _servicosPrestadorRepository = servicosPrestadorRepository; 
         }
 
         public async Task<Servico> Add(NovoServico servico)
@@ -39,12 +37,6 @@ namespace Pet.WebAPI.Services
         {
             return _repository.GetAll().ToList();
         }
-
-        //public List<Servico>? GetAllFromPrestador(int prestador_id)
-        //{
-        //    var servicos = _servicosPrestadorRepository.GetAll(p => p.PrestadorId == prestador_id);
-        //    return _repository.GetAll().ToList();
-        //}
 
         public async Task Update(int id, AlterarServico servico)
         {

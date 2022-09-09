@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+app:
+    container_name: app
+    image: app
+    build:
+        context: .
+        dockerfile: Dockerfile
+        target: runtime
+    restart: always
+    ports:
+        - "8080:8080"

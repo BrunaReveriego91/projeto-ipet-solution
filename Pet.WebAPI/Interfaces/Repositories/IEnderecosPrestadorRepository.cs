@@ -10,6 +10,5 @@ namespace Pet.WebAPI.Interfaces.Repositories
         EnderecoPrestador? Get(int id);
         Task Update(EnderecoPrestador entity);
         Task Delete(EnderecoPrestador entity);
-
     }
 }

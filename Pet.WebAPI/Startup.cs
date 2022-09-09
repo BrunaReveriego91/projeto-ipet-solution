@@ -55,7 +55,10 @@ namespace Pet.WebAPI
             services.AddScoped<IServicosPrestadorRepository, ServicosPrestadorRepository>();
             services.AddTransient<IServicosPrestadorService, ServicosPrestadorService>();
 
+            services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
+            services.AddTransient<IAgendamentoService, AgendamentoService>();
         }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment, PetContext context)
         {
             app.UseSwagger();

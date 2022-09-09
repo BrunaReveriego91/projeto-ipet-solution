@@ -23,6 +23,12 @@ namespace Pet.WebAPI.Domain.Entities
         /// </summary>
         public bool Ativo { get; set; } = false;
 
+        /// <summary>
+        /// Valor do Serviço
+        /// </summary>
+        [Column(TypeName = "money")]
+        public float Valor { get; set; }
+
         public ServicoPrestador()
         {
             Servico = new Servico();
