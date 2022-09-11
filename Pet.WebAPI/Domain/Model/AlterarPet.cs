@@ -8,7 +8,7 @@
 
         public double Peso { get; set; }
 
-        public string? DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
     }
 }

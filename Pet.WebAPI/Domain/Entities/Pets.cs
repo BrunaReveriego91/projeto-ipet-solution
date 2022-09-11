@@ -35,7 +35,7 @@ namespace Pet.WebAPI.Domain.Entities
         public string? Cor { get; set; }
 
         [StringLength(20)]
-        public string? DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         [StringLength(50)]
         public string? Raca { get; set; }

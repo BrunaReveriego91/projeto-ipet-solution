@@ -30,7 +30,7 @@ namespace Pet.WebAPI.Domain.Model
 
         public string? Cor { get; set; }
 
-        public string? DataNascimento { get; set; }
+        public DateTime? DataNascimento { get; set; }
 
         public string? Raca { get; set; }
     }
