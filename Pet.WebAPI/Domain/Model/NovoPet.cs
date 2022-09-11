@@ -4,7 +4,7 @@ namespace Pet.WebAPI.Domain.Model
 {
     public class NovoPet
     {
-        public NovoPet(int clienteId, string? nomeCompleto, EnumTipoPet? tipoPet, EnumTamanhoPet? tamanhoPet, double peso, EnumGenero? genero, string? cor, string? dataNascimento, string? raca)
+        public NovoPet(int clienteId, string? nomeCompleto, EnumTipoPet? tipoPet, EnumTamanhoPet? tamanhoPet, double peso, EnumGenero? genero, string? cor, DateTime? dataNascimento, string? raca)
         {
             ClienteId = clienteId;
             NomeCompleto = nomeCompleto;
