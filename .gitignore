@@ -456,3 +456,4 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+/Pet.UnitTests/Services/PrestadoresServiceTestes.cs

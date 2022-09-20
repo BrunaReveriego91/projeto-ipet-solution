@@ -24,9 +24,9 @@ namespace Pet.WebAPI.Services
                 DataNascimento = clientPet.DataNascimento,
                 Telefone1 = clientPet.Telefone1,
                 WhatsApp = clientPet.WhatsApp,
-                Telefone2 = clientPet.Telefone2
+                Telefone2 = clientPet.Telefone2,
+                Enderecos = clientPet.Enderecos
             };
-
 
             return await _clientPetRepository.Add(cliente);
         }
@@ -55,23 +55,24 @@ namespace Pet.WebAPI.Services
 
         public async Task Update(int id, AlterarCliente clientPet)
         {
-            var entry = _clientPetRepository.Get(id);
+            var cliente = _clientPetRepository.Get(id);
 
-            if (entry is null)
+            if (cliente is null)
             {
                 throw new Exception($"Cliente não encontrado pelo Id {id}.");
             }
 
-            entry.NomeCompleto = clientPet.NomeCompleto;
-            entry.CPF = clientPet.CPF;
-            entry.DataNascimento = clientPet.DataNascimento;
-            entry.Telefone1 = clientPet.Telefone1;
-            entry.WhatsApp = clientPet.WhatsApp;
-            entry.Telefone2 = clientPet.Telefone2;
+            cliente.NomeCompleto = clientPet.NomeCompleto;
+            cliente.CPF = clientPet.CPF;
+            cliente.DataNascimento = clientPet.DataNascimento;
+            cliente.Telefone1 = clientPet.Telefone1;
+            cliente.WhatsApp = clientPet.WhatsApp;
+            cliente.Telefone2 = clientPet.Telefone2;
+            cliente.Enderecos = clientPet.Enderecos;
 
             try
             {
-                await _clientPetRepository.Update(entry);
+                await _clientPetRepository.Update(cliente);
             }
             catch (DbUpdateConcurrencyException)
             {

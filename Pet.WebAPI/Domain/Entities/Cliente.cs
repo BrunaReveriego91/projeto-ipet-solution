@@ -5,28 +5,32 @@ namespace Pet.WebAPI.Domain.Entities
 {
     public class Cliente : BaseEFObject
     {
+
         [Key]
         public int Id { get; set; }
-        
+
         [Required]
         [StringLength(256)]
         public string? NomeCompleto { get; set; }
-        
+
         [Required]
         [StringLength(15)]
         public string? CPF { get; set; }
-        
+
         [StringLength(20)]
         public DateTime? DataNascimento { get; set; }
-        
+
         [Required]
         [StringLength(15)]
         public string? Telefone1 { get; set; }
-        
+
         [Required]
         public bool WhatsApp { get; set; }
 
         [StringLength(15)]
         public string? Telefone2 { get; set; }
+
+        public List<EnderecoCliente>? Enderecos { get; set; } = new List<EnderecoCliente>();
+
     }
 }
