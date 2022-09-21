@@ -43,6 +43,10 @@ namespace Pet.WebAPI
             services.AddScoped<IEnderecosPrestadorRepository, EnderecosPrestadorRepository>();
             services.AddTransient<IEnderecosPrestadorService, EnderecosPrestadorService>();
 
+            services.AddScoped<IEnderecosClienteRepository, EnderecosClienteRepository>();
+            services.AddTransient<IEnderecosClienteService, EnderecosClienteService>();
+
+
             services.AddScoped<IUsuariosRepository, UsuariosRepository>();
             services.AddTransient<IUsuariosService, UsuariosService>();
 

@@ -4,7 +4,7 @@ namespace Pet.WebAPI.Domain.Model
 {
     public class AlterarCliente
     {
-        public AlterarCliente(string? nome, string? cpf, DateTime? dataNascimento, string? telefone1, bool whatsApp, string? telefone2, List<EnderecoCliente> enderecos)
+        public AlterarCliente(string? nome, string? cpf, DateTime? dataNascimento, string? telefone1, bool whatsApp, string? telefone2, EnderecoCliente? endereco)
         {
             NomeCompleto = nome;
             CPF = cpf;
@@ -12,7 +12,7 @@ namespace Pet.WebAPI.Domain.Model
             Telefone1 = telefone1;
             WhatsApp = whatsApp;
             Telefone2 = telefone2;
-            Enderecos = enderecos;
+            Endereco = endereco;
         }
 
         public string? NomeCompleto { get; set; }
@@ -21,6 +21,6 @@ namespace Pet.WebAPI.Domain.Model
         public string? Telefone1 { get; set; }
         public bool WhatsApp { get; set; }
         public string? Telefone2 { get; set; }
-        public List<EnderecoCliente>? Enderecos { get; set; } = new List<EnderecoCliente>();
+        public EnderecoCliente? Endereco { get; set; }
     }
 }

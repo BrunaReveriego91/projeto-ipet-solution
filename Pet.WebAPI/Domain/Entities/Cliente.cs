@@ -30,7 +30,7 @@ namespace Pet.WebAPI.Domain.Entities
         [StringLength(15)]
         public string? Telefone2 { get; set; }
 
-        public List<EnderecoCliente>? Enderecos { get; set; } = new List<EnderecoCliente>();
+        public EnderecoCliente? Endereco { get; set; } 
 
     }
 }

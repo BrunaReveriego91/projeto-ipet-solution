@@ -12,11 +12,20 @@ namespace Pet.WebAPI.Repositories
 
         public override Cliente? Get(int id)
         {
-            var query = (from p in DataContext.Clientes
-                         where p.Id == id
-                         select p).FirstOrDefault();
+            var cliente = (from p in DataContext.Clientes
+                           where p.Id == id
+                           select p).FirstOrDefault();
 
-            return query;
+            if (cliente == null)
+                return null;
+
+            var enderecoCliente = (from e in DataContext.EnderecosClientes
+                                   where e.ClienteId == id
+                                   select e).FirstOrDefault();
+
+            cliente.Endereco = enderecoCliente;
+
+            return cliente;
         }
 
 

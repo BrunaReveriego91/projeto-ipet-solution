@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
+using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 using Pet.WebAPI.Repositories;
 
@@ -8,9 +9,9 @@ namespace Pet.WebAPI.Services
 {
     public class EnderecosClienteService : IEnderecosClienteService
     {
-        private readonly EnderecosClienteRepository _enderecosClienteRepository;
+        private readonly IEnderecosClienteRepository _enderecosClienteRepository;
 
-        public EnderecosClienteService(EnderecosClienteRepository enderecosClienteRepository)
+        public EnderecosClienteService(IEnderecosClienteRepository enderecosClienteRepository)
         {
             _enderecosClienteRepository = enderecosClienteRepository;
         }

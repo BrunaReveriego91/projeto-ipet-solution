@@ -9,13 +9,15 @@ namespace Pet.WebAPI.Services
     public class ClientesService : IClientesService
     {
         private IClientesRepository _clientPetRepository;
+        private IEnderecosClienteRepository _enderecoClienteRepository;
 
-        public ClientesService(IClientesRepository clientPetRepository)
+        public ClientesService(IClientesRepository clientPetRepository, IEnderecosClienteRepository enderecoClienteRepository)
         {
             _clientPetRepository = clientPetRepository;
+            _enderecoClienteRepository = enderecoClienteRepository;
         }
 
-        public async Task<Cliente> Add(NovoCliente clientPet)
+        public async Task<Cliente?> Add(NovoCliente clientPet)
         {
             var cliente = new Cliente()
             {
@@ -24,22 +26,51 @@ namespace Pet.WebAPI.Services
                 DataNascimento = clientPet.DataNascimento,
                 Telefone1 = clientPet.Telefone1,
                 WhatsApp = clientPet.WhatsApp,
-                Telefone2 = clientPet.Telefone2,
-                Enderecos = clientPet.Enderecos
+                Telefone2 = clientPet.Telefone2
             };
 
-            return await _clientPetRepository.Add(cliente);
+            var response = await _clientPetRepository.Add(cliente);
+            if (response.Id == 0)
+                return null;
+
+
+            if (clientPet.Endereco != null)
+            {
+                var enderecoCliente = new EnderecoCliente()
+                {
+                    ClienteId = response.Id,
+                    Logradouro = clientPet.Endereco.Logradouro,
+                    Bairro = clientPet.Endereco.Bairro,
+                    CEP = clientPet.Endereco.CEP,
+                    Cidade = clientPet.Endereco.Cidade,
+                    SemNumero = clientPet.Endereco.SemNumero,
+                    Complemento = clientPet.Endereco.Complemento,
+                    Data_Cadastro = clientPet.Endereco.Data_Cadastro,
+                    Numero = clientPet.Endereco.Numero,
+                    Referencia = clientPet.Endereco.Referencia,
+                    UF = clientPet.Endereco.UF
+                };
+
+                await _enderecoClienteRepository.Add(enderecoCliente);
+            }
+
+            return _clientPetRepository.Get(response.Id);
         }
 
         public async Task Delete(int id)
         {
             var entry = _clientPetRepository.Get(id);
+            var endereco = _enderecoClienteRepository.Get(entry.Endereco.Id);
 
             if (entry is null)
             {
                 throw new Exception($"Cliente não encontrado pelo Id {id}.");
             }
+
             await _clientPetRepository.Delete(entry);
+
+            if (endereco != null)
+                await _enderecoClienteRepository.Delete(endereco);
         }
 
         public Cliente? Get(int id)
@@ -68,11 +99,47 @@ namespace Pet.WebAPI.Services
             cliente.Telefone1 = clientPet.Telefone1;
             cliente.WhatsApp = clientPet.WhatsApp;
             cliente.Telefone2 = clientPet.Telefone2;
-            cliente.Enderecos = clientPet.Enderecos;
 
             try
             {
                 await _clientPetRepository.Update(cliente);
+
+                if (cliente.Endereco != null)
+                {
+                    var endereco = _enderecoClienteRepository.Get(cliente.Endereco.Id);
+
+                    endereco.Logradouro = clientPet.Endereco.Logradouro;
+                    endereco.Bairro = clientPet.Endereco.Bairro;
+                    endereco.CEP = clientPet.Endereco.CEP;
+                    endereco.Cidade = clientPet.Endereco.Cidade;
+                    endereco.SemNumero = clientPet.Endereco.SemNumero;
+                    endereco.Complemento = clientPet.Endereco.Complemento;
+                    endereco.Numero = clientPet.Endereco.Numero;
+                    endereco.Referencia = clientPet.Endereco.Referencia;
+                    endereco.UF = clientPet.Endereco.UF;
+
+                    await _enderecoClienteRepository.Update(endereco);
+                }
+                else
+                {
+                    var enderecoCliente = new EnderecoCliente()
+                    {
+                        Logradouro = clientPet.Endereco.Logradouro,
+                        Bairro = clientPet.Endereco.Bairro,
+                        CEP = clientPet.Endereco.CEP,
+                        Cidade = clientPet.Endereco.Cidade,
+                        SemNumero = clientPet.Endereco.SemNumero,
+                        Complemento = clientPet.Endereco.Complemento,
+                        Numero = clientPet.Endereco.Numero,
+                        Referencia = clientPet.Endereco.Referencia,
+                        UF = clientPet.Endereco.UF,
+                        ClienteId = cliente.Id,
+                        Data_Cadastro = DateTime.Now
+                    };
+
+                    await _enderecoClienteRepository.Add(enderecoCliente);
+                }
+
             }
             catch (DbUpdateConcurrencyException)
             {

@@ -9,10 +9,9 @@ namespace Pet.WebAPI.Domain.Entities
         [Key]
         public int Id { get; set; }
 
-        public int ClienteId { get; set; }
-
         [ForeignKey("ClienteId")]
-        public Cliente Cliente { get; set; }
+
+        public int ClienteId { get; set; }
 
         [Required]
         [StringLength(256)]
@@ -45,9 +44,5 @@ namespace Pet.WebAPI.Domain.Entities
         [StringLength(8)]
         public string? CEP { get; set; }
 
-        public EnderecoCliente()
-        {
-            Cliente = new Cliente();
-        }
     }
 }
