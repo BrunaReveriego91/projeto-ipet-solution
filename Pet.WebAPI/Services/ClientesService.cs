@@ -60,8 +60,7 @@ namespace Pet.WebAPI.Services
         public async Task Delete(int id)
         {
             var entry = _clientPetRepository.Get(id);
-            var endereco = _enderecoClienteRepository.Get(entry.Endereco.Id);
-
+   
             if (entry is null)
             {
                 throw new Exception($"Cliente não encontrado pelo Id {id}.");
@@ -69,8 +68,8 @@ namespace Pet.WebAPI.Services
 
             await _clientPetRepository.Delete(entry);
 
-            if (endereco != null)
-                await _enderecoClienteRepository.Delete(endereco);
+            if (entry.Endereco != null)
+                await _enderecoClienteRepository.Delete(entry.Endereco);
         }
 
         public Cliente? Get(int id)

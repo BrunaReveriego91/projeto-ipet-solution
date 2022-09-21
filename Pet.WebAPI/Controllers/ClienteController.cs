@@ -54,11 +54,11 @@ namespace Pet.WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCliente(int id)
+        public async Task<IActionResult> DeleteCliente(int id)
         {
             try
             {
-                _clientPetService.Delete(id);
+                await _clientPetService.Delete(id);
             }
             catch (Exception)
             {
