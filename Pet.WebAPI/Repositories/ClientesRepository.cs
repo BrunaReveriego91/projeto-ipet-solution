@@ -29,6 +29,8 @@ namespace Pet.WebAPI.Repositories
         }
 
 
+
+
         public override async Task Delete(Cliente cliente)
         {
             await base.Delete(cliente);
@@ -37,7 +39,34 @@ namespace Pet.WebAPI.Repositories
 
         public override IEnumerable<Cliente> GetAll()
         {
-            return base.GetAll();
+            var clientes = (from p in DataContext.Clientes
+                            select p).ToList();
+
+
+            if (clientes.Count == 0 || clientes == null)
+                return null;
+
+
+            var clienteList = new List<Cliente>();
+
+            foreach (var cliente in clientes)
+            {
+                var clienteObj = new Cliente();
+
+                clienteObj = cliente;
+
+                var enderecoCliente = (from e in DataContext.EnderecosClientes
+                                       where e.ClienteId == cliente.Id
+                                       select e).FirstOrDefault();
+
+                if (enderecoCliente != null)
+                    clienteObj.Endereco = enderecoCliente;
+
+
+                clienteList.Add(clienteObj);
+            }
+
+            return clienteList;
         }
 
         public override Task Update(Cliente cliente)

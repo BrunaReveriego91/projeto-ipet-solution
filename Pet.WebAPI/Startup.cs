@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pet.Repository.Infrastructure;
-using Pet.WebAPI.Domain.Settings;
 using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 using Pet.WebAPI.Repositories;
 using Pet.WebAPI.Services;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Pet.WebAPI.Controllers;
 
 namespace Pet.WebAPI
 {
