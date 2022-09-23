@@ -25,6 +25,7 @@ builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 var services = builder.Services;
 var configuration = builder.Configuration;
 
+
 services.AddAuthentication().AddGoogle(googleOptions =>
 {
     googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
