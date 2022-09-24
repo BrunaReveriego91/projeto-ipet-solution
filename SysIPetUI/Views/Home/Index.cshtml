@@ -8,45 +8,59 @@
 
         <!-- Cabeçalho do Conteúdo da Página -->
         <div class="content-header">
+
             <div class="container-fluid">
+
                 <div class="row mb-2">
 
                     <!-- Título -->
                     <div class="col-sm-6">
+
                         <h1 class="m-0">
-                            Bem-vindo ao
+
+                            <span class="text-gray">
+                                Bem-vindo ao
+                            </span>
+                            
                             <span class="brand-text font-weight-light">
                                 <i class="text-yellow" translate="no">i</i>
                                 <i class="text-blue" translate="no">Pet's</i>
                             </span>
+
                         </h1>
+
                     </div>
 
                     <!-- Data de Hoje na Home -->
                     <div class="col-sm-6">
+
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item active">@DateTime.Now.ToString("F")</li>
+                            <li class="breadcrumb-item active text-gray">@DateTime.Now.ToString("F")</li>
                         </ol>
+
                     </div>
 
                 </div>
 
                 <hr />
                 <!-- Frase deslisante -->
-                <marquee class="comment-text"><h5>Agende um Serviço com a gente! Acesse o Sistema<i translate="no"> iPet's </i>e confira! :)</h5></marquee>
+                <marquee class="comment-text text-gray"><h5>Agende um Serviço com a gente! Acesse o Sistema<i translate="no"> iPet's </i>e confira! :)</h5></marquee>
 
                 <!-- Sub Título -->
                 @*<div class="col-sm-6 text-primary"><i>Notícias e anúncios aparecem aqui! :)</i></div>*@
 
                 <hr />
                 <p class="mb-1">
-                    <h4 class="m-0">Acesse nosso Sistema!</h4>
-                    <hr />
-                    Aqui você encontra diversos serviços para o seu amigão!
-                    Use o iPet's e solicite um serviço com nossos Parceiros 24 horas por dia, 7 dias por semana.
+                                        
+                    <h5 class="m-0 text-gray">
+                        Aqui você encontra diversos serviços para o seu amigão!
+                        Use o iPet's e solicite um serviço com nossos Parceiros 24 horas por dia, 7 dias por semana.
+                    </h5>                    
+
                 </p>
 
                 <!-- Conteúdo principal -->
+                <hr />
                 <section class="content">
 
                     <div class="container-fluid">
@@ -62,7 +76,7 @@
 
                                     <!--Imagem promocional-->
                                     <div class="position-relative col-sm-8 animation__shake">
-                                        <img src="lib/image/iPet_Page_2.png" alt="Photo 1" class="img-fluid elevation-3" title="Agende um Serviço! Registre-se!">
+                                        <img src="lib/image/iPet_Page_2.png" alt="Photo 1" class="img-fluid elevation-3" title="Registre-se e agende um Serviço!">
                                         <div class="ribbon-wrapper ribbon-lg">
                                             <div class="ribbon bg-success text-lg elevation-2">
                                                 Novo!
@@ -94,9 +108,9 @@
                                         <img src="lib/image/Gato-removebg-preview.png" alt="Photo 2" class="img-fluid elevation-3" title="Eu não gosto de ninguém!">
                                     </div>
 
-                                    <!--Bons amigos famintos-->
+                                    <!--Bons amigos e famintos-->
                                     <div class="position-relative col-sm-3">
-                                        <img src="lib/image/Gato_Cachorro2-removebg-preview.png" alt="Photo 2" class="img-fluid elevation-3" title="Bons amigos famintos!">
+                                        <img src="lib/image/Gato_Cachorro2-removebg-preview.png" alt="Photo 2" class="img-fluid elevation-3" title="Bons amigos e famintos!">
                                     </div>
 
                                     <!--Desencana nanico-->

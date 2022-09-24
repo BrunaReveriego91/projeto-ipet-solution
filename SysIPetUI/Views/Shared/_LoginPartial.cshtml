@@ -105,14 +105,14 @@
                                 <li class="user-footer">
 
                                     <!--Gerenciar a Conta do Usuário-->
-                                    <a class="btn btn-success btn-flat" asp-area="Identity" asp-page="/Account/Manage/Index" title="Gerenciar sua Conta">Conta</a>
+                                    <a class="btn btn-primary btn-flat" asp-area="Identity" asp-page="/Account/Manage/Index" title="Gerenciar sua Conta">Conta</a>
 
                                     <!--Exibe a tela de Logout-->
                                     @*<a class="btn btn-primary btn-flat float-right" asp-area="Identity" asp-page="/Account/Logout" title="Logout">Sair</a>*@
 
                                     <!--Logout direto redireciona para o Home-->
                                     <form class="form-inline float-right" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="btn btn-primary btn-flat" title="Logout">Sair</button>
+                                        <button type="submit" class="btn btn-default btn-flat" title="Logout">Sair</button>
                                     </form>
 
                                 </li>
@@ -193,9 +193,9 @@
                                 <li class="nav-item">
 
                                     <a class="nav-link"
-                               asp-area="Identity"
-                               asp-page="/Account/Manage/Index"
-                               title="Gerenciar sua Conta">
+                                        asp-area="Identity"
+                                        asp-page="/Account/Manage/Index"
+                                        title="Gerenciar sua Conta">
                                         <!--<i class="nav-icon fas fa-address-card"></i>-->
                                         <p>Gerenciar sua Conta</p>
                                     </a>
@@ -255,7 +255,7 @@
                 <script src="~/js/site.js"></script>
 
                 @*<!-- Functions -->
-        <script src="~/lib/functions/js/functionsApp.js"></script>*@
+                <script src="~/lib/functions/js/functionsApp.js"></script>*@
 
                 <script type="text/javascript">
 
@@ -321,6 +321,7 @@
                                 function () {
 
                                     $('#modalIncluirPrestador').modal('show');
+                                    $('#modalIncluirCadastroCliente').modal('show');
 
                                 }
                             );
@@ -450,14 +451,14 @@
                                 <li class="user-footer">
 
                                     <!--Gerenciar a Conta do Usuário-->
-                                    <a class="btn btn-success btn-flat" asp-area="Identity" asp-page="/Account/Manage/Index" title="Gerenciar sua Conta">Conta</a>
+                                    <a class="btn btn-primary btn-flat" asp-area="Identity" asp-page="/Account/Manage/Index" title="Gerenciar sua Conta">Conta</a>
 
                                     <!--Exibe a tela de Logout-->
                                     @*<a class="btn btn-primary btn-flat float-right" asp-area="Identity" asp-page="/Account/Logout" title="Logout">Sair</a>*@
 
                                     <!--Logout direto redireciona para o Home-->
                                     <form class="form-inline float-right" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                        <button type="submit" class="btn btn-primary btn-flat" title="Logout">Sair</button>
+                                        <button type="submit" class="btn btn-default btn-flat" title="Logout">Sair</button>
                                     </form>
 
                                 </li>
@@ -538,9 +539,9 @@
                                 <li class="nav-item">
 
                                     <a class="nav-link"
-                               asp-area="Identity"
-                               asp-page="/Account/Manage/Index"
-                               title="Gerenciar sua Conta">
+                                        asp-area="Identity"
+                                        asp-page="/Account/Manage/Index"
+                                        title="Gerenciar sua Conta">
                                         <!--<i class="nav-icon fas fa-address-card"></i>-->
                                         <p>Gerenciar sua Conta</p>
                                     </a>

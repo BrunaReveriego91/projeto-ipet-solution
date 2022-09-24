@@ -9,19 +9,73 @@
     }
 }
 
-<h1>Manage your account</h1>
+<div class="wrapper">
 
-<div>
-    <h2>Change your account settings</h2>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+
+                    <!-- Título -->
+                    <div class="col-sm-6">
+
+                        <h1 class="m-0">
+
+                            <span class="text-gray">
+                                Gerenciar sua Conta
+                            </span>
+                            
+                            <span class="brand-text font-weight-light">
+                                <i class="text-yellow" translate="no">i</i>
+                                <i class="text-blue" translate="no">Pet's</i>
+                            </span>
+
+                        </h1>
+
+                    </div>
+
+                    <!-- Data de Hoje na Home -->
+                    <div class="col-sm-6">
+
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item active">@DateTime.Now.ToString("F")</li>
+                        </ol>
+
+                    </div>
+
+                </div>
+
+                <hr />                                       
+
+                <!-- Conteúdo principal -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <partial name="_ManageNav" />
+                            </div>
+
+                            <div class="col-md-9">
+                                @RenderBody()
+                            </div>                                                   
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
         </div>
-        <div class="col-md-9">
-            @RenderBody()
-        </div>
+
     </div>
+
 </div>
 
 @section Scripts {

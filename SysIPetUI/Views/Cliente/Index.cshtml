@@ -7,8 +7,14 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="CreateCliente">Create New</a>
+    @*<a asp-action="CreateCliente">Create New</a>*@
 </p>
+
+<!-- Gerenciar Conta -->
+<div class="col-md-auto float-right">
+    <a asp-area="Identity" asp-page="/Account/Manage/Index"><p>Voltar para minha Conta</p></a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -62,3 +68,124 @@
 }
     </tbody>
 </table>
+
+
+
+@*<div class="col-md-12">
+
+    <div class="form-group">
+
+        <!-- Complemento dos Dados -->
+        <div id="cadastroContainerAlterar">
+
+            <!-- Username -->
+            <div class="form-group">
+
+                <label asp-for="Username" class="form-label"></label>
+                <label class="control-label col-md-auto">
+                    <span class="brand-text font-weight-light">
+                        <b class="text-blue">Username</b>
+                    </span>
+                </label>
+
+                <div class="col-md-auto">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                    <input asp-for="Username" class="form-control" disabled />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                </div>
+
+            </div>
+
+            <!-- Telefone -->
+            <div class="form-group">
+
+                <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                <label class="control-label col-md-auto">
+                    <span class="brand-text font-weight-light">
+                        <b class="text-blue">Telefone</b>
+                    </span>
+                </label>
+
+                <div class="col-md-auto">
+                    @Html.EditorFor(model => model.Input.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Input.PhoneNumber, "", new { @class = "text-danger" })
+                    <input asp-for="Input.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Pessoa Juridica-->
+        <div id="pessoaJuridicaContainerAlterar" style="display:none">
+
+            <!--CNPJ-->
+            <div class="form-group">
+
+                <label class="control-label col-md-auto">
+                    <span class="brand-text font-weight-light">
+                        <b class="text-blue">CNPJ</b>
+                        <b class="text-red">*</b>
+                    </span>
+                </label>
+
+                <div class="col-md-auto">
+                    @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <!-- Adicionar o link para o form de cadastro de Serviços -->
+            <div class="form-group">
+                <div class="col-md-auto">
+                    <a href="#" class="btn-link text-green">Cadatre os principais Serviços</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Pessoa Fisica-->
+        <div id="pessoaFisicaContainerAlterar" style="display:none">
+
+            <!--CPF-->
+            <div class="form-group">
+
+                <label class="control-label col-md-auto">
+                    <span class="brand-text font-weight-light">
+                        <b class="text-blue">CPF</b>
+                        <b class="text-red">*</b>
+                    </span>
+                </label>
+
+                <div class="col-md-auto">
+                    @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            <!--Data Nascimento-->
+            <div class="form-group">
+
+                <label class="control-label col-md-auto">
+                    <span class="brand-text font-weight-light">
+                        <b class="text-blue">Data de Nascimento</b>
+                        <b class="text-red">*</b>
+                    </span>
+                </label>
+
+                <div class="col-md-auto">
+                    @Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>*@

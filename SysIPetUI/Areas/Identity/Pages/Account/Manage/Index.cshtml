@@ -1,7 +1,7 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Escolha como você utilizará o Sys iPet's";
+    ViewData["Title"] = "Configuração da sua conta no Sys iPet's";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
@@ -30,152 +30,73 @@
                 <!-- Corpo do Card -->
                 <div class="card-body">
 
-                    <div class="col-md-12">
+                    <div class="col-md-auto">                            
 
+                        <!-- Username -->
                         <div class="form-group">
+                                
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-gray">Username:</b>
+                                </span>
+                            </label>
 
-                            <!-- Checkbox Option -->
-                            <div class="form-group">
-
-                                <div class="col-md-auto">
-
-                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                        <input type="radio" class="custom-control-input" id="customSwitch1" name="Tipo" value="1">
-                                        <label class="custom-control-label" for="customSwitch1">Escolha essa opção se for um usuário Consumidor</label>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="col-md-auto">
-
-                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
-                                        <input type="radio" class="custom-control-input" id="customSwitch2" name="Tipo" value="2">
-                                        <label class="custom-control-label" for="customSwitch2">Escolha essa opção se for um usuário Prestador</label>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <!-- Complemento dos Dados -->
-                            <div id="cadastroContainerAlterar">
-
-                                <!-- Username -->
-                                <div class="form-group">
-
-                                    @*<label asp-for="Username" class="form-label"></label>*@
-                                    <label class="control-label col-md-auto">
-                                        <span class="brand-text font-weight-light">
-                                            <b class="text-blue">Username</b>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-md-auto">
-                                        @*@Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })*@
-                                        <input asp-for="Username" class="form-control" disabled />
-                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    </div>
-
-                                </div>
-
-                                <!-- Telefone -->
-                                <div class="form-group">
-
-                                    @*<label asp-for="Input.PhoneNumber" class="form-label"></label>*@
-                                    <label class="control-label col-md-auto">
-                                        <span class="brand-text font-weight-light">
-                                            <b class="text-blue">Telefone</b>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-md-auto">
-                                        @*@Html.EditorFor(model => model.Input.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.Input.PhoneNumber, "", new { @class = "text-danger" })*@
-                                        <input asp-for="Input.PhoneNumber" class="form-control" />
-                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <!--Pessoa Juridica-->
-                            <div id="pessoaJuridicaContainerAlterar" style="display:none">
-
-                                <!--CNPJ-->
-                                <div class="form-group">
-
-                                    <label class="control-label col-md-auto">
-                                        <span class="brand-text font-weight-light">
-                                            <b class="text-blue">CNPJ</b>
-                                            <b class="text-red">*</b>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-md-auto">
-                                        @*@Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })*@
-                                    </div>
-
-                                </div>
-
-                                <!-- Adicionar o link para o form de cadastro de Serviços -->
-                                <div class="form-group">
-                                    <div class="col-md-auto">
-                                        <a href="#" class="btn-link text-green">Cadatre os principais Serviços</a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!--Pessoa Fisica-->
-                            <div id="pessoaFisicaContainerAlterar" style="display:none">
-
-                                <!--CPF-->
-                                <div class="form-group">
-
-                                    <label class="control-label col-md-auto">
-                                        <span class="brand-text font-weight-light">
-                                            <b class="text-blue">CPF</b>
-                                            <b class="text-red">*</b>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-md-auto">
-                                        @*@Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })*@
-                                    </div>
-
-                                </div>
-
-                                <!--Data Nascimento-->
-                                <div class="form-group">
-
-                                    <label class="control-label col-md-auto">
-                                        <span class="brand-text font-weight-light">
-                                            <b class="text-blue">Data de Nascimento</b>
-                                            <b class="text-red">*</b>
-                                        </span>
-                                    </label>
-
-                                    <div class="col-md-auto">
-                                        @*@Html.EditorFor(model => model.DataNascimento, new { htmlAttributes = new { @class = "form-control" } })
-                                        @Html.ValidationMessageFor(model => model.DataNascimento, "", new { @class = "text-danger" })*@
-                                    </div>
-
-                                </div>
-
+                            <div class="col-md-auto">                                    
+                                <input asp-for="Username" class="form-control" disabled />
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             </div>
 
                         </div>
 
-                    </div>
+                        <!-- Telefone -->
+                        <div class="form-group">
+                                
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-gray">Telefone de Recuperação de Conta:</b>
+                                </span>
+                            </label>
 
+                            <div class="col-md-auto">                                    
+                                <input asp-for="Input.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <!-- Completar o Cadastro -->
+                        <div class="form-group">  
+                                    
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-red">*</b>
+                                    <b class="text-gray">Complete o Cadastro para Agendar um Serviço:</b>
+                                </span>
+                            </label>
+
+                            @*<div class="col-md-auto">
+                                <a asp-controller="Cliente" asp-action="CreateCliente">Clique aqui</a>
+                            </div>*@
+                            
+                            <button type="button"
+                                    class="btn btn-tool"
+                                    data-toggle="ajax-modal"
+                                    data-target="#modalIncluirCadastroCliente"
+                                    data-url="@Url.Action("CreateCliente", "Cliente")">
+                                    <i class="btn-tool fas fa-edit" title="Completar Cadastro"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-auto float-right">
+                                <a asp-controller="Cliente" asp-action="Index">Ver meu Cadastro</a>
+                            </div>
+                            
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -191,37 +112,45 @@
 
 </div>
 
+<!-- Incluir Cadastro -->
+<div id="modalIncluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Editar Cadastro -->
+<div id="modalEditarCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Excluir Cadastro -->
+<div id="modalExcluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
-
-
-    <script type="text/javascript">
-
-        //------------------------------------------------------------------
-        // Tipo Alterar - Ocultar exibir Pf ou CNPJ
-        //------------------------------------------------------------------
-
-        $('#customSwitch1').change(function () {
-            var el = $(this);
-            var value = el.val();
-
-            if (value == "1") {
-                $('#pessoaFisicaContainerAlterar').show();
-                $('#pessoaJuridicaContainerAlterar').hide();
-                $('#cadastroContainerAlterar').show();
-            }
-        });
-
-        $('#customSwitch2').change(function () {
-            var el = $(this);
-            var value = el.val();
-
-            if (value == "2") {
-                $('#pessoaFisicaContainerAlterar').hide();
-                $('#pessoaJuridicaContainerAlterar').show();
-                $('#cadastroContainerAlterar').show();
-            }
-        });
-
-    </script>
