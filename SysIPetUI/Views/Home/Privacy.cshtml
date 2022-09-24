@@ -1,45 +1,234 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@*@using System.Security.Claims
+@using SysIPetUI.Areas.Identity.Pages.Account*@
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    Layout = null;
     ViewData["Title"] = "Política de Privacidade";
 }
 
-<div class="wrapper">
+@if (SignInManager.IsSignedIn(User))
+{
+    <!DOCTYPE html>
+    <html lang="pt-br">
 
-    <div class="content-wrapper">
+    <head>
 
-        <!-- Cabeçalho do Conteúdo da Página -->
-        <div class="content-header">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title translate="no">@ViewData["Title"] - Sys | iPet's</title>
+        <link rel="icon" href="~/favicon_iPet_Logo-removebg.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.css" />
 
-            <div class="container-fluid">
-                <div class="row mb-2">
+    </head>
 
-                    <!-- Título -->
-                    <div class="col-sm-6">
-                        <h1 class="m-0">@ViewData["Title"]</h1>
+    <body class="bg-gradient-lightblue">
+
+        <div>
+
+            <div>
+
+                <!-- Cabeçalho do Conteúdo da Página -->
+                <div class="content-header">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Essa section que movimenta os cards -->
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-2 connectedSortable"></section>
+
+                            <section class="col-lg-8 connectedSortable">
+
+                                <div class="row mb-2">
+
+                                    <!-- Título -->
+                                    <div class="col-sm-6">
+                                        <h1 class="m-0">@ViewData["Title"]</h1>
+                                    </div>
+
+                                </div>
+
+                                <hr />
+
+                                <p>Permitir que empresas de todo Brasil se cadastrem em nossa plataforma e ofereçam serviços categorizados para os donos de pets.</p>
+
+                                <p>
+                                    Os usuários devem ser capazes de se cadastrar, buscar e selecionar um ou mais serviços disponíveis pelas empresas cadastradas,
+                                    com a visão de facilitar o cuidado com pets de maneira rápida e eficiente.
+                                </p>
+                                <p>
+                                    Cláusula 1ª – Das informações pessoais coletadas pelo site<br />
+                                    1.1. O SISTEMA IPET'S utiliza "cookies" para permitir identificação de dados e de configuração, aprimorando a experiência de seus USUÁRIOS para com o sistema.<br />
+                                    1.2. Além das informações pessoais fornecidas, o SISTEMA IPET'S tem a capacidade de recolher outras informações técnicas, como o navegador, o endereço IP, protocolo, dados de acesso ao sistema, hora, data, sistema operacional, a localização física do dispositivo de acesso, quando o USUÁRIO tiver optado em compartilhar sua geolocalização.<br />
+                                    1.3. Os dados não serão compartilhados exceto em casos nos quais seja necessário o fornecimento dos dados do USUÁRIO para entidades governamentais, judiciais, ou nos casos em que tal fornecimento seja necessário para a proteção de direitos ou segurança da plataforma do SISTEMA IPET'S ou de seus USUÁRIOS. Dessa forma, mediante a utilização de nosso sistema, o USUÁRIO expressamente autoriza o SISTEMA IPET'S a divulgar estas informações pessoais para atender aos fins acima indicados.<br />
+                                    1.4. Poderemos a nosso critério, fazer uso das informações armazenadas em nossos bancos de dados, para resolver quaisquer disputas, solucionar problemas, garantir os direitos do SISTEMA IPET'S, validar veracidade e consistência dos dados ou mesmo da identidade do USUÁRIO.<br />
+                                    1.5. As informações cedidas pelo USUÁRIO e registradas devido ao uso do SISTEMA IPET'S poderão ser utilizadas para o mapeamento de informações de mercado e formação de estatísticas. Através do cadastramento, uso e fornecimento de informações ao SISTEMA IPET'S, o USUÁRIO expressamente aceita o presente documento e as condições previstas sobre a coleta, armazenamento, processamento e uso de suas informações.<br />
+                                </p>
+
+                                <hr />
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+
+                                            <p class="mb-0">
+                                                <a href="@Url.Action("Index","Home")" class="text-light" style="text-align:left">Acesso ao Portal</a>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                        <section class="col-lg-2 connectedSortable"></section>
+
                     </div>
 
                 </div>
-
-                <hr />
-
-                <p>Permitir que empresas de todo Brasil se cadastrem em nossa plataforma e ofereçam serviços categorizados para os donos de pets.</p>
-
-                <p>
-                    Os usuários devem ser capazes de se cadastrar, buscar e selecionar um ou mais serviços disponíveis pelas empresas cadastradas,
-                    com a visão de facilitar o cuidado com pets de maneira rápida e eficiente.
-                </p>
-                <p>
-                    Cláusula 1ª – Das informações pessoais coletadas pelo site<br />
-                    1.1. O SISTEMA IPET'S utiliza "cookies" para permitir identificação de dados e de configuração, aprimorando a experiência de seus USUÁRIOS para com o sistema.<br />
-                    1.2. Além das informações pessoais fornecidas, o SISTEMA IPET'S tem a capacidade de recolher outras informações técnicas, como o navegador, o endereço IP, protocolo, dados de acesso ao sistema, hora, data, sistema operacional, a localização física do dispositivo de acesso, quando o USUÁRIO tiver optado em compartilhar sua geolocalização.<br />
-                    1.3. Os dados não serão compartilhados exceto em casos nos quais seja necessário o fornecimento dos dados do USUÁRIO para entidades governamentais, judiciais, ou nos casos em que tal fornecimento seja necessário para a proteção de direitos ou segurança da plataforma do SISTEMA IPET'S ou de seus USUÁRIOS. Dessa forma, mediante a utilização de nosso sistema, o USUÁRIO expressamente autoriza o SISTEMA IPET'S a divulgar estas informações pessoais para atender aos fins acima indicados.<br />
-                    1.4. Poderemos a nosso critério, fazer uso das informações armazenadas em nossos bancos de dados, para resolver quaisquer disputas, solucionar problemas, garantir os direitos do SISTEMA IPET'S, validar veracidade e consistência dos dados ou mesmo da identidade do USUÁRIO.<br />
-                    1.5. As informações cedidas pelo USUÁRIO e registradas devido ao uso do SISTEMA IPET'S poderão ser utilizadas para o mapeamento de informações de mercado e formação de estatísticas. Através do cadastramento, uso e fornecimento de informações ao SISTEMA IPET'S, o USUÁRIO expressamente aceita o presente documento e as condições previstas sobre a coleta, armazenamento, processamento e uso de suas informações.<br />
-                </p>
 
             </div>
 
         </div>
 
-    </div>
+    </body>
 
-</div>
+    </html>
+}
+else
+{
+    <!DOCTYPE html>
+    <html lang="pt-br">
+
+    <head>
+
+        @*@Html.Partial("_HeadPage")*@
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title translate="no">@ViewData["Title"] - Sys | iPet's</title>
+        <link rel="icon" href="~/favicon_iPet_Logo-removebg.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.css" />
+
+    </head>
+
+    <body class="bg-gradient-lightblue">
+
+        <div>
+
+            <div>
+
+                <!-- Cabeçalho do Conteúdo da Página -->
+                <div class="content-header">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Essa section que movimenta os cards -->
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-2 connectedSortable"></section>
+
+                            <section class="col-lg-8 connectedSortable">
+
+                                <div class="row mb-2">
+
+                                    <!-- Título -->
+                                    <div class="col-sm-6">
+                                        <h1 class="m-0">@ViewData["Title"]</h1>
+                                    </div>
+
+                                </div>
+
+                                <hr />
+
+                                <p>Permitir que empresas de todo Brasil se cadastrem em nossa plataforma e ofereçam serviços categorizados para os donos de pets.</p>
+
+                                <p>
+                                    Os usuários devem ser capazes de se cadastrar, buscar e selecionar um ou mais serviços disponíveis pelas empresas cadastradas,
+                                    com a visão de facilitar o cuidado com pets de maneira rápida e eficiente.
+                                </p>
+                                <p>
+                                    Cláusula 1ª – Das informações pessoais coletadas pelo site<br />
+                                    1.1. O SISTEMA IPET'S utiliza "cookies" para permitir identificação de dados e de configuração, aprimorando a experiência de seus USUÁRIOS para com o sistema.<br />
+                                    1.2. Além das informações pessoais fornecidas, o SISTEMA IPET'S tem a capacidade de recolher outras informações técnicas, como o navegador, o endereço IP, protocolo, dados de acesso ao sistema, hora, data, sistema operacional, a localização física do dispositivo de acesso, quando o USUÁRIO tiver optado em compartilhar sua geolocalização.<br />
+                                    1.3. Os dados não serão compartilhados exceto em casos nos quais seja necessário o fornecimento dos dados do USUÁRIO para entidades governamentais, judiciais, ou nos casos em que tal fornecimento seja necessário para a proteção de direitos ou segurança da plataforma do SISTEMA IPET'S ou de seus USUÁRIOS. Dessa forma, mediante a utilização de nosso sistema, o USUÁRIO expressamente autoriza o SISTEMA IPET'S a divulgar estas informações pessoais para atender aos fins acima indicados.<br />
+                                    1.4. Poderemos a nosso critério, fazer uso das informações armazenadas em nossos bancos de dados, para resolver quaisquer disputas, solucionar problemas, garantir os direitos do SISTEMA IPET'S, validar veracidade e consistência dos dados ou mesmo da identidade do USUÁRIO.<br />
+                                    1.5. As informações cedidas pelo USUÁRIO e registradas devido ao uso do SISTEMA IPET'S poderão ser utilizadas para o mapeamento de informações de mercado e formação de estatísticas. Através do cadastramento, uso e fornecimento de informações ao SISTEMA IPET'S, o USUÁRIO expressamente aceita o presente documento e as condições previstas sobre a coleta, armazenamento, processamento e uso de suas informações.<br />
+                                </p>
+
+                                <hr />
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+                                        <div class="form-group">
+
+                                            <p class="mb-0">
+                                                <a href="@Url.Action("Index","Home")" class="text-light" style="text-align:left">Acesso ao Portal</a>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-5">
+
+                                        <div class="form-group">
+
+                                            <p class="mb-0">
+                                                <a class="text-light" asp-area="Identity" asp-page="/Account/Register">Registrar-se</a>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-1">
+
+                                        <div class="form-group">
+
+                                            <p class="mb-0">
+                                                <a class="text-light" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                        <section class="col-lg-2 connectedSortable"></section>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+
+    </html>
+}

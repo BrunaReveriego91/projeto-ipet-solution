@@ -2,83 +2,380 @@
 @model LoginModel
 
 @{
+    Layout = null;
     ViewData["Title"] = "Log in";
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
-                <hr />
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-floating">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                    <label asp-for="Input.Email" class="form-label"></label>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-floating">
-                    <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />
-                    <label asp-for="Input.Password" class="form-label"></label>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div>
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe" class="form-label">
-                            <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    @*@Html.Partial("_HeadPage")*@
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title translate="no">@ViewData["Title"] - Sys | iPet's</title>
+    <link rel="icon" href="~/favicon_iPet_Logo-removebg.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome-free/css/all.css" />
+
+</head>
+
+<body class="bg-gradient-lightblue">
+
+    <!-- Cabeçalho do Conteúdo da Página -->
+    <div class="content-header">
+
+        <div class="container-fluid">
+
+            <!-- Conteúdo da Página -->
+            <!-- Main content -->
+            <section class="content">
+
+                <div class="container-fluid">
+
+                    <!--Main Row-->
+                    <div class="row">
+
+                        <!-- Essa section que movimenta os cards -->
+                        <!-- Divisão da Pág Lado Esquerdo -->
+                        <section class="col-lg-4 connectedSortable"></section>
+                        <section class="col-lg-4 connectedSortable">
+
+                            <!-- Card Login -->
+                            <div class="card">
+
+                                <div class="card-body login-card-body">
+
+                                    <p class="login-box-msg">
+
+                                        <div class="input-group mb-3">
+
+                                            <div class="col-12">
+
+                                                <div style="text-align:center" translate="no">
+
+                                                    <!--Logo IPet-->
+                                                    <a href="@Url.Action("Index","Home")">
+                                                        <img src="~/lib/image/iPet_Logo-removebg.png"
+                                                             alt="IPet"
+                                                             width="60"
+                                                             title="Acesso ao Portal">
+                                                    </a>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-12">
+
+                                                <div class="brand-text font-weight-light" style="text-align:center" translate="no">
+
+                                                    <a href="@Url.Action("Index","Home")" title="Acesso ao Portal">
+                                                        <i class="text-yellow" translate="no">i</i>
+                                                        <i class="text-blue" translate="no">Pet's | </i>
+                                                        <i class="text-green" translate="no">Login</i>
+                                                    </a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </p>
+
+                                    <!-- Conteúdo -->
+                                    <form id="account" method="post">
+
+                                        <!-- Segurança -->
+                                        @Html.AntiForgeryToken()
+
+                                        <!-- Validação -->
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+
+                                        <!-- E-mail -->
+                                        <div class="input-group mb-3">
+
+                                            <input asp-for="Input.Email"
+                                                   id="Email"
+                                                   class="form-control"
+                                                   autocomplete="username"
+                                                   aria-required="true"
+                                                   placeholder="E-mail" />
+
+                                            <div class="input-group-append">
+
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-envelope" title="Digite seu e-mail"></span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Validação -->
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                                        <!-- Password -->
+                                        <div class="input-group mb-3">
+
+                                            <input asp-for="Input.Password"
+                                                   id="exibirSenha"
+                                                   class="form-control"
+                                                   autocomplete="current-password"
+                                                   aria-required="true"
+                                                   placeholder="Password" />
+
+                                            <!--Olho aberto-->
+                                            <div class="input-group-append" id="olhoAberto">
+
+                                                <div class="input-group-text" href="#" role="button">
+                                                    <span class="fas fa-eye" title="Clique para exibir sua senha"></span>
+                                                </div>
+
+                                            </div>
+
+                                            <!--Olho fechado-->
+                                            <div class="input-group-append" id="olhoFechado" style="display:none">
+
+                                                <div class="input-group-text" href="#" role="button">
+                                                    <span class="fas fa-eye-slash" title="Clique para ocultar sua senha"></span>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!--Conectar-se-->
+                                        <div class="row">
+
+                                            <div class="col-12">
+
+                                                <!--Este botão faz o submit-->
+                                                <button id="buttonConectarVisible"
+                                                        class="btn btn-primary btn-block"
+                                                        type="submit"
+                                                        value="Logon"
+                                                        title="Faça login usando sua conta Local">
+                                                    Conectar-se
+                                                </button>
+
+                                            </div>
+
+                                            <div class="col-12">
+
+                                                <!--O mesmo botão é exibido bloqueado e evita o usuário clicar várias vezes após já ter clicado-->
+                                                <!--Para isso usar o jquery no final do body-->
+                                                <button id="buttonConectarDisabled"
+                                                        class="btn btn-primary btn-block disabled"
+                                                        type="button"
+                                                        style="display:none"
+                                                        title="Faça login usando sua conta Local">
+                                                    Conectar-se
+                                                </button>
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+
+                                    <!--Remember Me-->
+                                    <p class="mb-3">
+
+                                        <div class="icheck-primary">
+
+                                            <div class="checkbox">
+
+                                                <label asp-for="Input.RememberMe">
+                                                    <input asp-for="Input.RememberMe" />
+                                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                                </label>
+
+                                            </div>
+
+                                        </div>
+
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <a id="forgot-password" asp-page="./ForgotPassword">Esqueceu sua senha?</a>
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Reenviar confirmação de e-mail?</a>
+                                    </p>
+
+                                    <p class="mb-0">
+                                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Registre-se como um novo usuário</a>
+                                    </p>
+
+                                    <hr />
+                                    <!--Termos de Privacidade-->
+                                    <div class="input-group mb-3">
+
+                                        <p class="mb-1">
+                                            Ao fazer login, você concorda com os <a href="@Url.Action("Privacy","Home")">Termos de Privacidade</a> do <i translate="no">iPet's</i>.
+                                        </p>
+
+                                    </div>
+
+                                    <!--Login com Google-->
+                                    <div class="mb-1">
+
+                                        <section>
+
+                                            <hr />
+                                            <p>Se já possuir uma conta local ou for um Prestador, primeiro faça login em sua conta local e ative o Login Externo em suas configurações de Perfil.</p>
+
+                                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+
+                                                <div>
+
+                                                    <p>
+                                                        @foreach (var provider in Model.ExternalLogins)
+                                                        {
+                                                            <!--Este botão faz o submit-->
+                                                            <button id="loginGoogleVisible"
+                                                                class="btn btn-block btn-info"
+                                                                type="submit"
+                                                                name="provider"
+                                                                value="@provider.Name"
+                                                                title="Faça login usando sua conta @provider.DisplayName">
+                                                                <i class="fab fa-google mr-2"></i>
+                                                                Login com Google
+                                                            </button>
+
+                                                            <!--O mesmo botão é exibido bloqueado e evita o usuário clicar várias vezes após já ter clicado-->
+                                                            <button id="loginGoogleDisabled"
+                                                                class="btn btn-block btn-info disabled"
+                                                                type="button"
+                                                                name="provider"
+                                                                style="display:none"
+                                                                title="Faça login usando sua conta @provider.DisplayName">
+                                                                <i class="fab fa-google mr-2"></i>
+                                                                Login com Google
+                                                            </button>
+
+                                                        }
+
+                                                    </p>
+
+                                                </div>
+
+                                            </form>
+
+                                        </section>
+
+                                    </div>
+
+                                    <!-- Marketing -->
+                                    <hr />
+                                    <p class="mb-1">
+                                        Use o <i translate="no">iPet's</i> e solicite um serviço com nossos Parceiros 24 horas por dia, 7 dias por semana.
+                                    </p>
+
+                                    <hr />
+                                    <p class="mb-0">
+                                        <a href="@Url.Action("Index","Home")" class="text-center">Acesso ao Portal</a>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <section class="col-lg-4 connectedSortable"></section>
+
                     </div>
+
                 </div>
-                <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
-                </div>
-                <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
+
+            </section>
+
+        </div>
+
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
-                            about setting up this ASP.NET application to support logging in via external services</a>.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
+
+    <!-- SCRIPTS NECESSÁRIOS -->
+    <!-- jQuery -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/lib/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap -->
+    <script src="~/lib/bootstrap-4/js/bootstrap.js"></script>
+
+    <!-- JavaScript do Site -->
+    <script src="~/js/site.js"></script>
+
+    @*<!-- Functions -->
+    <script src="~/lib/functions/js/functionsApp.js"></script>*@
+
+    <script type="text/javascript">
+
+        $(function () {
+            'use strict'
+
+            //------------------------------------------------------------------
+            // Exibir Ocultar Senha
+            //------------------------------------------------------------------
+            var exibirSenha = $('#exibirSenha');
+
+            $("#olhoAberto").click(mostrarOlhoAberto);
+            $("#olhoFechado").click(mostrarOlhoFechado);
+
+            function mostrarOlhoAberto() {
+                $("#olhoAberto").toggle();
+                $("#olhoFechado").toggle();
+                exibirSenha.attr("type", "text");
             }
-        </section>
-    </div>
-</div>
+
+            function mostrarOlhoFechado() {
+                $("#olhoAberto").toggle();
+                $("#olhoFechado").toggle();
+                exibirSenha.attr("type", "password");
+            }
+
+
+            //------------------------------------------------------------------
+            // Bloqueio de duplo click no Login
+            //------------------------------------------------------------------
+            $('#buttonConectarVisible').click(mostrarOcultarButtonLogin);
+
+            //Função mostrarButtonConectar
+            function mostrarOcultarButtonLogin() {
+                $('#buttonConectarDisabled').toggle();
+                $('#buttonConectarVisible').toggle();
+                $('#loginGoogleDisabled').toggle();
+                $('#loginGoogleVisible').toggle();
+                mostrarOlhoFechado();
+            }
+
+
+            //------------------------------------------------------------------
+            // Função CapsLock
+            //------------------------------------------------------------------
+            $('#exibirSenha').keypress(function (event) {
+                var Strg = String.fromCharCode(event.which);
+                if (Strg.toUpperCase() === Strg && Strg.toLowerCase() !== Strg && !event.shiftKey) {
+                    alert('Caps Lock ativada');
+                    //$('#msnCapsLock').toggle();
+                }
+            });
+
+        });
+
+    </script>
+
+</body>
+
+</html>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

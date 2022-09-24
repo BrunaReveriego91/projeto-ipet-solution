@@ -17,7 +17,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Logging;
+using SysIPetUI.Models;
 
 namespace SysIPetUI.Areas.Identity.Pages.Account
 {
@@ -84,7 +86,7 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -95,8 +97,13 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
             /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Compare("Password", ErrorMessage = "O Password e a confirmação de Password não coincidem.")]
             public string ConfirmPassword { get; set; }
+
+            //Tipo Usuário View Model            
+            public bool TipoUsuario { get; set; }
+            public bool AceiteTermo { get; set; }
+
         }
 
 
@@ -110,47 +117,101 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            //Verifica se o Usuário preencheu os Dados corretamente
             if (ModelState.IsValid)
             {
-                var user = CreateUser();
-
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-                var result = await _userManager.CreateAsync(user, Input.Password);
-
-                if (result.Succeeded)
+                //Se o Termo for aceito Registra o Usuário
+                if (Input.AceiteTermo == true)
                 {
-                    _logger.LogInformation("User created a new account with password.");
+                    //Criando o novo Usuário
+                    var user = CreateUser();
 
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                    await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                    var result = await _userManager.CreateAsync(user, Input.Password);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    //Adicionando o Tipo de Usuário escolhido, o UserId e o aceite do Termo
+                    if (result.Succeeded)
                     {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        //Encontra e faz a leitura do arquivo appsettings.json:
+                        IConfigurationRoot configuration = new ConfigurationBuilder()
+                            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                            .AddJsonFile("appsettings.json")
+                            .Build();
+
+                        //Conexão com o LocalDB:
+                        var stringConexao = configuration.GetConnectionString("DefaultConnection");
+                        SqlConnection sqlconn = new SqlConnection(stringConexao);
+
+                        //Script SQL para realizar o Insert no DB:
+                        string sqlquery = "Insert Into [dbo].[AspNetTipoUsuario] (UserId, TipoUsuario, AceiteTermo) Values (@UserId, @TipoUsuario, @AceiteTermo)";
+
+                        //Cria um novo Comando SQL
+                        SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+
+                        //Abre a Conexão:
+                        sqlconn.Open();
+
+                        //Instrução de Inclusão dos dados
+                        sqlcomm.Parameters.AddWithValue("@UserId", user.Id);
+                        sqlcomm.Parameters.AddWithValue("@TipoUsuario", Input.TipoUsuario);
+                        sqlcomm.Parameters.AddWithValue("@AceiteTermo", Input.AceiteTermo);
+
+                        //Executa a Query SQL:
+                        sqlcomm.ExecuteNonQuery();
+
+                        //Fecha a Conexão:
+                        sqlconn.Close();
                     }
-                    else
+                    foreach (var error in result.Errors)
                     {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+
+                    //Envia o e-mail com o link de confirmação para a conta Registrada
+                    if (result.Succeeded)
+                    {
+                        _logger.LogInformation("O usuário criou uma nova conta com senha.");
+
+                        var userId = await _userManager.GetUserIdAsync(user);
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                            protocol: Request.Scheme);
+
+                        //Link de Confirmação de Conta
+                        await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
+                            $"Confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+
+                        if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                        {
+                            return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                        }
+                        else
+                        {
+                            await _signInManager.SignInAsync(user, isPersistent: false);
+                            return LocalRedirect(returnUrl);
+                        }
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
                     }
                 }
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    //Retorna a mensagem de Termo obrigatório:
+                    ViewData["Message"] = "Aceite nossa Política de Privacidade!";
+                    return Page();
                 }
+
             }
 
-            // If we got this far, something failed, redisplay form
+            //Se chegamos até aqui, algo falhou, reexibe o formulário
             return Page();
         }
 
@@ -176,5 +237,6 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }
+
     }
 }

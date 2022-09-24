@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SysIPetUI.Models
+﻿namespace SysIPetUI.Models
 {
     public class AgendamentoViewModel
     {

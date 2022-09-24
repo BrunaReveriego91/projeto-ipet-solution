@@ -1,23 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SysIPetUI.Models;
 using System.Diagnostics;
-using System.Net.Http.Json;
 using System.Text;
 
 namespace SysIPetUI.Controllers
 {
     [Authorize]
-    public class PrestadorController : Controller
+    public class ClienteController : Controller
     {
-        // Pegando o endereço com HttpClient
-        //private readonly string url = "https://localhost:7271/api/Prestadores";
-        //private readonly string url = "https://669e-201-150-112-139.sa.ngrok.io/api/Prestadores";
-        private readonly string url = "https://localhost:44321/api/Prestadores";
+        // Pegando o endereço com HttpClient        
+        private readonly string url = "https://localhost:44321/api/Cliente";
 
-        // GET: PrestadorController
+        // GET: ClienteController
         public async Task<IActionResult> Index()
         {
             var cliente = new HttpClient();
@@ -39,10 +35,10 @@ namespace SysIPetUI.Controllers
 
                 // Criando a Lista e Deserializando o Arquivo Json
                 // O Interrogação trata os nulls                
-                List<PrestadorViewModel>? listaPrestadores = new List<PrestadorViewModel>();
-                listaPrestadores = JsonConvert.DeserializeObject<List<PrestadorViewModel>>(responseBody);
+                List<ClienteViewModel>? listaCliente = new List<ClienteViewModel>();
+                listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBody);
 
-                return View(listaPrestadores);
+                return View(listaCliente);
             }
             catch (Exception)
             {
@@ -50,32 +46,32 @@ namespace SysIPetUI.Controllers
             }
         }
 
-        // GET: PrestadorController/Create
-        public ActionResult CreatePrestador()
+        // GET: ClienteController/Create
+        public ActionResult CreateCliente()
         {
             return View();
         }
 
-        // POST: PrestadorController/Create
+        // POST: ClienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreatePrestador(PrestadorViewModel prestador)
+        public async Task<IActionResult> CreateCliente(ClienteViewModel cliente)
         {
             try
             {
-                PrestadorViewModel? prestadorIncluido = new PrestadorViewModel();
+                ClienteViewModel? clienteIncluido = new ClienteViewModel();
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Como a API precisará dos novos dados do prestador no formato JSON, estamos serializando os dados
-                    //da ViewModel PrestadorViewModel para JSON e depois convertendo-os em um objeto StringContent:
-                    StringContent content = new StringContent(JsonConvert.SerializeObject(prestador), Encoding.UTF8, "application/json");
+                    //Como a API precisará dos novos dados do Cliente no formato JSON, estamos serializando os dados
+                    //da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
 
-                    //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Prestador na Tabela do SQL
+                    //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Cliente na Tabela do SQL
                     using (var response = await httpClient.PostAsync(url, content))
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        prestadorIncluido = JsonConvert.DeserializeObject<PrestadorViewModel>(responseBody);
+                        clienteIncluido = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                     }
                 }
                 return RedirectToAction("Index");
@@ -87,41 +83,41 @@ namespace SysIPetUI.Controllers
 
         }
 
-        // GET: PrestadorController/Edit/5
+        // GET: ClienteController/Edit/5
         [HttpGet]
-        public async Task<IActionResult> EditPrestador(int Id)
+        public async Task<IActionResult> EditCliente(int Id)
         {
-            PrestadorViewModel? prestador = new PrestadorViewModel();
+            ClienteViewModel? cliente = new ClienteViewModel();
 
             using (var httpClient = new HttpClient())
             {
-                //Aqui realizamos o GetAsync que Utiliza a Pet.WebAPI para Retornar o Prestador que será Editado pelo Id na Tabela do SQL
-                //Dessa forma exibimos no Modal os Detalhes do Prestador que será Editado.
+                //Aqui realizamos o GetAsync que Utiliza a Pet.WebAPI para Retornar o Cliente que será Editado pelo Id na Tabela do SQL
+                //Dessa forma exibimos no Modal os Detalhes do Cliente que será Editado.
                 using (var response = await httpClient.GetAsync(url + "/" + Id))
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    prestador = JsonConvert.DeserializeObject<PrestadorViewModel>(responseBody);
+                    cliente = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                 }
             }
-            return View(prestador);
+            return View(cliente);
         }
 
-        // POST: PrestadorController/Edit/5
+        // POST: ClienteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPrestador(PrestadorViewModel prestador)
+        public async Task<IActionResult> EditCliente(ClienteViewModel cliente)
         {
             try
             {
-                PrestadorViewModel? prestadorRecebido = new PrestadorViewModel();
+                ClienteViewModel? clienteRecebido = new ClienteViewModel();
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Aqui realizamos o PutAsync que Utiliza a Pet.WebAPI para Editar o Prestador na Tabela do SQL usando o Id
-                    using (var response = await httpClient.PutAsJsonAsync($"{url}/{prestador.Id}", prestador))
+                    //Aqui realizamos o PutAsync que Utiliza a Pet.WebAPI para Editar o Cliente na Tabela do SQL usando o Id
+                    using (var response = await httpClient.PutAsJsonAsync($"{url}/{cliente.Id}", cliente))
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        prestadorRecebido = JsonConvert.DeserializeObject<PrestadorViewModel>(responseBody);
+                        clienteRecebido = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                     }
                 }
                 return RedirectToAction("Index");
@@ -132,32 +128,32 @@ namespace SysIPetUI.Controllers
             }
         }
 
-        // GET: PrestadorController/ExcluirPrestador/5
-        public async Task<IActionResult> ExcluirPrestador(int Id)
+        // GET: ClienteController/ExcluirCliente/5
+        public async Task<IActionResult> ExcluirCliente(int Id)
         {
-            PrestadorViewModel? prestador = new PrestadorViewModel();
+            ClienteViewModel? cliente = new ClienteViewModel();
 
             using (var httpClient = new HttpClient())
             {
-                //Aqui realizamos o GetAsync que Utiliza a Pet.WebAPI para Retornar o Prestador que será excluído pelo Id na Tabela do SQL
-                //Dessa forma exibimos no Modal os Detalhes do Prestador que será excluído.
+                //Aqui realizamos o GetAsync que Utiliza a Pet.WebAPI para Retornar o Cliente que será excluído pelo Id na Tabela do SQL
+                //Dessa forma exibimos no Modal os Detalhes do Cliente que será excluído.
                 using (var response = await httpClient.GetAsync(url + "/" + Id))
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();
-                    prestador = JsonConvert.DeserializeObject<PrestadorViewModel>(responseBody);
+                    cliente = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                 }
             }
-            return View(prestador);
+            return View(cliente);
         }
 
-        // POST: PrestadorController/ExcluirPrestador/5
+        // POST: ClienteController/ExcluirCliente/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcluirPrestador(int Id, IFormCollection form)
+        public async Task<IActionResult> ExcluirCliente(int Id, IFormCollection form)
         {
             using (var httpClient = new HttpClient())
             {
-                //Aqui realizamos o DeletAsync que Utiliza a Pet.WebAPI para Deletar o Prestador na Tabela do SQL usando o Id
+                //Aqui realizamos o DeletAsync que Utiliza a Pet.WebAPI para Deletar o Cliente na Tabela do SQL usando o Id
                 using (var response = await httpClient.DeleteAsync(url + "/" + Id))
                 {
                     string responseBody = await response.Content.ReadAsStringAsync();

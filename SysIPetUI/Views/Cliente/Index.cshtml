@@ -1,0 +1,64 @@
+﻿@model IEnumerable<SysIPetUI.Models.ClienteViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="CreateCliente">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WhatsApp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone2)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WhatsApp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone2)
+            </td>
+            <td>
+                <a asp-action="EditCliente" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="ExcluirCliente" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

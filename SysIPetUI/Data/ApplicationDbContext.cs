@@ -10,6 +10,6 @@ namespace SysIPetUI.Data
             : base(options)
         {
         }
-        public DbSet<SysIPetUI.Models.AgendamentoViewModel>? AgendamentoViewModel { get; set; }
+        public DbSet<SysIPetUI.Models.AspNetTipoUsuario>? AspNetTipoUsuario { get; set; }        
     }
 }

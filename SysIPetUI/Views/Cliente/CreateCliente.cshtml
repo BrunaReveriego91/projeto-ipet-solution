@@ -1,0 +1,58 @@
+﻿@model SysIPetUI.Models.ClienteViewModel
+
+@{
+    ViewData["Title"] = "CreateCliente";
+}
+
+<h1>CreateCliente</h1>
+
+<h4>ClienteViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateCliente">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeCompleto" class="control-label"></label>
+                <input asp-for="NomeCompleto" class="form-control" />
+                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CPF" class="control-label"></label>
+                <input asp-for="CPF" class="form-control" />
+                <span asp-validation-for="CPF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone1" class="control-label"></label>
+                <input asp-for="Telefone1" class="form-control" />
+                <span asp-validation-for="Telefone1" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="WhatsApp" /> @Html.DisplayNameFor(model => model.WhatsApp)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone2" class="control-label"></label>
+                <input asp-for="Telefone2" class="form-control" />
+                <span asp-validation-for="Telefone2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

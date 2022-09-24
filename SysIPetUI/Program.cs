@@ -21,7 +21,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 
-//Autentica��o com Google.
+//Autenticação com Google.
 var services = builder.Services;
 var configuration = builder.Configuration;
 

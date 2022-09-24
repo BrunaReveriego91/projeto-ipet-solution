@@ -11,14 +11,14 @@
 
     <div class="col-md-6">
 
-        <form id="profile-form" method="post"> 
-                        
+        <form id="profile-form" method="post">
+
             <!-- Card Tipo Cliente/ Prestador -->
             <div class="card elevation-2">
 
                 <!-- Título do Card -->
                 <div class="card-header">
-                    
+
                     <h3 class="card-title">
                         <span class="brand-text font-weight-light">
                             <b class="text-gray"><i class="fas fa-tools"></i> @ViewData["Title"]</b>
@@ -29,7 +29,7 @@
 
                 <!-- Corpo do Card -->
                 <div class="card-body">
-                        
+
                     <div class="col-md-12">
 
                         <div class="form-group">
@@ -39,7 +39,7 @@
 
                                 <div class="col-md-auto">
 
-                                    <div class="custom-control custom-switch">
+                                    <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
                                         <input type="radio" class="custom-control-input" id="customSwitch1" name="Tipo" value="1">
                                         <label class="custom-control-label" for="customSwitch1">Escolha essa opção se for um usuário Consumidor</label>
                                     </div>
@@ -63,7 +63,7 @@
 
                             <!-- Complemento dos Dados -->
                             <div id="cadastroContainerAlterar">
-                                
+
                                 <!-- Username -->
                                 <div class="form-group">
 
@@ -89,7 +89,7 @@
                                     @*<label asp-for="Input.PhoneNumber" class="form-label"></label>*@
                                     <label class="control-label col-md-auto">
                                         <span class="brand-text font-weight-light">
-                                            <b class="text-blue">Telefone</b>                                            
+                                            <b class="text-blue">Telefone</b>
                                         </span>
                                     </label>
 
@@ -100,7 +100,7 @@
                                         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                                     </div>
 
-                                </div>                                
+                                </div>
 
                             </div>
 
@@ -176,15 +176,15 @@
 
                     </div>
 
-                    
+
                 </div>
-                
+
                 <div class="card-footer">
                     <button id="update-profile-button" type="submit" class="btn btn-success float-right">Save</button>
                 </div>
 
             </div>
-                   
+
         </form>
 
     </div>
@@ -196,32 +196,32 @@
 }
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
-    //------------------------------------------------------------------
-    // Tipo Alterar - Ocultar exibir Pf ou CNPJ
-    //------------------------------------------------------------------
-                
-    $('#customSwitch1').change(function () {
-        var el = $(this);
-        var value = el.val();
+        //------------------------------------------------------------------
+        // Tipo Alterar - Ocultar exibir Pf ou CNPJ
+        //------------------------------------------------------------------
 
-        if (value == "1") {
-            $('#pessoaFisicaContainerAlterar').show();
-            $('#pessoaJuridicaContainerAlterar').hide();
-            $('#cadastroContainerAlterar').show();
-        }            
-    });
+        $('#customSwitch1').change(function () {
+            var el = $(this);
+            var value = el.val();
 
-    $('#customSwitch2').change(function () {
-        var el = $(this);
-        var value = el.val();
+            if (value == "1") {
+                $('#pessoaFisicaContainerAlterar').show();
+                $('#pessoaJuridicaContainerAlterar').hide();
+                $('#cadastroContainerAlterar').show();
+            }
+        });
 
-        if (value == "2") {
-            $('#pessoaFisicaContainerAlterar').hide();
-            $('#pessoaJuridicaContainerAlterar').show();
-            $('#cadastroContainerAlterar').show();
-        }            
-    });
+        $('#customSwitch2').change(function () {
+            var el = $(this);
+            var value = el.val();
 
-</script>
+            if (value == "2") {
+                $('#pessoaFisicaContainerAlterar').hide();
+                $('#pessoaJuridicaContainerAlterar').show();
+                $('#cadastroContainerAlterar').show();
+            }
+        });
+
+    </script>

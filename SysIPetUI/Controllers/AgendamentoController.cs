@@ -1,10 +1,15 @@
-﻿using System.Text;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SysIPetUI.Models;
+using System.Diagnostics;
+using System.Net.Http.Json;
+using System.Text;
 
 namespace SysIPetUI.Controllers
 {
+    [Authorize]
     public class AgendamentoController : Controller
     {
         private readonly string url = "https://localhost:44321/api/Agendamento";
@@ -44,7 +49,7 @@ namespace SysIPetUI.Controllers
 
         // GET: Agendamento/Details/5
         public IActionResult Details(int? id)
-        {            
+        {
             return View();
         }
 
@@ -160,6 +165,12 @@ namespace SysIPetUI.Controllers
                 }
             }
             return RedirectToAction("Index");
-        }        
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
