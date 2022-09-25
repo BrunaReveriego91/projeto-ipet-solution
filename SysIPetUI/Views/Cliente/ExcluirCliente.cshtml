@@ -1,57 +1,131 @@
 ﻿@model SysIPetUI.Models.ClienteViewModel
 
 @{
-    ViewData["Title"] = "ExcluirCliente";
+    Layout = null;
+    ViewData["Title"] = "Excluir Cliente";
 }
 
-<h1>ExcluirCliente</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ClienteViewModel</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeCompleto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeCompleto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone1)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone1)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WhatsApp)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WhatsApp)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone2)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefone2)
-        </dd>
-    </dl>
-    
-    <form asp-action="ExcluirCliente">
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-danger text-lg">
+                    <i class="fas fa-trash-alt"></i>
+                </b>
+
+                <b class="text-gray text-lg">
+                    @ViewData["Title"]
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <!--Detalhes da Conta-->
+            <div class="col-lg-auto">
+
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <ul class="nav nav-pills nav-sidebar flex-column">
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Nome Completo:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.NomeCompleto)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">CPF:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.CPF)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Data Nascimento:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.DataNascimento)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Telefone 01:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Telefone1)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">WhatsApp:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.WhatsApp)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Telefone 02:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Telefone2)
+                        </li>                        
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <p>Tem certeza que deseja excluir o Cliente: <b>@Html.DisplayFor(model => model.NomeCompleto)</b>?</p>
+            <p>Esse registro será excluído desta e de todas as outras páginas. <b>Essa ação não poderá ser desfeita.</b></p>
+
+        </div>
+        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+
+    </div>
+
+    <div class="modal-footer justify-content-between">
+
+        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+        <button id="buttonConfirmarVisible" type="submit" value="Excluir" class="btn btn-danger">Confirmar</button>
+        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+    </div>
+
+    @*<form asp-action="ExcluirCliente">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+    </form>*@
+}

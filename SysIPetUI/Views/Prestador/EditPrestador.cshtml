@@ -2,7 +2,7 @@
 
 @{
     Layout = null;
-    ViewData["Title"] = "EditPrestador";
+    ViewData["Title"] = "Editar Prestador";
 }
 
 @using (Html.BeginForm())
@@ -21,7 +21,7 @@
                 </b>
 
                 <b class="text-gray text-lg">
-                    Editar Prestador
+                    @ViewData["Title"]
                 </b>
 
             </span>
@@ -91,4 +91,8 @@
 
     </div>
 
+}
+
+@section Scripts { 
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

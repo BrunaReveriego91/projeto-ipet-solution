@@ -1,9 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@*@using System.Security.Claims
-@using SysIPetUI.Areas.Identity.Pages.Account*@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -33,7 +30,7 @@
                         </li>
 
                         <li class="nav-item d-none d-sm-inline-block">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Prestador" asp-action="Index">Prestador</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="Index">Serviços Agendados</a>
                         </li>
 
                         <li class="nav-item d-none d-sm-inline-block">
@@ -176,9 +173,9 @@
 
                                         <li class="nav-item">
 
-                                            <a href="@Url.Action("Index", "Prestador")" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Prestador</p>
+                                                <p>Serviços Agendados</p>
                                             </a>
 
                                         </li>

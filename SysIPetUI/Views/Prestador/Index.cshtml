@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<SysIPetUI.Models.PrestadorViewModel>
 
 @{
-    ViewData["Title"] = "Prestador";
+    ViewData["Title"] = "Casdastro Prestador";
 }
-
 
 <div class="wrapper">
 
@@ -30,11 +29,11 @@
 
                                     <div class="card-header border-0">
 
-                                        <h3 class="card-title">
-
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
                                             <span class="brand-text font-weight-light">
-                                                <b class="text-gray">Prestadores</b>
-                                            </span>
+                                                <b class="text-gray"><i class="fas fa-tools"></i> @ViewData["Title"]</b>
+                                            </span>                                           
 
                                         </h3>
 
@@ -97,11 +96,7 @@
                                                                     data-target="#modalExcluirPrestador"
                                                                     data-url="@Url.Action("ExcluirPrestador", new { id = @item.Id })">
                                                                     <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
-                                                                </button>
-
-                                                                @*<a asp-action="ExcluirPrestador" asp-route-id="@item.Id">
-                                                            <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
-                                                            </a>*@
+                                                                </button>                                                                
 
                                                             </span>
 
@@ -114,6 +109,11 @@
 
                                         </table>
 
+                                    </div>
+
+                                    <!-- Gerenciar Conta -->
+                                    <div class="col-md-auto text-right">
+                                        <a asp-area="Identity" asp-page="/Account/Manage/Index"><p>Voltar para minha Conta</p></a>
                                     </div>
 
                                 </div>

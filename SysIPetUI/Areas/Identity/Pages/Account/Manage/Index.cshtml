@@ -1,5 +1,10 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using SysIPetUI.Models
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @model IndexModel
+
 @{
     ViewData["Title"] = "Configuração da sua conta no Sys iPet's";
     ViewData["ActivePage"] = ManageNavPages.Index;
@@ -64,37 +69,58 @@
 
                         </div>
 
-                        <!-- Completar o Cadastro -->
-                        <div class="form-group">  
-                                    
-                            <label class="control-label col-md-auto">
-                                <span class="brand-text font-weight-light">
-                                    <b class="text-red">*</b>
-                                    <b class="text-gray">Complete o Cadastro para Agendar um Serviço:</b>
-                                </span>
-                            </label>
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <!--Obtem o usuário logado e valida o TipoUsuario-->
+                            var tipoUsuario = User.GetUserId();
 
-                            @*<div class="col-md-auto">
-                                <a asp-controller="Cliente" asp-action="CreateCliente">Clique aqui</a>
-                            </div>*@
-                            
-                            <button type="button"
-                                    class="btn btn-tool"
-                                    data-toggle="ajax-modal"
-                                    data-target="#modalIncluirCadastroCliente"
-                                    data-url="@Url.Action("CreateCliente", "Cliente")">
-                                    <i class="btn-tool fas fa-edit" title="Completar Cadastro"></i>
-                            </button>
+                            <!--Se o TipoUsuario for igual a true então exibe o Cadastro de Prestador Se Não, exibe o Cadastro de Consumidor-->
+                            @if (tipoUsuario == "True")
+                            {
+                                <!-- Completar o Cadastro de Prestador -->
+                                <div class="form-group">
 
-                        </div>
+                                    <label class="control-label col-md-auto">
 
-                        <div class="form-group">
+                                        <span class="brand-text font-weight-light">
+                                            <b class="text-red">*</b>
+                                            <b class="text-gray">Complete o Cadastro para acessar os Serviços:</b>
+                                            <a asp-controller="Prestador" asp-action="Index">
+                                                <i class="btn-tool fas fa-edit" title="Completar Cadastro Prestador"></i>
+                                            </a>
+                                        </span>
 
-                            <div class="col-md-auto float-right">
-                                <a asp-controller="Cliente" asp-action="Index">Ver meu Cadastro</a>
-                            </div>
-                            
-                        </div>
+                                    </label>                                                                  
+
+                                </div>
+                                
+                            }
+                            else
+                            {
+                                <!-- Completar o Cadastro de Cliente -->
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-auto">
+
+                                        <span class="brand-text font-weight-light">
+                                            <b class="text-red">*</b>
+                                            <b class="text-gray">Complete o Cadastro para Agendar um Serviço:</b>
+                                            <a asp-controller="Cliente" asp-action="Index">
+                                                <i class="btn-tool fas fa-edit" title="Completar Cadastro Cliente"></i>
+                                            </a>
+                                        </span>
+
+                                    </label>                                   
+
+                                </div>
+                                
+                            }
+
+                        }
+                        else
+                        {
+                            RedirectToPage("Login");
+                        }                                               
 
                     </div>
 
@@ -107,45 +133,6 @@
             </div>
 
         </form>
-
-    </div>
-
-</div>
-
-<!-- Incluir Cadastro -->
-<div id="modalIncluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
-
-    <div class="modal-dialog" role="document">
-
-        <!-- Partial View Load Dynamically -->
-        <div id="conteudoModal" class="modal-content">
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Editar Cadastro -->
-<div id="modalEditarCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
-
-    <div class="modal-dialog" role="document">
-
-        <!-- Partial View Load Dynamically -->
-        <div id="conteudoModal" class="modal-content">
-        </div>
-
-    </div>
-
-</div>
-
-<!-- Excluir Cadastro -->
-<div id="modalExcluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
-
-    <div class="modal-dialog" role="document">
-
-        <!-- Partial View Load Dynamically -->
-        <div id="conteudoModal" class="modal-content">
-        </div>
 
     </div>
 

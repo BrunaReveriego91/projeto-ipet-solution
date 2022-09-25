@@ -1,58 +1,187 @@
 ﻿@model SysIPetUI.Models.ClienteViewModel
 
 @{
-    ViewData["Title"] = "EditCliente";
+    Layout = null;
+    ViewData["Title"] = "Editar Cliente";
 }
 
-<h1>EditCliente</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h4>ClienteViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditCliente">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="NomeCompleto" class="control-label"></label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone1" class="control-label"></label>
-                <input asp-for="Telefone1" class="form-control" />
-                <span asp-validation-for="Telefone1" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="WhatsApp" /> @Html.DisplayNameFor(model => model.WhatsApp)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone2" class="control-label"></label>
-                <input asp-for="Telefone2" class="form-control" />
-                <span asp-validation-for="Telefone2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-warning text-lg">
+                    <i class="fas fa-edit"></i>
+                </b>
+
+                <b class="text-gray text-lg">
+                    @ViewData["Title"]
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <div class="form-group">
+
+                    <!--Validação-->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">
+
+                        <!--Nome Completo-->
+                        <div class="col-md-12">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Nome Completo:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                                <input asp-for="NomeCompleto" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--CPF-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">CPF:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite um CPF válido.">
+
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                                <input asp-for="CPF" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--Data de Nascimento-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Data Nascimento:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite ou escolha sua data de nascimento.">
+
+                                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                                <input asp-for="DataNascimento" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Telefone 1-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Telefone 1:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu Telefone n° 01.">
+
+                                <span asp-validation-for="Telefone1" class="text-danger"></span>
+                                <input asp-for="Telefone1" class="form-control" />
+
+                            </div>
+
+                            <div class="col-md-auto">
+
+                                <div class="form-check" title="Marque se esse Telefone for WhatsApp">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="WhatsApp" /> Esse Telefone é WhatsApp?
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Telefone 2-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Telefone 2:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu Telefone n° 02.">
+
+                                <span asp-validation-for="Telefone2" class="text-danger"></span>
+                                <input asp-for="Telefone2" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <p>Você está prestes a Editar o Cliente: <b>@Html.DisplayFor(model => model.NomeCompleto).</b> Você Confirma a Edição?</p>
+
+    </div>
+
+    <div class="modal-footer justify-content-between">
+
+        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+        <button id="buttonConfirmarVisible" type="submit" value="Save" class="btn btn-warning">Confirmar</button>
+        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-warning disabled">Confirmar</button>
+
+    </div>
+
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
