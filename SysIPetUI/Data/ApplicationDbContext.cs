@@ -10,6 +10,7 @@ namespace SysIPetUI.Data
             : base(options)
         {
         }
-        public DbSet<SysIPetUI.Models.AspNetTipoUsuario>? AspNetTipoUsuario { get; set; }        
+        public DbSet<SysIPetUI.Models.AspNetTipoUsuario>? AspNetTipoUsuario { get; set; }
+        public DbSet<SysIPetUI.Models.PetsViewModel> PetsViewModel { get; set; }
     }
 }
