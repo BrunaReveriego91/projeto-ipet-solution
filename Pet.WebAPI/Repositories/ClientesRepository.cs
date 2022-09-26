@@ -42,7 +42,6 @@ namespace Pet.WebAPI.Repositories
             var clientes = (from p in DataContext.Clientes
                             select p).ToList();
 
-
             if (clientes.Count == 0 || clientes == null)
                 return null;
 
@@ -51,19 +50,14 @@ namespace Pet.WebAPI.Repositories
 
             foreach (var cliente in clientes)
             {
-                var clienteObj = new Cliente();
-
-                clienteObj = cliente;
-
                 var enderecoCliente = (from e in DataContext.EnderecosClientes
                                        where e.ClienteId == cliente.Id
                                        select e).FirstOrDefault();
 
                 if (enderecoCliente != null)
-                    clienteObj.Endereco = enderecoCliente;
+                    cliente.Endereco = enderecoCliente;
 
-
-                clienteList.Add(clienteObj);
+                clienteList.Add(cliente);
             }
 
             return clienteList;
