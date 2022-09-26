@@ -1,0 +1,101 @@
+﻿@model IEnumerable<SysIPetUI.Models.EstabelecimentosViewModel>
+
+@{
+    ViewData["Title"] = "Mapa";
+}
+
+<style>
+    #map {
+        height: 600px;
+    }
+</style>
+
+<h2>Stores</h2>
+
+<div id="map"></div>
+<script>
+    var map;
+    var infowindow;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -30.060821, lng: -51.181687 },
+            zoom: 14
+        });
+
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(-30.059737, -51.164658),
+            map: map,
+            title: "Store 1"
+        });
+        marker.setMap(map);
+
+        infowindow = new google.maps.InfoWindow({
+            content: " "
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<p>Event Name: ' + this.title + '</p>' +
+                '<p>Aqui vai exibir os serviços do PetShops </p>' +
+                '<p><button onclick="myFunction()">Click me</button></p>');
+            //infowindow.open(map, this);
+        });
+        google.maps.event.trigger(marker, 'click');
+
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.064746, -51.157816),
+        //    title: "Store 2"
+        //});
+        //marker.setMap(map);
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.066648, -51.155412),
+        //    title: "Store 3"
+        //});
+        //marker.setMap(map);
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.051898, -51.194615),
+        //    title: "Store 4"
+        //});
+        //marker.setMap(map);
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.052617, -51.181038),
+        //    title: "Store 5"
+        //});
+        //marker.setMap(map);
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.071457, -51.191396),
+        //    title: "Store 6"
+        //});
+        //marker.setMap(map);
+
+        //marker = new google.maps.Marker({
+        //    position: new google.maps.LatLng(-30.059410, -51.207637),
+        //    title: "Store 7"
+        //});
+        //marker.setMap(map);
+
+
+        marker.addListener("click", () => {
+            infowindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+
+    };
+
+    function myFunction() {
+        infowindow.setContent('<div style="background-color: green">' + infowindow.getContent() + "</div>");
+        console.log(infowindow.getContent());
+    }
+
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHVzDdx8TFlthK3AtHLnucxr3PUMy-xTY&callback=initMap" async defer></script>
