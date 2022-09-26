@@ -30,8 +30,9 @@ namespace Pet.WebAPI.Services
             };
 
             var response = await _clientPetRepository.Add(cliente);
+
             if (response.Id == 0)
-                return null;
+                throw new Exception($"Erro ao adicionar novo cliente.");
 
 
             if (clientPet.Endereco != null)
@@ -60,7 +61,7 @@ namespace Pet.WebAPI.Services
         public async Task Delete(int id)
         {
             var entry = _clientPetRepository.Get(id);
-   
+
             if (entry is null)
             {
                 throw new Exception($"Cliente não encontrado pelo Id {id}.");
@@ -74,13 +75,23 @@ namespace Pet.WebAPI.Services
 
         public Cliente? Get(int id)
         {
-            return _clientPetRepository.Get(id);
+            var cliente = _clientPetRepository.Get(id);
+            if (cliente is null)
+                throw new Exception($"Cliente não encontrado pelo Id {id}.");
+
+            return cliente;
         }
 
 
         public IEnumerable<Cliente> GetClientes()
         {
-            return _clientPetRepository.GetAll();
+            var clientes = _clientPetRepository.GetAll();
+
+            if(clientes is null)
+                throw new Exception($"Não há clientes cadastrados na base.");
+
+            return clientes;
+
         }
 
         public async Task Update(int id, AlterarCliente clientPet)
