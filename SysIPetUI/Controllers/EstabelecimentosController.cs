@@ -7,7 +7,7 @@ namespace SysIPetUI.Controllers
 {
     public class EstabelecimentosController : Controller
     {
-        private readonly string url = "https://localhost:44321/api/Cliente";
+        private readonly string url = "https://localhost:44321/api/Maps";
 
         public async Task<IActionResult> Index()
         {
@@ -15,27 +15,19 @@ namespace SysIPetUI.Controllers
 
             try
             {
-                // Recebendo as informações da API
-                // HttpResponseMensage? Trata se o Retorno for Vazio
-                // await realiza as consultas varias vezes se necessário
-                HttpResponseMessage? response = await cliente.GetAsync(url);
+                int id = 15;
 
-                // EnsureSuccessStatusCode Trata os erros:
-                // Nesse caso a Aplicação se vira sem um tratamento de erro personalizado
+                HttpResponseMessage? response = await cliente.GetAsync(url + '/' + id);
+
                 response.EnsureSuccessStatusCode();
 
-                // Obtendo os dados
-                // Estatus 200 conseguiu fazer a solicitação e tras os dados serializados em formato texto
-                string responseBody = await response.Content.ReadAsStringAsync();
+                string responseBody = await response.Content.ReadAsStringAsync(); 
+                List<PrestadorViewModel>? listaPrestadores = new List<PrestadorViewModel>();
+                listaPrestadores = JsonConvert.DeserializeObject<List<PrestadorViewModel>>(responseBody);
 
-                // Criando a Lista e Deserializando o Arquivo Json
-                // O Interrogação trata os nulls                
-                List<ClienteViewModel>? listaCliente = new List<ClienteViewModel>();
-                listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBody);
+                ViewData["Prestadores"] = listaPrestadores.ToArray();
 
-                ViewData["Cliente"] = listaCliente.ToArray().FirstOrDefault();
-
-                return View(listaCliente);
+                return View(listaPrestadores);
             }
             catch (Exception)
             {
