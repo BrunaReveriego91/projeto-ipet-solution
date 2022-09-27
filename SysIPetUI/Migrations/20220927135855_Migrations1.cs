@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SysIPetUI.Migrations
 {
-    public partial class inicial : Migration
+    public partial class Migrations1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,6 +61,28 @@ namespace SysIPetUI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PetsViewModel",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    Cliente = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeCompleto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TipoPet = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TamanhoPet = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Peso = table.Column<double>(type: "float", nullable: false),
+                    Genero = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cor = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Raca = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PetsViewModel", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -228,6 +250,9 @@ namespace SysIPetUI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "PetsViewModel");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

@@ -12,14 +12,14 @@ using SysIPetUI.Data;
 namespace SysIPetUI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220924031225_inicial")]
-    partial class inicial
+    [Migration("20220927141139_Migrations2")]
+    partial class Migrations2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -247,6 +247,49 @@ namespace SysIPetUI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("AspNetTipoUsuario");
+                });
+
+            modelBuilder.Entity("SysIPetUI.Models.PetsViewModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Cliente")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Cor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DataNascimento")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Genero")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeCompleto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Peso")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Raca")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TamanhoPet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TipoPet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PetsViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

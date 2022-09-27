@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SysIPetUI.Models.EstabelecimentosViewModel>
+﻿@using Newtonsoft.Json
+@model IEnumerable<SysIPetUI.Models.ClienteViewModel>
 
 @{
     ViewData["Title"] = "Mapa";
@@ -18,6 +19,11 @@
     var infowindow;
 
     function initMap() {
+
+        var teste = @Html.Raw(JsonConvert.SerializeObject(Model));
+
+        console.log(teste);
+
         map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: -30.060821, lng: -51.181687 },
             zoom: 14
