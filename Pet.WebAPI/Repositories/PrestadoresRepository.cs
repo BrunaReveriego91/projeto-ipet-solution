@@ -7,8 +7,10 @@ namespace Pet.WebAPI.Repositories
 {
     public class PrestadoresRepository : BaseRepository<Prestador, PetContext>, IPrestadoresRepository
     {
+
         public PrestadoresRepository(PetContext context) : base(context)
         {
+
         }
 
         public override Prestador? Get(int id)

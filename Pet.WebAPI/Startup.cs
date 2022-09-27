@@ -61,6 +61,9 @@ namespace Pet.WebAPI
 
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
             services.AddTransient<IAgendamentoService, AgendamentoService>();
+
+            services.AddScoped<IMapsRepository, MapsRepository>();
+            services.AddTransient<IMapsService, MapsService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment, PetContext context)
