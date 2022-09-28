@@ -41,7 +41,7 @@ namespace Pet.WebAPI.Domain.Entities
         public string? UF { get; set; }
 
         [Required]
-        [StringLength(8)]
+        [StringLength(10)]
         public string? CEP { get; set; }
 
     }
