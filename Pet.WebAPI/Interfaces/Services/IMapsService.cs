@@ -4,6 +4,6 @@ namespace Pet.WebAPI.Interfaces.Services
 {
     public interface IMapsService
     {
-        IEnumerable<Prestador> GetPrestadoresByUserLocation(int userId);
+        IEnumerable<Maps> GetPrestadoresByUserLocation(int userId);
     }
 }
