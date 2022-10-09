@@ -5,9 +5,7 @@ using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
 {
-
-    [Route("pets")]
-    [ControllerName("Pets")]
+    [Route("api/[controller]")]
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]

@@ -12,29 +12,54 @@ namespace SysIPetUI.Controllers
     {
         // Pegando o endereço com HttpClient        
         private readonly string url = "https://localhost:44321/api/EnderecoCliente";
+        private readonly string urlCliente = "https://localhost:44321/api/Cliente";
 
         // GET: EnderecoClienteController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? Id)
         {
+            Id = 4;
+
+            if (Id == null)
+            {
+                //var cliente = new HttpClient();                
+                //HttpResponseMessage? response = await cliente.GetAsync(urlCliente);
+                //response.EnsureSuccessStatusCode();
+                //string responseBody = await response.Content.ReadAsStringAsync();
+                //List<ClienteViewModel>? listaCliente = new List<ClienteViewModel>();
+                //listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBody);
+
+                //ClienteViewModel? cliente = new ClienteViewModel();
+
+                //using (var httpClient = new HttpClient())
+                //{
+                //    using (var response = await httpClient.GetAsync(urlCliente))
+                //    {
+                //        string responseBody = await response.Content.ReadAsStringAsync();
+                //        cliente = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
+                //    }
+                //}                
+
+                //if (cliente == null)
+                //{
+                //    return RedirectToAction("CadastroCliente");
+                //}
+                //else 
+                //{
+                //    return RedirectToAction("Index", new { Id = cliente.Id });
+                //    //return View("Error");
+                //}
+
+                return RedirectToAction("CadastroEnderecoCliente");
+
+            }                      
+
             var enderecoCliente = new HttpClient();
 
             try
-            {
-                // Recebendo as informações da API
-                // HttpResponseMensage? Trata se o Retorno for Vazio
-                // await realiza as consultas varias vezes se necessário
-                HttpResponseMessage? response = await enderecoCliente.GetAsync(url);
-
-                // EnsureSuccessStatusCode Trata os erros:
-                // Nesse caso a Aplicação se vira sem um tratamento de erro personalizado
+            {                
+                HttpResponseMessage? response = await enderecoCliente.GetAsync(url + "/" + Id);
                 response.EnsureSuccessStatusCode();
-
-                // Obtendo os dados
-                // Estatus 200 conseguiu fazer a solicitação e tras os dados serializados em formato texto
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-                // Criando a Lista e Deserializando o Arquivo Json
-                // O Interrogação trata os nulls                
+                string responseBody = await response.Content.ReadAsStringAsync(); 
                 List<EnderecoClienteViewModel>? listaEnderecoCliente = new List<EnderecoClienteViewModel>();
                 listaEnderecoCliente = JsonConvert.DeserializeObject<List<EnderecoClienteViewModel>>(responseBody);
 
@@ -92,7 +117,44 @@ namespace SysIPetUI.Controllers
                         enderecoClienteIncluido = JsonConvert.DeserializeObject<EnderecoClienteViewModel>(responseBody);
                     }
                 }
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { Id = enderecoClienteIncluido?.ClienteId });
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
+
+        }
+
+        // GET: EnderecoClienteController/Create
+        public ActionResult CadastroEnderecoCliente()
+        {
+            return View();
+        }
+
+        // POST: EnderecoClienteController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CadastroEnderecoCliente(EnderecoClienteViewModel enderecoCliente)
+        {
+            try
+            {
+                EnderecoClienteViewModel? enderecoClienteIncluido = new EnderecoClienteViewModel();
+
+                using (var httpClient = new HttpClient())
+                {
+                    //Como a API precisará dos novos dados do EnderecoCliente no formato JSON, estamos serializando os dados
+                    //da ViewModel EnderecoClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(enderecoCliente), Encoding.UTF8, "application/json");
+
+                    //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo EnderecoCliente na Tabela do SQL
+                    using (var response = await httpClient.PostAsync(url, content))
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        enderecoClienteIncluido = JsonConvert.DeserializeObject<EnderecoClienteViewModel>(responseBody);
+                    }
+                }
+                return RedirectToAction("Index", new { Id = enderecoClienteIncluido?.ClienteId });
             }
             catch (Exception)
             {

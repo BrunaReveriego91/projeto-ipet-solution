@@ -29,10 +29,13 @@ namespace Pet.WebAPI.Services
         {
             var entry = _repository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Prestador não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            //}
 
             await _repository.Delete(entry);
         }
@@ -51,10 +54,13 @@ namespace Pet.WebAPI.Services
         {
             var entry = _repository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Prestador não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            //}
 
             entry.NomeCompleto = entity.NomeCompleto;
             entry.CPF_CNPJ = entity.CPF_CNPJ;

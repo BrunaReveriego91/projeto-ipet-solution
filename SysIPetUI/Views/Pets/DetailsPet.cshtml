@@ -1,4 +1,4 @@
-﻿@model SysIPetUI.Models.PetsViewModel
+﻿@model SysIPetUI.Models.PetsListViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -9,70 +9,63 @@
 <div>
     <h4>PetsViewModel</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClienteId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClienteId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cliente)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cliente)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomeCompleto)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomeCompleto)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoPet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoPet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TamanhoPet)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TamanhoPet)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Peso)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Peso)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Genero)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Genero)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cor)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DataNascimento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DataNascimento)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Raca)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Raca)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="EditPet" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @for (int i = 0; i < Model.PetsList.Count; i++)
+    {
+        @Html.HiddenFor(model => model.PetsList[i].Id)
+
+        <dl class="row">
+            <dt class="col-sm-2">
+                Nome:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].NomeCompleto)
+            </dd>
+            <dt class="col-sm-2">
+                Tipo Pet:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].TipoPetNome)
+            </dd>
+            <dt class="col-sm-2">
+                Tamanho:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].TamanhoPetNome)
+            </dd>
+            <dt class="col-sm-2">
+                Peso:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Peso)
+            </dd>
+            <dt class="col-sm-2">
+                Genero Pet:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].GeneroPetNome)
+            </dd>
+            <dt class="col-sm-2">
+                Cor:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Cor)
+            </dd>
+            <dt class="col-sm-2">
+                Data Nascimento:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].DataNascimento)
+            </dd>
+            <dt class="col-sm-2">
+                Raça:
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Raca)
+            </dd>
+        </dl>
+        <div>
+            <a asp-action="EditPet" asp-route-id="id = @Model.PetsList[i].Id">Edit1</a> |            
+            <a asp-action="Index">Back to List</a>
+        </div>
+    }
 </div>

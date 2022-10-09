@@ -1,0 +1,172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginModel">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\Login.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAgAABAAAAAMAAAAQAAAAIEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Login.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.AccessDeniedModel">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\AccessDenied.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ConfirmEmailModel">
+    <Position X="2.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ConfirmEmail.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ConfirmEmailChangeModel">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ExternalLoginModel">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ExternalLoginModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\ExternalLogin.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CQAADAAAAQAAAAAAAABAAAgIMgCAAAYAAAYAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ExternalLogin.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ForgotPasswordModel">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ForgotPasswordModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAEACAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ForgotPasswordConfirmation">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LockoutModel">
+    <Position X="2.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Lockout.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginWith2faModel">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginWith2faModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAgAABAAAAAMAAAAAAAAAIEAAAgAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\LoginWith2fa.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LoginWithRecoveryCodeModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAgAABAAAAAMAAAAAAAAAIEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.LogoutModel">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Logout.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.RegisterModel">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.RegisterModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\Register.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAADAAAAQAAAAAgAABAAAAAMgCAAQQAAAIEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\Register.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.RegisterConfirmationModel">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAMAACAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\RegisterConfirmation.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ResendEmailConfirmationModel">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ResendEmailConfirmationModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAEACAAAAAAAQEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ResetPasswordModel">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ResetPasswordModel.InputModel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Areas\Identity\Pages\Account\ResetPassword.cshtml.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAEAAAAAAAAAQEAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ResetPassword.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Areas.Identity.Pages.Account.ResetPasswordConfirmationModel">
+    <Position X="5.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

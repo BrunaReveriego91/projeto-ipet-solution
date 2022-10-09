@@ -42,10 +42,13 @@ namespace Pet.WebAPI.Services
         {
             var entry = _repository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Serviço não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Serviço não encontrado pelo Id {id}.");
+            //}
 
             entry.Nome = servico.Nome;
             entry.Descricao = servico.Descricao;
