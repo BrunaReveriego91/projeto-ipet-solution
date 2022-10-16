@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Pet.WebAPI.Domain.Entities.Agenda">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAEAAAAADCAAAAAAAAAAAAAAAAQQAAAAAA=</HashCode>
+      <FileName>Domain\Entities\Agenda.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.BaseEFObject">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\BaseEFObject.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Cliente">
+    <Position X="3.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAAAAAAAAAAAACAAAIAAAAAAAAAAJAAEAA=</HashCode>
+      <FileName>Domain\Entities\Cliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.EnderecoCliente">
+    <Position X="1.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQACAAAAAABAACIAABAAgACAAAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>Domain\Entities\EnderecoCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.EnderecoPrestador">
+    <Position X="11" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQACAAAAgABAACIAACAAgACAAAAAAAQAAAAAABABAAA=</HashCode>
+      <FileName>Domain\Entities\EnderecoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Genero">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\Genero.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Pets">
+    <Position X="2.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAABAAEAAADCAAAIAAAMAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain\Entities\Pets.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Prestador">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAJAIEAA=</HashCode>
+      <FileName>Domain\Entities\Prestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Servico">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Domain\Entities\Servico.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.ServicoAgenda">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACACEACAAAAAAAIAAAAIAAAAIAAQAAAAAAAQAAkAAAA=</HashCode>
+      <FileName>Domain\Entities\ServicoAgenda.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.ServicoPrestador">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAACAAAAEAAAAACEAAAAEAAAQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\ServicoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.TamanhoPet">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\TamanhoPet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.TipoPet">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\TipoPet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.Usuario">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAACAAAAACAAAAAAEAAAA=</HashCode>
+      <FileName>Domain\Entities\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Entities.UsuarioPrestador">
+    <Position X="10.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAEAAAAACAAAAAAAIAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Domain\Entities\UsuarioPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

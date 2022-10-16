@@ -42,7 +42,7 @@
                                             <button type="button"
                                                     class="btn btn-tool"
                                                     data-toggle="ajax-modal"
-                                                    data-target="#modalIncluirPrestador"
+                                                    data-target="#modalIncluirCliente"
                                                     data-url="@Url.Action("CreateCliente")">
                                                 <i class="fas fa-plus-circle" title="Adicionar Cadastro"></i>
                                             </button>
@@ -115,7 +115,7 @@
                                                                 <button type="button"
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
-                                                                    data-target="#modalEditarPrestador"
+                                                                    data-target="#modalEditarCliente"
                                                                     data-url="@Url.Action("EditCliente", new { id = @item.Id })">
                                                                     <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
                                                                 </button>
@@ -123,7 +123,7 @@
                                                                 <button type="button"
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
-                                                                    data-target="#modalExcluirPrestador"
+                                                                    data-target="#modalExcluirCliente"
                                                                     data-url="@Url.Action("ExcluirCliente", new { id = @item.Id })">
                                                                     <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
                                                                 </button>                                                                                                                                
@@ -165,7 +165,7 @@
 </div>
 
 <!-- Incluir Cadastro -->
-<div id="modalIncluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+<div id="modalIncluirCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
 
     <div class="modal-dialog" role="document">
 
@@ -178,7 +178,7 @@
 </div>
 
 <!-- Editar Cadastro -->
-<div id="modalEditarCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+<div id="modalEditarCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
 
     <div class="modal-dialog" role="document">
 
@@ -191,7 +191,7 @@
 </div>
 
 <!-- Excluir Cadastro -->
-<div id="modalExcluirCadastroCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+<div id="modalExcluirCliente" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
 
     <div class="modal-dialog" role="document">
 

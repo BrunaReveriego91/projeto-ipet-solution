@@ -122,10 +122,13 @@ namespace Pet.WebAPI.Services
         {
             var entry = Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Agendamento não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Agendamento não encontrado pelo Id {id}.");
+            //}
 
             entry.Data_Agenda = entity.Data_Agenda;
 

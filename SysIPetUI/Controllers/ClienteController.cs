@@ -38,13 +38,18 @@ namespace SysIPetUI.Controllers
                 List<ClienteViewModel>? listaCliente = new List<ClienteViewModel>();
                 listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBody);
 
+                if(listaCliente == null) 
+                {
+                    return RedirectToAction("CadastroCliente");
+                }
+
                 return View(listaCliente);
             }
             catch (Exception)
             {
                 return View("Error");
             }
-        }
+        }               
 
         // GET: ClienteController/Create
         public ActionResult CreateCliente()
@@ -56,6 +61,43 @@ namespace SysIPetUI.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateCliente(ClienteViewModel cliente)
+        {
+            try
+            {
+                ClienteViewModel? clienteIncluido = new ClienteViewModel();
+
+                using (var httpClient = new HttpClient())
+                {
+                    //Como a API precisará dos novos dados do Cliente no formato JSON, estamos serializando os dados
+                    //da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    StringContent content = new StringContent(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
+
+                    //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Cliente na Tabela do SQL
+                    using (var response = await httpClient.PostAsync(url, content))
+                    {
+                        string responseBody = await response.Content.ReadAsStringAsync();
+                        clienteIncluido = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
+                    }
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
+
+        }
+
+        // GET: ClienteController/CadastroCliente
+        public ActionResult CadastroCliente()
+        {
+            return View();
+        }
+
+        // POST: ClienteController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CadastroCliente(ClienteViewModel cliente)
         {
             try
             {
