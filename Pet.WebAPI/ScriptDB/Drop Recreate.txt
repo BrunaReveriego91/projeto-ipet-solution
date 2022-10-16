@@ -3,9 +3,11 @@
 2 - Dropar Banco no SQL Management
 
 2 - na linha de cmd:
+
+	dotnet tool install -g dotnet-ef (se não existir dotnet-ef)
 	
 	2.1) dotnet-ef migrations add inicial
 
-	2.2) dotnet-ef update database 
+	2.2) dotnet-ef database update
 
 3 - Seja Feliz

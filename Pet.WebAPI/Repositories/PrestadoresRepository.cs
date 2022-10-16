@@ -16,24 +16,26 @@ namespace Pet.WebAPI.Repositories
             var query = (from p in DataContext.Prestadores
                          where p.Id == id
                          select p)
-                         .Include(e => e.Enderecos).FirstOrDefault();
+                         .Include(e => e.Enderecos)
+                         .Include(s => s.Servicos)
+                         .FirstOrDefault();
             return query;
         }
 
-        public override Task Update(Prestador prestador)
-        {
-            return base.Update(prestador);
-        }
+        //public override Task Update(Prestador prestador)
+        //{
+        //    return base.Update(prestador);
+        //}
 
-        public override async Task Delete(Prestador prestador)
-        {
-            await base.Delete(prestador);
-        }
+        //public override async Task Delete(Prestador prestador)
+        //{
+        //    await base.Delete(prestador);
+        //}
 
-        public override IEnumerable<Prestador> GetAll()
-        {
-            return base.GetAll();
-        }
+        //public override IEnumerable<Prestador> GetAll()
+        //{
+        //    return base.GetAll();
+        //}
     }
 
 }

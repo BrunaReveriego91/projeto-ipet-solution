@@ -20,7 +20,9 @@ namespace Pet.WebAPI.Services
             var prestador = new Prestador()
             {
                 NomeCompleto = novoPrestador.NomeCompleto,
-                CPF_CNPJ = novoPrestador.CPF_CNPJ
+                CPF_CNPJ = novoPrestador.CPF_CNPJ,
+                Telefone = novoPrestador.Telefone,
+                WhatsApp = novoPrestador.WhatsApp
             };
             return await _repository.Add(prestador);
         }
@@ -58,6 +60,8 @@ namespace Pet.WebAPI.Services
 
             entry.NomeCompleto = entity.NomeCompleto;
             entry.CPF_CNPJ = entity.CPF_CNPJ;
+            entry.Telefone = entity.Telefone;
+            entry.WhatsApp = entity.WhatsApp;
 
             try
             {

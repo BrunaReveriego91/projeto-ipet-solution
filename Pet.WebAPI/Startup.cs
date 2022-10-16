@@ -4,6 +4,9 @@ using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 using Pet.WebAPI.Repositories;
 using Pet.WebAPI.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Pet.WebAPI.Controllers;
 
 namespace Pet.WebAPI
 {
@@ -58,9 +61,10 @@ namespace Pet.WebAPI
             services.AddScoped<IPetsRepository, PetsRepository>();
             services.AddTransient<IPetsService, PetsService>();
 
-
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
             services.AddTransient<IAgendamentoService, AgendamentoService>();
+
+            services.AddScoped<IServicosAgendaRepository, ServicosAgendaRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment environment, PetContext context)

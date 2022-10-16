@@ -21,6 +21,8 @@ namespace Pet.WebAPI.Domain.Entities
 
         public bool Ativo { get; set; } = false;
 
+        // Valor do Serviço está presente no Serviço do Prestador.
+
         public Servico()
         {
             Nome = "";

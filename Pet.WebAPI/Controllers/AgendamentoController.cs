@@ -43,8 +43,19 @@ namespace Pet.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAgendamento([FromBody] NovoAgendamento novoAgendamento)
         {
-            var result = await _service.Add(novoAgendamento);
-            return CreatedAtAction(nameof(GetAgendamento), new { id = result.Id }, result);
+            try
+            {
+                var result = await _service.Add(novoAgendamento);
+                return CreatedAtAction(nameof(GetAgendamento), new { id = result.Id }, result);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpPut("{id}")]

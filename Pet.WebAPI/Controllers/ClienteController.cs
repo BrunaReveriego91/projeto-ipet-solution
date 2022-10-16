@@ -5,7 +5,8 @@ using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("cliente")]
+    [ControllerName("Cliente")]
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
@@ -57,7 +58,7 @@ namespace Pet.WebAPI.Controllers
         {
             try
             {
-                await _clientPetService.Delete(id);
+                _clientPetService.Delete(id);
             }
             catch (Exception)
             {

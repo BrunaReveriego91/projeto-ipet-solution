@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Domain\Entities\IBaseRecord.cs" />
+    <Compile Remove="Services\ServicosAgendamentoService.cs" />
   </ItemGroup>
 
   <ItemGroup>

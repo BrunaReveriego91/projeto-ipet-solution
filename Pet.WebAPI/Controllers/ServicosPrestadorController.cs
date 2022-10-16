@@ -44,8 +44,19 @@ namespace Pet.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> PostServicoPrestador([FromBody] NovoServicoPrestador servico)
         {
-            var result = await _service.Add(servico);
-            return CreatedAtAction(nameof(GetServicosPrestador), new { prestador_id = result.PrestadorId }, result);
+            try
+            {
+                var result = await _service.Add(servico);
+                return CreatedAtAction(nameof(GetServicosPrestador), new { prestador_id = result.PrestadorId }, result);
+            }
+            catch (NullReferenceException)
+            {
+                return NotFound();
+            }
+            catch (Exception)
+            {
+                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
         }
 
         [HttpPut("{id}")]
