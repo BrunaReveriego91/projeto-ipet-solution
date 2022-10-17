@@ -35,11 +35,13 @@ namespace Pet.WebAPI.Services
             return await _enderecosClienteRepository.Add(endereco);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _enderecosClienteRepository.Get(id);
+
             if (entry == null) return;
-            await _enderecosClienteRepository.Delete(entry);
+
+            _enderecosClienteRepository.Delete(entry);
         }
 
         public List<EnderecoCliente>? GetAll(int cliente_id)

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
 using Pet.WebAPI.Interfaces.Repositories;
@@ -46,15 +47,37 @@ namespace Pet.WebAPI.Services
                 Valor = novoServico.Valor,
             };
 
-            var result = await _repository.Add(srv_prest);
-            return result;
+            try
+            {
+                return await _repository.Add(srv_prest);
+            }
+            catch (SqlException sqlEx)
+            {
+                switch (sqlEx.ErrorCode)
+                {
+                    case 2601:
+                        throw new Exception($"Serviço Id {novoServico.Servico_Id} duplicado para o Prestador {novoServico.Prestador_Id}.");
+
+                    default:
+                        throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _repository.Get(id);
-            if (entry is null) { return; }
-            await _repository.Delete(entry);
+
+            if (entry is null)
+            {
+                return;
+            }
+
+            _repository.Delete(entry);
         }
 
         public List<ServicoPrestador>? GetAllFromPrestador(int prestador_id)

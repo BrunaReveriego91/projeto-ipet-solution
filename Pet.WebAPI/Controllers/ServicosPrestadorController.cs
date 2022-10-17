@@ -56,6 +56,11 @@ namespace Pet.WebAPI.Controllers
             catch (Exception)
             {
                 return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                //var retorno = new
+                //{
+                //    teste = ""
+                //};
+                //return new JsonResult(retorno);
             }
         }
 

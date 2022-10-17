@@ -9,6 +9,7 @@ namespace Pet.WebAPI.Interfaces.Repositories
         IEnumerable<EnderecoPrestador> GetAll(Expression<Func<EnderecoPrestador, bool>>? expression = null);
         EnderecoPrestador? Get(int id);
         Task Update(EnderecoPrestador entity);
-        Task Delete(EnderecoPrestador entity);
+        //Task Delete(EnderecoPrestador entity);
+        void Delete(EnderecoPrestador entity);
     }
 }

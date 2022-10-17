@@ -17,15 +17,19 @@ namespace Pet.WebAPI.Services
 
         public async Task<Servico> Add(NovoServico servico)
         {
-            var result = await _repository.Add(new Servico(servico.Nome, servico.Descricao, servico.Ativo));
-            return result;
+            return await _repository.Add(new Servico(servico.Nome, servico.Descricao, servico.Ativo));
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _repository.Get(id);
-            if (entry is null) { return; }
-            await _repository.Delete(entry);
+            
+            if (entry is null) 
+            { 
+                return;
+            }
+
+            _repository.Delete(entry);
         }
 
         public Servico? Get(int id)

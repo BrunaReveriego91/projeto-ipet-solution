@@ -12,7 +12,7 @@ namespace Pet.WebAPI.Services
         private readonly IClientesRepository _clientesRepository;
         private readonly IPrestadoresRepository _prestadoresRepository;
         private readonly IEnderecosPrestadorRepository _enderecosPrestadorRepository;
-        private readonly IServicosRepository _servicosRepository;
+        private readonly IServicosPrestadorRepository _servicosPrestadorRepository;
         private readonly IServicosAgendaRepository _servicosAgendaRepository;
 
         public AgendamentoService(
@@ -20,14 +20,14 @@ namespace Pet.WebAPI.Services
             IClientesRepository clientesRepository,
             IPrestadoresRepository prestadoresRepository,
             IEnderecosPrestadorRepository enderecosPrestadorRepository,
-            IServicosRepository servicosRepository,
+            IServicosPrestadorRepository servicosPrestadorRepository,
             IServicosAgendaRepository servicosAgendaRepository)
         {
             _repository = repository;
             _clientesRepository = clientesRepository;
             _prestadoresRepository = prestadoresRepository;
             _enderecosPrestadorRepository = enderecosPrestadorRepository;
-            _servicosRepository = servicosRepository;
+            _servicosPrestadorRepository = servicosPrestadorRepository;
             _servicosAgendaRepository = servicosAgendaRepository;
         }
 
@@ -50,10 +50,10 @@ namespace Pet.WebAPI.Services
             // Valida
             novoAgendamento.Servicos.ForEach(srv =>
             {
-                var servico = _servicosRepository.Get(srv.Id_Servico);
+                var servico = _servicosPrestadorRepository.Get(srv.Id_Servico_Prestador);
                 if (servico is null)
                 {
-                    throw new NullReferenceException($"Servico não encontrado pelo Id {srv.Id_Servico}.");
+                    throw new NullReferenceException($"Servico do Prestador não encontrado pelo Id {srv.Id_Servico_Prestador}.");
                 }
 
                 var enderecoPrestador = _enderecosPrestadorRepository.Get(srv.Id_Endereco_Prestador);
@@ -79,7 +79,7 @@ namespace Pet.WebAPI.Services
             {
                 novoAgendamento.Servicos.ForEach(srv =>
                 {
-                    var srv_agenda = _servicosAgendaRepository.Add(result_agenda.Id, srv.Id_Servico, srv.Id_Endereco_Prestador, srv.Mensagem_Cliente);
+                    var srv_agenda = _servicosAgendaRepository.Add(result_agenda.Id, srv.Id_Servico_Prestador, srv.Id_Endereco_Prestador, srv.Mensagem_Cliente);
 
                     var srv_result = srv_agenda.Result;
                     result_agenda.Servicos.Add(srv_result);
@@ -89,7 +89,7 @@ namespace Pet.WebAPI.Services
             return result_agenda;
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = Get(id);
 
@@ -98,7 +98,7 @@ namespace Pet.WebAPI.Services
                 throw new NullReferenceException($"Agendamento não encontrado pelo Id {id}.");
             }
 
-            await _repository.Delete(entry);
+            _repository.Delete(entry);
         }
 
         public Agenda? Get(int id)

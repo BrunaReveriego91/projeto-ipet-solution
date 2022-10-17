@@ -10,15 +10,15 @@ namespace Pet.WebAPI.Repositories
         {
         }
 
-        public async Task Activate(int id, bool activate = true)
-        {
-            var entry = base.Get(id);
+        //public async Task Activate(int id, bool activate = true)
+        //{
+        //    var entry = base.Get(id);
 
-            if (entry != null)
-            {
-                entry.Ativo = activate;
-                await base.Update(entry);
-            }
-        }
+        //    if (entry != null)
+        //    {
+        //        entry.Ativo = activate;
+        //        await base.Update(entry);
+        //    }
+        //}
     }
 }

@@ -10,7 +10,6 @@ namespace Pet.WebAPI.Repositories
         {
         }
 
-
         public override Pets? Get(int id)
         {
             var query = (from p in DataContext.Pets
@@ -25,10 +24,11 @@ namespace Pet.WebAPI.Repositories
             return base.Update(pets);
         }
 
-        public override async Task Delete(Pets pets)
-        {
-            await base.Delete(pets);
-        }
+        //public override async Task Delete(Pets pets)
+        //{
+        //    await base.Delete(pets);
+        //}
+
         public override IEnumerable<Pets> GetAll()
         {
             return base.GetAll();

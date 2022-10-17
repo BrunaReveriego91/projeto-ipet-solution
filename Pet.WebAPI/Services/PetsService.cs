@@ -34,7 +34,7 @@ namespace Pet.WebAPI.Services
             return await _petsRepository.Add(pet);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _petsRepository.Get(id);
 
@@ -45,7 +45,8 @@ namespace Pet.WebAPI.Services
             //{
             //    throw new Exception($"Pet não encontrado pelo Id {id}.");
             //}
-            await _petsRepository.Delete(entry);
+
+            _petsRepository.Delete(entry);
         }
 
         public Pets? Get(int id)

@@ -8,7 +8,8 @@ namespace Pet.WebAPI.Interfaces.Services
         Task<Agenda> Add(NovoAgendamento novoAgendamento);
         Agenda? Get(int id);
         Task Update(int id, AlterarAgendamento entity);
-        Task Delete(int id);
+        //Task Delete(int id);
+        void Delete(int id);
         IEnumerable<ServicoAgenda> GetServicos(int id);
     }
 }

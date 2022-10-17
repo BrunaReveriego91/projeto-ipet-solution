@@ -9,6 +9,7 @@ namespace Pet.WebAPI.Interfaces.Repositories
         IEnumerable<Servico> GetAll(Expression<Func<Servico, bool>>? expression = null);
         Servico? Get(int id);
         Task Update(Servico servico);
-        Task Delete(Servico servico);
+        //Task Delete(Servico servico);
+        void Delete(Servico servico);
     }
 }

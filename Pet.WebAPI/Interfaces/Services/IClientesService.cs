@@ -7,7 +7,8 @@ namespace Pet.WebAPI.Interfaces.Services
     {
         Task<Cliente> Add(NovoCliente clientPet);
         Task Update(int id, AlterarCliente clientPet);
-        Task Delete(int id);
+        //Task Delete(int id);
+        void Delete(int id);
         Cliente? Get(int id);
         IEnumerable<Cliente> GetClientes();
     }

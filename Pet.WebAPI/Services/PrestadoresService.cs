@@ -27,19 +27,16 @@ namespace Pet.WebAPI.Services
             return await _repository.Add(prestador);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _repository.Get(id);
 
-            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
-            //Pode retornar nulo mesmo que redireciono para a pág de Create
+            if (entry is null)
+            {
+                throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            }
 
-            //if (entry is null)
-            //{
-            //    throw new Exception($"Prestador não encontrado pelo Id {id}.");
-            //}
-
-            await _repository.Delete(entry);
+            _repository.Delete(entry);
         }
 
         public Prestador? Get(int id)

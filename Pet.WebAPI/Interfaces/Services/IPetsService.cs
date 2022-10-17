@@ -8,7 +8,8 @@ namespace Pet.WebAPI.Interfaces.Services
         Task<Pets> Add(NovoPet novoPet);
         Pets? Get(int id);
         Task Update(int id, AlterarPet entity);
-        Task Delete(int id);
+        //Task Delete(int id);
+        void Delete(int id);
         IEnumerable<Pets> GetPets();
     }
 }

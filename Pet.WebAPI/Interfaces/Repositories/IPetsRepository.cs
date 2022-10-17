@@ -7,7 +7,8 @@ namespace Pet.WebAPI.Interfaces.Repositories
         Task<Pets> Add(Pets pets);
         Pets? Get(int id);
         Task Update(Pets pets);
-        Task Delete(Pets pets);
+        //Task Delete(Pets pets);
+        void Delete(Pets pets);
         IEnumerable<Pets> GetAll();
     }
 }

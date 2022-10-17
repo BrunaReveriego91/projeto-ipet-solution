@@ -21,10 +21,16 @@ namespace Pet.WebAPI.Repositories
             return result.Entity;
         }
 
-        public virtual async Task Delete(TEntity entity)
+        //public virtual async Task Delete(TEntity entity)
+        //{
+        //    _context.Set<TEntity>().Remove(entity);
+        //    await _context.SaveChangesAsync();
+        //}
+
+        public void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public virtual TEntity? Get(int id)
@@ -67,6 +73,7 @@ namespace Pet.WebAPI.Repositories
         TEntity? Single(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>>? expression = null);
         Task Update(TEntity entity);
-        Task Delete(TEntity entity);
+        //Task Delete(TEntity entity);
+        void Delete(TEntity entity);
     }
 }

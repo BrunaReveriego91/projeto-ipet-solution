@@ -23,7 +23,7 @@ namespace Pet.WebAPI.Services
             {
                 NomeCompleto = clientPet.NomeCompleto,
                 CPF = clientPet.CPF,
-                DataNascimento = clientPet.DataNascimento,
+                DataNascimento = Convert.ToDateTime(clientPet.DataNascimento),
                 Telefone1 = clientPet.Telefone1,
                 WhatsApp = clientPet.WhatsApp,
                 Telefone2 = clientPet.Telefone2
@@ -61,7 +61,7 @@ namespace Pet.WebAPI.Services
             return _clientPetRepository.Get(response.Id);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _clientPetRepository.Get(id);
 
@@ -73,10 +73,10 @@ namespace Pet.WebAPI.Services
             //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
             //}
 
-            await _clientPetRepository.Delete(entry);
+            _clientPetRepository.Delete(entry);
 
             if (entry.Endereco != null)
-                await _enderecoClienteRepository.Delete(entry.Endereco);
+                _enderecoClienteRepository.Delete(entry.Endereco);
         }
 
         public Cliente? Get(int id)
