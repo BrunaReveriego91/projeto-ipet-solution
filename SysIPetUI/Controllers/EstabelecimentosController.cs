@@ -10,6 +10,7 @@ namespace SysIPetUI.Controllers
 
         public async Task<IActionResult> Index()
         {
+            
             var cliente = new HttpClient();
 
             try

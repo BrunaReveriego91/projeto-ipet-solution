@@ -34,45 +34,42 @@ namespace Pet.WebAPI.Services
             {
                 foreach (var enderecoPrestador in prestador.Enderecos)
                 {
-                    var location = ProcuraGeolocalizacaoPrestador(enderecoPrestador);
+                    var localizacao = ProcuraGeolocalizacaoPrestador(enderecoPrestador);
                 }
             }
 
             return null;
         }
 
-        public async Task ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)
+        private async Task<List<double>> ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)
         {
-            //Maps map = new();
 
             var key = _apiConnection.Key;
-            //var postal_code = enderecoPrestador.CEP;
-            var postal_code = "04222-060";
-            var address = string.Concat("Rua Violantino dos Santos", ' ', "48");
 
+            var postal_code = enderecoPrestador.CEP;
+            var address = string.Concat(enderecoPrestador.Logradouro, ' ', enderecoPrestador.Numero);
+            var coordenadas = new List<double>();
             var url = "http://dev.virtualearth.net/REST/v1/Locations?postalCode=" + postal_code + "&key=" + key + "&addressLine=" + address;
 
             using (var httpClient = new HttpClient())
             {
                 using (var response = await httpClient.GetAsync(url))
                 {
-                  
+
                     string responseBody = await response.Content.ReadAsStringAsync();
                     if (!string.IsNullOrEmpty(responseBody))
                     {
                         Maps maps = JsonConvert.DeserializeObject<Maps>(responseBody);
-                        var estabelecimentos = new List<Estabelecimento>();
-                        foreach(var item in maps.resourceSets.ToList())
+
+                        foreach (var item in maps.resourceSets.ToList())
                         {
-                            var teste = item.resources.FirstOrDefault().point.coordinates[0];
-                            coordinates.Add(teste);
+                            coordenadas.Add(item.resources.FirstOrDefault().point.coordinates[0]);
+                            coordenadas.Add(item.resources.FirstOrDefault().point.coordinates[1]);
                         }
                     }
-                   
-                    //cliente = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                 }
             }
-            //return View(cliente);
+            return coordenadas;
         }
     }
 }

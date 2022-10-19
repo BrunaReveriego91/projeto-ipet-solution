@@ -6,6 +6,6 @@ namespace Pet.WebAPI.Interfaces.Services
     public interface IMapsService
     {
         IEnumerable<Maps> GetPrestadoresByUserLocation(int userId);
-        Task ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador);
+      
     }
 }
