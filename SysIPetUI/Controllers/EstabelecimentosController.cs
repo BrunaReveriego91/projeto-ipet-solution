@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using SysIPetUI.Models;
-using System.Text;
+using static SysIPetUI.Models.EstabelecimentoViewModel;
 
 namespace SysIPetUI.Controllers
 {
@@ -15,19 +14,30 @@ namespace SysIPetUI.Controllers
 
             try
             {
-                int id = 15;
+                EstabelecimentosLists model = new EstabelecimentosLists();
+                var locations = new List<EstabelecimentoViewModel>()
+                {
+                new EstabelecimentoViewModel(1, "Teste","Teste", -23.594786699313218, -46.68442189606897),
+                new EstabelecimentoViewModel(2, "Hyderabad","Hyderabad, Telengana", 17.387140, 78.491684),
+                new EstabelecimentoViewModel(3, "Bengaluru","Bengaluru, Karnataka", 12.972442, 77.580643)
+                };
+                model.EstabelecimentosList = locations;
 
-                HttpResponseMessage? response = await cliente.GetAsync(url + '/' + id);
+                return View(model);
 
-                response.EnsureSuccessStatusCode();
+                //int id = 15;
 
-                string responseBody = await response.Content.ReadAsStringAsync(); 
-                List<PrestadorViewModel>? listaPrestadores = new List<PrestadorViewModel>();
-                listaPrestadores = JsonConvert.DeserializeObject<List<PrestadorViewModel>>(responseBody);
+                //HttpResponseMessage? response = await cliente.GetAsync(url + '/' + id);
 
-                ViewData["Prestadores"] = listaPrestadores.ToArray();
+                //response.EnsureSuccessStatusCode();
 
-                return View(listaPrestadores);
+                //string responseBody = await response.Content.ReadAsStringAsync(); 
+                //List<PrestadorViewModel>? listaPrestadores = new List<PrestadorViewModel>();
+                //listaPrestadores = JsonConvert.DeserializeObject<List<PrestadorViewModel>>(responseBody);
+
+                //ViewData["Prestadores"] = listaPrestadores.ToArray();
+
+                //return View(listaPrestadores);
             }
             catch (Exception)
             {

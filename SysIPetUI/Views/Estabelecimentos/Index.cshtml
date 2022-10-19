@@ -1,7 +1,6 @@
-﻿@model IEnumerable<SysIPetUI.Models.PrestadorViewModel>
-
+﻿@model SysIPetUI.Models.EstabelecimentosLists
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Estabelecimentos";
 }
 
 <script type='text/javascript'>
@@ -53,8 +52,14 @@
         }
 
         //add markers to map
-
+    @if (Model.EstabelecimentosList != null)
+    {
+        foreach (var item in Model.EstabelecimentosList)
+        {
+            @:addMarker(@item.Latitude, @item.Longitude, '@item.Title', '@item.Description', @item.LocationId);
+        }
     }
+                }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
