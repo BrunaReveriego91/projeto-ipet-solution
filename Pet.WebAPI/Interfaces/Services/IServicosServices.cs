@@ -9,6 +9,7 @@ namespace Pet.WebAPI.Interfaces.Services
         Servico? Get(int id);
         List<Servico>? GetAll();
         Task Update(int id, AlterarServico servico);
-        Task Delete(int id);
+        //Task Delete(int id);
+        void Delete(int id);
     }
 }

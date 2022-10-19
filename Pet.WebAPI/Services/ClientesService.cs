@@ -23,7 +23,7 @@ namespace Pet.WebAPI.Services
             {
                 NomeCompleto = clientPet.NomeCompleto,
                 CPF = clientPet.CPF,
-                DataNascimento = clientPet.DataNascimento,
+                DataNascimento = Convert.ToDateTime(clientPet.DataNascimento),
                 Telefone1 = clientPet.Telefone1,
                 WhatsApp = clientPet.WhatsApp,
                 Telefone2 = clientPet.Telefone2
@@ -31,8 +31,11 @@ namespace Pet.WebAPI.Services
 
             var response = await _clientPetRepository.Add(cliente);
 
-            if (response.Id == 0)
-                throw new Exception($"Erro ao adicionar novo cliente.");
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (response.Id == 0)
+            //    throw new Exception($"Erro ao adicionar novo cliente.");
 
 
             if (clientPet.Endereco != null)
@@ -58,26 +61,33 @@ namespace Pet.WebAPI.Services
             return _clientPetRepository.Get(response.Id);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _clientPetRepository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Cliente não encontrado pelo Id {id}.");
-            }
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
 
-            await _clientPetRepository.Delete(entry);
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
+            //}
+
+            _clientPetRepository.Delete(entry);
 
             if (entry.Endereco != null)
-                await _enderecoClienteRepository.Delete(entry.Endereco);
+                _enderecoClienteRepository.Delete(entry.Endereco);
         }
 
         public Cliente? Get(int id)
         {
             var cliente = _clientPetRepository.Get(id);
-            if (cliente is null)
-                throw new Exception($"Cliente não encontrado pelo Id {id}.");
+
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (cliente is null)
+            //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
 
             return cliente;
         }
@@ -87,8 +97,11 @@ namespace Pet.WebAPI.Services
         {
             var clientes = _clientPetRepository.GetAll();
 
-            if(clientes is null)
-                throw new Exception($"Não há clientes cadastrados na base.");
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if(clientes is null)
+            //    throw new Exception($"Não há clientes cadastrados na base.");
 
             return clientes;
 
@@ -98,10 +111,13 @@ namespace Pet.WebAPI.Services
         {
             var cliente = _clientPetRepository.Get(id);
 
-            if (cliente is null)
-            {
-                throw new Exception($"Cliente não encontrado pelo Id {id}.");
-            }
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (cliente is null)
+            //{
+            //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
+            //}
 
             cliente.NomeCompleto = clientPet.NomeCompleto;
             cliente.CPF = clientPet.CPF;

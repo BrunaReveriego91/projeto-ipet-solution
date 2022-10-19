@@ -57,7 +57,7 @@ namespace Pet.WebAPI.Controllers
         {
             try
             {
-                await _clientPetService.Delete(id);
+                _clientPetService.Delete(id);
             }
             catch (Exception)
             {

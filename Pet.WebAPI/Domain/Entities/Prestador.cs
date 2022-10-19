@@ -12,11 +12,11 @@ namespace Pet.WebAPI.Domain.Entities
         public string? NomeCompleto { get; set; } 
 
         [Required]
-        [StringLength(14)]
+        [StringLength(14)]  //345.999.125.44
         public string? CPF_CNPJ { get; set; }
 
         [Required]
-        [StringLength(11)]  // 11963981794
+        [StringLength(15)]  // 11-96398-1794
         public string Telefone { get; set; } = "";
 
         public bool WhatsApp { get; set; } = false;

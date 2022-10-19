@@ -2,8 +2,9 @@
 {
     public class NovoServicoPrestador
     {
-        public int PrestadorId { get; set; }
-        public int ServicoId { get; set; }
+        public int Prestador_Id { get; set; }
+        public int Servico_Id { get; set; }
         public bool Ativo { get; set; }
+        public float Valor { get; set; }
     }
 }

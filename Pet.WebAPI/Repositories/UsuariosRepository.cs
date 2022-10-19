@@ -37,23 +37,18 @@ namespace Pet.WebAPI.Repositories
                 CPF_CNPJ = novo_usuario.Dados_Prestador.CPF_CNPJ,
                 Telefone = novo_usuario.Dados_Prestador.Telefone,
                 WhatsApp = novo_usuario.Dados_Prestador.WhatsApp,
-                //Enderecos = new List<EnderecoPrestador>()
-                //{
-                //    {
-                //        new EnderecoPrestador()
-                //        {
-                //             Logradouro = usuario.Dados_Prestador.EnderecosPrestador[]
-                //        }
-                //    }
-                //}
             };
 
             await _prestadoresRepository.Add(prest);
 
             // Faz o vínculo.
-            var result = await _usuariosPrestadoresRepository.Add(new UsuarioPrestador(usu_adicionado.Id, prest.Id));
+            var usu_prest = new UsuarioPrestador(usu_adicionado.Id, prest.Id)
+            {
+                Prestador = prest,
+                Usuario = usuario
+            };
 
-            return result;
+            return await _usuariosPrestadoresRepository.Add(usu_prest);
         }
 
         public override Task<Usuario> Add(Usuario entity)

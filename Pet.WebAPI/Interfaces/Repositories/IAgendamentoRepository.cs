@@ -9,6 +9,7 @@ namespace Pet.WebAPI.Interfaces.Repositories
         Task<Agenda> Add(Agenda agendamento);
         Agenda? Get(int id);
         Task Update(Agenda agenda);
-        Task Delete(Agenda agenda);
+        //Task Delete(Agenda agenda);
+        void Delete(Agenda agenda);
     }
 }

@@ -18,6 +18,7 @@ namespace Pet.WebAPI.Controllers
         {
             _service = service;
         }
+
         [HttpDelete("{id}")]
         public IActionResult DeleteEnderecoCliente(int id)
         {
@@ -31,6 +32,7 @@ namespace Pet.WebAPI.Controllers
             }
             return Ok();
         }
+
         [HttpGet("{cliente_id}")]
         public ActionResult<List<EnderecoCliente>> GetEnderecosCliente(int cliente_id)
         {
@@ -45,6 +47,7 @@ namespace Pet.WebAPI.Controllers
             var result = await _service.Add(endereco);
             return CreatedAtAction(nameof(GetEnderecosCliente), new { cliente_id = result.ClienteId }, result);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEnderecoCliente(int id, AlterarEnderecoCliente endereco)
         {

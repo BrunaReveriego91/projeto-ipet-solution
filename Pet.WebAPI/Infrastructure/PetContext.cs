@@ -93,6 +93,7 @@ namespace Pet.Repository.Infrastructure
                     Descricao = e.ToString()
                 })
                 );
+
             modelBuilder
             .Entity<TipoPet>().HasData(
              Enum.GetValues(typeof(EnumTipoPet))
@@ -104,15 +105,25 @@ namespace Pet.Repository.Infrastructure
              })
              );
 
-            // Seed
-            //modelBuilder.Entity<Prestador>()
-            //    .HasData(new Prestador()
-            //    {
-            //        CPF_CNPJ = "12355589778",
-            //        NomeCompleto = "Fofinho Pet Shop",
-            //        Telefone = "11-94569-1235",
-            //        WhatsApp = true
-            //    });
+            // 1 Prestador pode ter muitos serviços porém não podem ser duplicados.
+            // Melhoria: Faz o chaveamento por Endereço Prestador. "O Endereço do Prestador pode ter N-Serviços não repetíveis"
+            modelBuilder
+               .Entity<ServicoPrestador>()
+               .HasIndex(e => new
+               {
+                   e.PrestadorId,
+                   e.ServicoId
+               }).IsUnique().HasDatabaseName("IDX_SERVPREST_PREST");
+
+            // Dentro de uma mesma Agenda não poder ter Servicos do Prestador repetidos para o mesmo Endereço do Prestador.
+            modelBuilder
+               .Entity<ServicoAgenda>()
+               .HasIndex(e => new
+               {
+                   e.AgendaId,
+                   e.ServicoPrestadorId,
+                   e.EnderecoPrestadorId
+               }).IsUnique().HasDatabaseName("IDX_AGENDA_SRVPREST_ENDPREST");
 
             modelBuilder
                .Entity<UsuarioPrestador>()
@@ -135,6 +146,12 @@ namespace Pet.Repository.Infrastructure
             modelBuilder
                .Entity<Agenda>()
                .HasOne(e => e.Prestador)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+               .Entity<ServicoAgenda>()
+               .HasOne(p => p.ServicoPrestador)
                .WithMany()
                .OnDelete(DeleteBehavior.NoAction);
         }

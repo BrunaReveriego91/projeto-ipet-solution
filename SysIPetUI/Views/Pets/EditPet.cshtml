@@ -1,79 +1,244 @@
-﻿@model SysIPetUI.Models.PetsViewModel
+﻿@model SysIPetUI.Models.PetsListViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    Layout = null;
+    ViewData["Title"] = "Editar Dados do Pet";
 }
 
-<h1>Edit</h1>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
 
-<h4>PetsViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditPet">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClienteId" />
-            <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <input asp-for="ClienteId" class="form-control" />
-                <span asp-validation-for="ClienteId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cliente" class="control-label"></label>
-                <input asp-for="Cliente" class="form-control" />
-                <span asp-validation-for="Cliente" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NomeCompleto" class="control-label"></label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TipoPet" class="control-label"></label>
-                <input asp-for="TipoPet" class="form-control" />
-                <span asp-validation-for="TipoPet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TamanhoPet" class="control-label"></label>
-                <input asp-for="TamanhoPet" class="form-control" />
-                <span asp-validation-for="TamanhoPet" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Peso" class="control-label"></label>
-                <input asp-for="Peso" class="form-control" />
-                <span asp-validation-for="Peso" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Genero" class="control-label"></label>
-                <input asp-for="Genero" class="form-control" />
-                <span asp-validation-for="Genero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cor" class="control-label"></label>
-                <input asp-for="Cor" class="form-control" />
-                <span asp-validation-for="Cor" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Raca" class="control-label"></label>
-                <input asp-for="Raca" class="form-control" />
-                <span asp-validation-for="Raca" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-warning text-lg">
+                    <i class="fas fa-user"></i> +
+                </b>
+
+                <b class="text-gray text-lg">
+                    @ViewData["Title"]
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="modal-body">
+
+        <div class="row">
+
+            <div class="col-md-auto">
+
+                <form class="form-group" asp-action="EditPet">
+
+                    <!--Campo oculto: Guada o ID - Expressão Lâmbida: (m=> m)-->
+                    @Html.HiddenFor(m => m.PetsViewModelInstancia.Id)
+                    @Html.HiddenFor(m => m.PetsViewModelInstancia.ClienteId)
+
+                    <!--Validação-->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="row">                        
+
+                        <!--Nome Completo-->
+                        <div class="col-md-12">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Nome do Pet:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite o nome do Pet.">
+
+                                <span asp-validation-for="PetsViewModelInstancia.NomeCompleto" class="text-danger"></span>
+                                <input asp-for="PetsViewModelInstancia.NomeCompleto" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--TipoPet-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Tipo Pet:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Escolha o Tipo Pet.">
+                                @Html.DropDownListFor(m => Model.PetsViewModelInstancia.TipoPet,
+                            new SelectList(Model.TipoPetList, "TipoPetId", "Descricao", Model.PetsViewModelInstancia.TipoPet),
+                            new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+                        <!--Data de Nascimento-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Data Nascimento:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite ou escolha a data de nascimento.">
+
+                                <span asp-validation-for="PetsViewModelInstancia.DataNascimento" class="text-danger"></span>
+                                <input asp-for="PetsViewModelInstancia.DataNascimento" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Tamanho Pet-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Tamanho Pet:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Escolha o Tamanho do Pet.">
+                                @Html.DropDownListFor(m => Model.PetsViewModelInstancia.TamanhoPet,
+                            new SelectList(Model.TamanhoPetList, "TamanhoPetId", "Descricao", Model.PetsViewModelInstancia.TamanhoPet),
+                            new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+                        <!--Genero Pet-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Genero Pet:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Escolha o Gênero do Pet.">
+                                @Html.DropDownListFor(m => Model.PetsViewModelInstancia.Genero,
+                            new SelectList(Model.GeneroPetList, "GeneroPetId", "Descricao", Model.PetsViewModelInstancia.Genero),
+                            new { @class = "form-control" })
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Peso-->
+                        <div class="col-md-2">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Peso:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite o Peso do Pet.">
+
+                                <span asp-validation-for="PetsViewModelInstancia.Peso" class="text-danger"></span>
+                                <input asp-for="PetsViewModelInstancia.Peso" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--Cor-->
+                        <div class="col-md-4">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Cor:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite a cor do Pet.">
+
+                                <span asp-validation-for="PetsViewModelInstancia.Cor" class="text-danger"></span>
+                                <input asp-for="PetsViewModelInstancia.Cor" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--Raça-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Raça:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite a raça do Pet.">
+
+                                <span asp-validation-for="PetsViewModelInstancia.Raca" class="text-danger"></span>
+                                <input asp-for="PetsViewModelInstancia.Raca" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <hr />
+                    <p>Você está prestes a Editar os Dados do Pet <b>@Html.DisplayFor(model => model.PetsViewModelInstancia.NomeCompleto).</b> Você Confirma a Edição?</p>
+
+                    <div class="modal-footer justify-content-between">
+
+                        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+                        <button id="buttonConfirmarVisible" type="submit" value="Save" class="btn btn-success">Confirmar</button>
+                        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+}
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+

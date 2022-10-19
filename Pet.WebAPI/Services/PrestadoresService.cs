@@ -20,12 +20,14 @@ namespace Pet.WebAPI.Services
             var prestador = new Prestador()
             {
                 NomeCompleto = novoPrestador.NomeCompleto,
-                CPF_CNPJ = novoPrestador.CPF_CNPJ
+                CPF_CNPJ = novoPrestador.CPF_CNPJ,
+                Telefone = novoPrestador.Telefone,
+                WhatsApp = novoPrestador.WhatsApp
             };
             return await _repository.Add(prestador);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _repository.Get(id);
 
@@ -34,7 +36,7 @@ namespace Pet.WebAPI.Services
                 throw new Exception($"Prestador não encontrado pelo Id {id}.");
             }
 
-            await _repository.Delete(entry);
+            _repository.Delete(entry);
         }
 
         public Prestador? Get(int id)
@@ -51,13 +53,18 @@ namespace Pet.WebAPI.Services
         {
             var entry = _repository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Prestador não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Prestador não encontrado pelo Id {id}.");
+            //}
 
             entry.NomeCompleto = entity.NomeCompleto;
             entry.CPF_CNPJ = entity.CPF_CNPJ;
+            entry.Telefone = entity.Telefone;
+            entry.WhatsApp = entity.WhatsApp;
 
             try
             {

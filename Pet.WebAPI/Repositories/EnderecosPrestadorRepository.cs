@@ -26,11 +26,9 @@ namespace Pet.WebAPI.Repositories
             return base.Update(entity);
         }
 
-        public override Task Delete(EnderecoPrestador entity)
-        {
-            return base.Delete(entity);
-        }
+        //public override Task Delete(EnderecoPrestador entity)
+        //{
+        //    return base.Delete(entity);
+        //}
     }
-
-
 }

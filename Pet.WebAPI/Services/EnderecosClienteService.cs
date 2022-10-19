@@ -35,11 +35,13 @@ namespace Pet.WebAPI.Services
             return await _enderecosClienteRepository.Add(endereco);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _enderecosClienteRepository.Get(id);
+
             if (entry == null) return;
-            await _enderecosClienteRepository.Delete(entry);
+
+            _enderecosClienteRepository.Delete(entry);
         }
 
         public List<EnderecoCliente>? GetAll(int cliente_id)
@@ -51,10 +53,13 @@ namespace Pet.WebAPI.Services
         {
             var entry = _enderecosClienteRepository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Endereco Cliente não encontrado pelo Id {id}.");
-            }
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Endereco Cliente não encontrado pelo Id {id}.");
+            //}
 
             entry.CEP = endereco.CEP;
             entry.UF = endereco.UF;

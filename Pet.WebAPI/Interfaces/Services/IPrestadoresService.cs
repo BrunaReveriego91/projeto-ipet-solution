@@ -8,7 +8,8 @@ namespace Pet.WebAPI.Interfaces.Services
         Task<Prestador> Add(NovoPrestador novoPrestador);
         Prestador? Get(int id);
         Task Update(int id, AlterarPrestador entity);
-        Task Delete(int id);
-        IEnumerable<Prestador> GetPrestadores();
+        //Task Delete(int id);
+        void Delete(int id);
+        IEnumerable<Prestador> GetPrestadores(); 
     }
 }

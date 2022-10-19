@@ -1,4 +1,5 @@
-﻿using Pet.WebAPI.Interfaces;
+﻿using Newtonsoft.Json;
+using Pet.WebAPI.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,6 +10,7 @@ namespace Pet.WebAPI.Domain.Entities
         [Key]
         public int Id { get; set; }
 
+        [JsonProperty(PropertyName = "Id_Prestador")]
         [ForeignKey(nameof(Prestador))]
         public int PrestadorId { get; set; }
 
@@ -40,11 +42,11 @@ namespace Pet.WebAPI.Domain.Entities
         public string? UF { get; set; } 
 
         [Required]
-        [StringLength(8)]
+        [StringLength(10)]
         public string? CEP { get; set; }
 
         [Required]
-        [StringLength(11)]  // 11963981794
+        [StringLength(15)]  // 11-96398-1794
         public string Telefone { get; set; } = "";
 
         public bool WhatsApp { get; set; } = false;

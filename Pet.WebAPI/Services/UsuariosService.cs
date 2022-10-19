@@ -16,8 +16,7 @@ namespace Pet.WebAPI.Services
 
         public async Task<UsuarioPrestador> AddUsuarioPrestador(NovoUsuarioPrestador usuario)
         {
-            var result = await _repository.AddUsuarioPrestador(usuario);
-            return result;
+            return await _repository.AddUsuarioPrestador(usuario);
         }
     }
 }

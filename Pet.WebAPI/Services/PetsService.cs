@@ -34,15 +34,19 @@ namespace Pet.WebAPI.Services
             return await _petsRepository.Add(pet);
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _petsRepository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Pet não encontrado pelo Id {id}.");
-            }
-            await _petsRepository.Delete(entry);
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Pet não encontrado pelo Id {id}.");
+            //}
+
+            _petsRepository.Delete(entry);
         }
 
         public Pets? Get(int id)
@@ -59,16 +63,26 @@ namespace Pet.WebAPI.Services
         {
             var entry = _petsRepository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Pet não encontrado pelo Id {id}.");
-            }
+            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Pet não encontrado pelo Id {id}.");
+            //}
 
             entry.NomeCompleto = pet.NomeCompleto;
             entry.ClienteId = pet.ClienteId;
             entry.DataNascimento = pet.DataNascimento;
             entry.Peso = pet.Peso;
-          
+
+            //Bruna, adicionei os demais campos pois o usuário pode precisar alterar
+            entry.TipoPet = pet.TipoPet;
+            entry.TamanhoPet = pet.TamanhoPet;
+            entry.Genero = pet.Genero;
+            entry.Cor = pet.Cor;
+            entry.Raca = pet.Raca;
+
 
             try
             {

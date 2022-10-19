@@ -10,10 +10,10 @@ namespace Pet.WebAPI.Repositories
         {
         }
 
-        public override Task<UsuarioPrestador> Add(UsuarioPrestador entity)
-        {
-            return base.Add(entity);
-        }
+        //public override Task<UsuarioPrestador> Add(UsuarioPrestador entity)
+        //{
+        //    return base.Add(entity);
+        //}
     }
 
 

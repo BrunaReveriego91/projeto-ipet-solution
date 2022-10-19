@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
 using Pet.WebAPI.Interfaces.Repositories;
@@ -9,21 +10,74 @@ namespace Pet.WebAPI.Services
     public class ServicosPrestadorService : IServicosPrestadorService
     {
         private readonly IServicosPrestadorRepository _repository;
-        public ServicosPrestadorService(IServicosPrestadorRepository repository)
+        private readonly IPrestadoresRepository _prestadoresRepository;
+        private readonly IServicosRepository _servicosRepository;
+
+        public ServicosPrestadorService(IServicosPrestadorRepository repository, IPrestadoresRepository prestadoresRepository, IServicosRepository servicosRepository)
         {
             _repository = repository;
+            _prestadoresRepository = prestadoresRepository;
+            _servicosRepository = servicosRepository;
         }
-        public async Task<ServicoPrestador> Add(NovoServicoPrestador servico)
+        public async Task<ServicoPrestador> Add(NovoServicoPrestador novoServico)
         {
-            var result = await _repository.Add(new ServicoPrestador(servico.PrestadorId, servico.ServicoId, servico.Ativo));
-            return result;
+            // Verifica se o Prestador existe
+            var prestador = _prestadoresRepository.Get(novoServico.Prestador_Id);
+
+            if (prestador is null)
+            {
+                throw new NullReferenceException($"Prestador não encontrado pelo Id {novoServico.Prestador_Id}.");
+            }
+
+            // Verifica se o Serviço existe
+            var servico = _servicosRepository.Get(novoServico.Servico_Id);
+
+            if (servico is null)
+            {
+                throw new NullReferenceException($"Serviço não encontrado pelo Id {novoServico.Servico_Id}.");
+            }
+
+            var srv_prest = new ServicoPrestador()
+            {
+                Prestador = prestador,
+                Servico = servico,
+                PrestadorId = novoServico.Prestador_Id,
+                ServicoId = novoServico.Servico_Id,
+                Ativo = novoServico.Ativo,
+                Valor = novoServico.Valor,
+            };
+
+            try
+            {
+                return await _repository.Add(srv_prest);
+            }
+            catch (SqlException sqlEx)
+            {
+                switch (sqlEx.ErrorCode)
+                {
+                    case 2601:
+                        throw new Exception($"Serviço Id {novoServico.Servico_Id} duplicado para o Prestador {novoServico.Prestador_Id}.");
+
+                    default:
+                        throw;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task Delete(int id)
+        public void Delete(int id)
         {
             var entry = _repository.Get(id);
-            if (entry is null) { return; }
-            await _repository.Delete(entry);
+
+            if (entry is null)
+            {
+                return;
+            }
+
+            _repository.Delete(entry);
         }
 
         public List<ServicoPrestador>? GetAllFromPrestador(int prestador_id)
@@ -36,12 +90,16 @@ namespace Pet.WebAPI.Services
         {
             var entry = _repository.Get(id);
 
-            if (entry is null)
-            {
-                throw new Exception($"Serviço não encontrado pelo Id {id}.");
-            }
+            //Eberton, comentei todos os Ifs com throw new Exception que vc adicionou
+            //Pode retornar nulo mesmo que redireciono para a pág de Create
+
+            //if (entry is null)
+            //{
+            //    throw new Exception($"Serviço não encontrado pelo Id {id}.");
+            //}
 
             entry.Ativo = servico.Ativo;
+            entry.Valor = servico.Valor;
 
             try
             {

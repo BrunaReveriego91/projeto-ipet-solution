@@ -9,6 +9,7 @@ namespace Pet.WebAPI.Interfaces.Repositories
         IEnumerable<EnderecoCliente> GetAll(Expression<Func<EnderecoCliente, bool>>? expression = null);
         EnderecoCliente? Get(int id);
         Task Update(EnderecoCliente entity);
-        Task Delete(EnderecoCliente entity);
+        //Task Delete(EnderecoCliente entity);
+        void Delete(EnderecoCliente entity);
     }
 }

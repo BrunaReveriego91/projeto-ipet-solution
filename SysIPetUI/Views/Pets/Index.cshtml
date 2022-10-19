@@ -1,89 +1,205 @@
-﻿@model IEnumerable<SysIPetUI.Models.PetsViewModel>
+﻿@model SysIPetUI.Models.PetsListViewModel
+@*@model IEnumerable<SysIPetUI.Models.PetsListViewModel>*@
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Casdastro Pet";
 }
 
-<h1>Index</h1>
+<div class="wrapper">
 
-<p>
-    <a asp-action="CreatePet">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TipoPet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TamanhoPet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Peso)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genero)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Raca)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ClienteId)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Cliente)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeCompleto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoPet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TamanhoPet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Peso)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genero)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataNascimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Raca)
-            </td>
-            <td>
-                <a asp-action="EditPet" asp-route-id="@item.ClienteId">Edit</a> |
-                <a asp-action="DetailsPet" asp-route-id="@item.ClienteId">Details</a> |
-                <a asp-action="DeletePet" asp-route-id="@item.ClienteId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-12 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-0">
+
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
+                                            <span class="brand-text font-weight-light">
+                                                <b class="text-gray"><i class="fas fa-tools"></i> @ViewData["Title"]</b>
+                                            </span>                                           
+
+                                        </h3>
+
+                                        <div class="card-tools">
+
+                                            <button type="button"
+                                                    class="btn btn-tool"
+                                                    data-toggle="ajax-modal"
+                                                    data-target="#modalIncluirPet"
+                                                    data-url="@Url.Action("CreatePet")">
+                                                <i class="fas fa-plus-circle" title="Adicionar Novo Pet"></i>
+                                            </button>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <table class="table table-hover">
+
+                                            <thead>
+
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Tipo Pet</th>
+                                                    <th>Tamanho Pet</th>
+                                                    <th>Peso</th>
+                                                    <th>Genero</th>
+                                                    <th>Cor</th>
+                                                    <th>Data Nascimento</th>
+                                                    <th>Raça</th>
+                                                    <th></th>
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody class="todo-list" data-widget="todo-list">
+                                                @foreach (var item in Model.PetsList)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.NomeCompleto)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TipoPetNome)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.TamanhoPetNome)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Peso)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.GeneroPetNome)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Cor)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.DataNascimento)
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Raca)
+                                                        </td>
+
+                                                        <td>
+
+                                                            <!-- Ferramentas gerais, como editar ou excluir-->
+                                                            <span class="tools">
+
+                                                                <button type="button"
+                                                                    class="btn btn-tool"
+                                                                    data-toggle="ajax-modal"
+                                                                    data-target="#modalEditarPet"
+                                                                    data-url="@Url.Action("EditPet", new { id = @item.Id })">
+                                                                    <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
+                                                                </button>
+
+                                                                <button type="button"
+                                                                    class="btn btn-tool"
+                                                                    data-toggle="ajax-modal"
+                                                                    data-target="#modalExcluirPet"
+                                                                    data-url="@Url.Action("ExcluirPet", new { id = @item.Id })">
+                                                                    <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                                </button>                                                                
+
+                                                            </span>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                    <!-- Gerenciar Conta -->
+                                    <div class="col-md-auto text-right">
+                                        <a asp-area="Identity" asp-page="/Account/Manage/Index"><p>Voltar para minha Conta</p></a>
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Incluir Pet -->
+<div id="modalIncluirPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Editar Pet -->
+<div id="modalEditarPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Excluir Pet -->
+<div id="modalExcluirPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>

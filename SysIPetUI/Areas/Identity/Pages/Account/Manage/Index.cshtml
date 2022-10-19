@@ -155,6 +155,7 @@
                                     </div>                                    
 
                                     <div class="col-md-auto">
+
                                         <span class="brand-text font-weight-light">
                                             <b class="text-red">*</b>
                                             <b class="text-gray">Pet:</b>
@@ -162,6 +163,15 @@
                                                 <i class="btn-tool fas fa-edit" title="Cadastre seu Pet aqui"></i>
                                             </a>
                                         </span>
+
+                                        @*<button type="button"
+                                            class="btn btn-tool"
+                                            data-toggle="ajax-modal"
+                                            data-target="#modalCadastroPet"
+                                            data-url="@Url.Action("CreatePet", "Pets")">
+                                            <i class="btn-tool fas fa-edit" title="Cadastre seu Pet aqui"></i>
+                                        </button>*@
+
                                     </div>                                  
 
                                 </div>
@@ -189,6 +199,19 @@
     </div>
 
 </div>
+
+<!-- Incluir Pet -->
+@*<div id="modalCadastroPet" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>*@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

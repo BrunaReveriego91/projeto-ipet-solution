@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarAgendamento">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAA=</HashCode>
+      <FileName>Domain\Model\AlterarAgendamento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarCliente">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAACAAAIAAAAAAAAAAJAAEAA=</HashCode>
+      <FileName>Domain\Model\AlterarCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarEnderecoCliente">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAABAACIAAAAAgACAAAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>Domain\Model\AlterarEnderecoCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarEnderecoPrestador">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAABAACIAAAAAgACAAAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>Domain\Model\AlterarEnderecoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarPet">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAABAAAAAAAAIAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain\Model\AlterarPet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarPrestador">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
+      <FileName>Domain\Model\AlterarPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarServico">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Domain\Model\AlterarServico.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.AlterarServicoPrestador">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Model\AlterarServicoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoAgendamento">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Pet.WebAPI.Domain.Model.NovoAgendamento.Servico_Agendamento" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Domain\Model\NovoAgendamento.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAEAAAAAAAAAAAAAAAAAAAAAABAAAAAAACAA=</HashCode>
+      <FileName>Domain\Model\NovoAgendamento.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoCliente">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAACAAAIAAAAAAAAAAJAAEAA=</HashCode>
+      <FileName>Domain\Model\NovoCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoEnderecoCliente">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAABAACIAABAAgACAAAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>Domain\Model\NovoEnderecoCliente.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoEnderecoPrestador">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CQAAAAAAAABAACIAACAAgACAAAAAAAQAAAAAAAABAAA=</HashCode>
+      <FileName>Domain\Model\NovoEnderecoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoPet">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAAEAAADAAAAIAAAMAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Domain\Model\NovoPet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoPrestador">
+    <Position X="2.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
+      <FileName>Domain\Model\NovoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoServico">
+    <Position X="4" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAEAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Domain\Model\NovoServico.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoServicoPrestador">
+    <Position X="9.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAACEAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Model\NovoServicoPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pet.WebAPI.Domain.Model.NovoUsuarioPrestador">
+    <Position X="9.25" Y="3.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Pet.WebAPI.Domain.Model.NovoUsuarioPrestador.Info_Prestador" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Domain\Model\NovoUsuarioPrestador.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAACAEAAAAAAAAAA=</HashCode>
+      <FileName>Domain\Model\NovoUsuarioPrestador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -28,14 +28,10 @@ namespace Pet.WebAPI.Repositories
             return cliente;
         }
 
-
-
-
-        public override async Task Delete(Cliente cliente)
-        {
-            await base.Delete(cliente);
-        }
-
+        //public override async Task Delete(Cliente cliente)
+        //{
+        //    await base.Delete(cliente);
+        //}
 
         public override IEnumerable<Cliente> GetAll()
         {
