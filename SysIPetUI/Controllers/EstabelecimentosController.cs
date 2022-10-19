@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SysIPetUI.Models;
+using System.Security.Claims;
 using static SysIPetUI.Models.EstabelecimentoViewModel;
 
 namespace SysIPetUI.Controllers
@@ -15,6 +16,8 @@ namespace SysIPetUI.Controllers
 
             try
             {
+                var userName = User.GetUserName();
+
                 EstabelecimentosLists model = new EstabelecimentosLists();
                 var locations = new List<EstabelecimentoViewModel>()
                 {

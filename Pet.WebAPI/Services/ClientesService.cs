@@ -92,6 +92,11 @@ namespace Pet.WebAPI.Services
             return cliente;
         }
 
+        public Cliente? Get(string userName)
+        {
+            var cliente = _clientPetRepository.GetByUserName(userName);
+            return cliente;
+        }
 
         public IEnumerable<Cliente> GetClientes()
         {
