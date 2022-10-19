@@ -20,7 +20,8 @@ namespace Pet.WebAPI.Controllers
         [HttpGet("{userId}")]
         public IActionResult GetPrestadoresByUserLocation(int userId)
         {
-            return Ok(_service.GetPrestadoresByUserLocation(userId));
+            return Ok(_service.ProcuraGeolocalizacaoPrestador(null));
+            //return Ok(_service.GetPrestadoresByUserLocation(userId));
         }
 
     }

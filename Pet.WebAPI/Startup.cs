@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Pet.Repository.Infrastructure;
+using Pet.WebAPI.Domain.Settings;
 using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 using Pet.WebAPI.Repositories;
@@ -25,7 +26,7 @@ namespace Pet.WebAPI
             services.AddSwaggerGen();
 
             //services.Configure<AzureSqlConnection>(options => Configuration.GetSection("AzureSQLConnection").Bind(options)).ToString();
-
+            services.Configure<EarthAPIConnection>(options => Configuration.GetSection("EarthAPIConnection").Bind(options));
             services.AddDbContext<PetContext>(options =>
                 options.UseSqlServer(Configuration.GetSection("AzureSQLConnection")["DefaultConnection"]));
 

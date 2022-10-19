@@ -1,16 +1,25 @@
-﻿using Pet.WebAPI.Domain.Entities;
+﻿using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Pet.WebAPI.Domain.Entities;
+using Pet.WebAPI.Domain.Entities.Maps;
+using Pet.WebAPI.Domain.Settings;
 using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
+using System.Configuration;
+using System.Dynamic;
 
 namespace Pet.WebAPI.Services
 {
     public class MapsService : IMapsService
     {
         private IMapsRepository _mapsRepository;
+        private readonly EarthAPIConnection _apiConnection;
 
-        public MapsService(IMapsRepository mapsRepository)
+        public MapsService(IMapsRepository mapsRepository, IOptions<EarthAPIConnection> apiConnection)
         {
             _mapsRepository = mapsRepository;
+            _apiConnection = apiConnection.Value;
         }
 
         public IEnumerable<Maps> GetPrestadoresByUserLocation(int userId)
@@ -32,13 +41,14 @@ namespace Pet.WebAPI.Services
             return null;
         }
 
-        private async Task ProcuraGeolocalizacaoPrestador(EnderecoPrestador enderecoPrestador)
+        public async Task ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)
         {
             //Maps map = new();
 
-            var key = "Aps_5kSQcUT8FGgG-RMhSjc71DfwtZEee7IYbz__tU1BuLRh8dyDwj2oj72aQUW_";
-            var postal_code = enderecoPrestador.CEP;
-            var address = string.Concat(enderecoPrestador.Logradouro, ' ', enderecoPrestador.Numero);
+            var key = _apiConnection.Key;
+            //var postal_code = enderecoPrestador.CEP;
+            var postal_code = "04222-060";
+            var address = string.Concat("Rua Violantino dos Santos", ' ', "48");
 
             var url = "http://dev.virtualearth.net/REST/v1/Locations?postalCode=" + postal_code + "&key=" + key + "&addressLine=" + address;
 
@@ -46,7 +56,19 @@ namespace Pet.WebAPI.Services
             {
                 using (var response = await httpClient.GetAsync(url))
                 {
+                  
                     string responseBody = await response.Content.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(responseBody))
+                    {
+                        Maps maps = JsonConvert.DeserializeObject<Maps>(responseBody);
+                        var estabelecimentos = new List<Estabelecimento>();
+                        foreach(var item in maps.resourceSets.ToList())
+                        {
+                            var teste = item.resources.FirstOrDefault().point.coordinates[0];
+                            coordinates.Add(teste);
+                        }
+                    }
+                   
                     //cliente = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                 }
             }
