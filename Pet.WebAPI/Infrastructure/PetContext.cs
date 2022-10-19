@@ -115,15 +115,15 @@ namespace Pet.Repository.Infrastructure
                    e.ServicoId
                }).IsUnique().HasDatabaseName("IDX_SERVPREST_PREST");
 
-            // Dentro de uma mesma Agenda não podem ter ServicoAgenda repetidos para o mesmo Endereço do Prestador.
+            // Dentro de uma mesma Agenda não poder ter Servicos do Prestador repetidos para o mesmo Endereço do Prestador.
             modelBuilder
                .Entity<ServicoAgenda>()
                .HasIndex(e => new
                {
                    e.AgendaId,
-                   e.ServicoId,
+                   e.ServicoPrestadorId,
                    e.EnderecoPrestadorId
-               }).IsUnique().HasDatabaseName("IDX_AGENDA_SRVAGENDA_ENDPREST");
+               }).IsUnique().HasDatabaseName("IDX_AGENDA_SRVPREST_ENDPREST");
 
             modelBuilder
                .Entity<UsuarioPrestador>()
@@ -146,6 +146,12 @@ namespace Pet.Repository.Infrastructure
             modelBuilder
                .Entity<Agenda>()
                .HasOne(e => e.Prestador)
+               .WithMany()
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder
+               .Entity<ServicoAgenda>()
+               .HasOne(p => p.ServicoPrestador)
                .WithMany()
                .OnDelete(DeleteBehavior.NoAction);
         }

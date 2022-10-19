@@ -7,38 +7,38 @@ namespace Pet.WebAPI.Repositories
     public class ServicosAgendaRepository : BaseRepository<ServicoAgenda, PetContext>, IServicosAgendaRepository
     {
         private readonly IEnderecosPrestadorRepository _enderecosPrestadorRepository;
-        private readonly IServicosRepository _servicosRepository;
+        private readonly IServicosPrestadorRepository _servicosPrestadorRepository;
 
         public ServicosAgendaRepository(PetContext context,
             IEnderecosPrestadorRepository enderecosPrestadorRepository,
-            IServicosRepository servicosRepository) : base(context)
+            IServicosPrestadorRepository servicosPrestadorRepository) : base(context)
         {
             _enderecosPrestadorRepository = enderecosPrestadorRepository;
-            _servicosRepository = servicosRepository;
+            _servicosPrestadorRepository = servicosPrestadorRepository;
         }
 
-        public Task<ServicoAgenda> Add(int id_agenda, int id_servico, int id_endereco_prestador, string mensagem_cliente)
+        public Task<ServicoAgenda> Add(int agenda_id, int servico_prestador_id, int endereco_prestador_id, string mensagem_cliente)
         {
-            var servico = _servicosRepository.Get(id_servico);
+            var servico = _servicosPrestadorRepository.Get(servico_prestador_id);
             if (servico is null)
             {
-                throw new NullReferenceException($"Servico não encontrado pelo Id {id_servico}.");
+                throw new NullReferenceException($"Servico do Prestador não encontrado pelo Id {servico_prestador_id}.");
             }
 
-            var enderecoPrestador = _enderecosPrestadorRepository.Get(id_endereco_prestador);
+            var enderecoPrestador = _enderecosPrestadorRepository.Get(endereco_prestador_id);
             if (enderecoPrestador is null)
             {
-                throw new NullReferenceException($"Endereco_Prestador não encontrado pelo Id {id_endereco_prestador}.");
+                throw new NullReferenceException($"Endereco_Prestador não encontrado pelo Id {endereco_prestador_id}.");
             }
 
             var servico_agendamento = new ServicoAgenda()
             {
-                AgendaId = id_agenda,
-                ServicoId = id_servico,
-                EnderecoPrestadorId = id_endereco_prestador,
+                AgendaId = agenda_id,
+                ServicoPrestadorId = servico_prestador_id,
+                EnderecoPrestadorId = endereco_prestador_id,
                 Mensagem_Cliente = mensagem_cliente,
                 EnderecoPrestador = enderecoPrestador,
-                Servico = servico
+                ServicoPrestador = servico
             };
 
             return base.Add(servico_agendamento);

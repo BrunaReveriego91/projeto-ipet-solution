@@ -14,12 +14,19 @@ namespace Pet.WebAPI.Domain.Entities
         [ForeignKey(nameof(Agenda))]
         public int AgendaId { get; set; }
 
-        [JsonProperty(PropertyName = "Id_Servico")]
-        public int ServicoId { get; set; }
+        //[JsonProperty(PropertyName = "Id_Servico")]
+        //public int ServicoId { get; set; }
+
+        //[JsonIgnore]
+        //[ForeignKey("ServicoId")]
+        //public Servico Servico { get; set; }
+
+        [JsonProperty(PropertyName = "Id_Servico_Prestador")]
+        public int ServicoPrestadorId { get; set; }
 
         [JsonIgnore]
-        [ForeignKey("ServicoId")]
-        public Servico Servico { get; set; }
+        [ForeignKey("ServicoPrestadorId")]
+        public ServicoPrestador ServicoPrestador { get; set; }
 
         [JsonProperty(PropertyName = "Id_Endereco_Prestador")]
         public int EnderecoPrestadorId { get; set; }
@@ -41,6 +48,12 @@ namespace Pet.WebAPI.Domain.Entities
         public string Mensagem_Profissional_Executante { get; set; } = "";
 
         /// <summary>
+        /// Valor do Desconto no Serviço Prestador
+        /// </summary>
+        [Column(TypeName = "money")]
+        public float Valor_Desconto { get; set; }
+
+        /// <summary>
         /// Data do Cancelamento do Serviço
         /// </summary>
         public DateTime? Data_Cancelamento { get; set; }
@@ -54,7 +67,7 @@ namespace Pet.WebAPI.Domain.Entities
 
         public ServicoAgenda()
         {
-            Servico = new Servico();
+            ServicoPrestador = new ServicoPrestador();
             EnderecoPrestador = new EnderecoPrestador();
         }
     }

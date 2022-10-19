@@ -33,7 +33,7 @@ namespace Pet.WebAPI.Services
 
         public async Task<Agenda> Add(NovoAgendamento novoAgendamento)
         {
-            // Validação
+            // Valida o cliente.
             var cliente = _clientesRepository.Get(novoAgendamento.Id_Cliente);
 
             if (cliente is null)
@@ -41,21 +41,23 @@ namespace Pet.WebAPI.Services
                 throw new NullReferenceException($"Cliente não encontrado pelo Id {novoAgendamento.Id_Cliente}.");
             }
 
+            // Valida o prestador.
             var prestador = _prestadoresRepository.Get(novoAgendamento.Id_Prestador);
             if (prestador is null)
             {
                 throw new NullReferenceException($"Prestador não encontrado pelo Id {novoAgendamento.Id_Prestador}.");
             }
 
-            // Valida
             novoAgendamento.Servicos.ForEach(srv =>
             {
+                // Valida o serviço do prestador.
                 var servico = _servicosPrestadorRepository.Get(srv.Id_Servico_Prestador);
                 if (servico is null)
                 {
                     throw new NullReferenceException($"Servico do Prestador não encontrado pelo Id {srv.Id_Servico_Prestador}.");
                 }
 
+                // Valida o endereço do prestador.
                 var enderecoPrestador = _enderecosPrestadorRepository.Get(srv.Id_Endereco_Prestador);
                 if (enderecoPrestador is null)
                 {
@@ -82,7 +84,7 @@ namespace Pet.WebAPI.Services
                     var srv_agenda = _servicosAgendaRepository.Add(result_agenda.Id, srv.Id_Servico_Prestador, srv.Id_Endereco_Prestador, srv.Mensagem_Cliente);
 
                     var srv_result = srv_agenda.Result;
-                    result_agenda.Servicos.Add(srv_result);
+                    //result_agenda.Servicos.Add(srv_result);
                 });
             }
 
