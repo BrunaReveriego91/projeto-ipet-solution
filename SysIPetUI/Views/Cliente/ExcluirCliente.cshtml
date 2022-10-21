@@ -80,16 +80,7 @@
                                 </span>
                             </label>
                             @Html.DisplayFor(model => model.Telefone1)
-                        </li>
-
-                        <li>
-                            <label class="control-label">
-                                <span class="brand-text">
-                                    <b class="text-blue">WhatsApp:</b>
-                                </span>
-                            </label>
-                            @Html.DisplayFor(model => model.WhatsApp)
-                        </li>
+                        </li>                        
 
                         <li>
                             <label class="control-label">
@@ -98,7 +89,79 @@
                                 </span>
                             </label>
                             @Html.DisplayFor(model => model.Telefone2)
-                        </li>                        
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Logradouro:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Logradouro)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Número:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Numero)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Complemento:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Complemento)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Bairro:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Bairro)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Cidade:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Cidade)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">UF:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.UF)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">CEP:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.CEP)
+                        </li>
+
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Ponto de Referência:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(model => model.Endereco.Referencia)
+                        </li>
 
                     </ul>
 
