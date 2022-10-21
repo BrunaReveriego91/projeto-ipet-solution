@@ -18,6 +18,8 @@ namespace Pet.WebAPI.Domain.Model
         //    Endereco = endereco;
         //}
 
+        public string? IdUsuario { get; set; }
+
         public string? NomeCompleto { get; set; }
         public string? CPF { get; set; }
         public string DataNascimento { get; set; } = "";
