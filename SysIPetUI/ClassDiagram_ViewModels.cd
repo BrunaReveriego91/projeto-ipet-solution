@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="SysIPetUI.Models.AgendamentoViewModel">
-    <Position X="4" Y="4.25" Width="1.5" />
+    <Position X="2.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACEAAAAAAEAAAAADCAAAAAAAAAAAAAAAAQQAAAAAA=</HashCode>
       <FileName>Models\AgendamentoViewModel.cs</FileName>
@@ -29,30 +29,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SysIPetUI.Models.ErrorViewModel">
-    <Position X="9.25" Y="2.25" Width="1.5" />
+    <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAIAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\ErrorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SysIPetUI.Models.GeneroPetList">
-    <Position X="5.75" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACAAAAAAABAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\GeneroPetList.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SysIPetUI.Models.PetsDropdownListViewModel">
-    <Position X="7.5" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQCAAAAAABAAAAAABAAAAAAAAMAIAAAAAAAAKQAAAA=</HashCode>
-      <FileName>Models\PetsDropdownListViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="SysIPetUI.Models.PetsViewModel">
     <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQCAAAAAABAAEAAADAAAAAAAAMAAAAAAAAAAIAAAAA=</HashCode>
+      <HashCode>AAQCAAAAAABAAEAAADAAAAIAAAMAAAAAAAAAAIAAAAA=</HashCode>
       <FileName>Models\PetsViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -63,25 +49,46 @@
       <FileName>Models\PrestadorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SysIPetUI.Models.TamanhoPetList">
+  <Class Name="SysIPetUI.Models.TamanhoPet">
     <Position X="7.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\TamanhoPetList.cs</FileName>
+      <FileName>Models\TamanhoPet.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SysIPetUI.Models.TipoPetList">
+  <Class Name="SysIPetUI.Models.TipoPet">
     <Position X="5.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Models\TipoPetList.cs</FileName>
+      <FileName>Models\TipoPet.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SysIPetUI.Models.Usuarios">
-    <Position X="9.25" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAACAAAAAAAAAgAAAAAA=</HashCode>
       <FileName>Models\Usuarios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Models.GeneroPet">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAABAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\GeneroPet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Models.PetsListItem">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAQAABAAEAAABAAAAAAACMAIAAAAAAABIAAAAg=</HashCode>
+      <FileName>Models\PetsListItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SysIPetUI.Models.PetsListViewModel">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAgAAAIAAAAAAAAAAAAAAAAIAAAAAAAACQAAAA=</HashCode>
+      <FileName>Models\PetsListViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -1,56 +1,376 @@
 ﻿@model SysIPetUI.Models.ClienteViewModel
 
 @{
-    ViewData["Title"] = "CadastroCliente";
+    ViewData["Title"] = "Cadastro Dados Pessoais";
 }
 
-<h1>CadastroCliente</h1>
+<div class="wrapper">
 
-<h4>ClienteViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CadastroCliente">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NomeCompleto" class="control-label"></label>
-                <input asp-for="NomeCompleto" class="form-control" />
-                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-7 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-0">
+
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
+                                            <span class="brand-text font-weight-light">
+                                                <b class="text-gray"><i class="fas fa-tools"></i> @ViewData["Title"]</b>
+                                            </span>                                           
+
+                                        </h3>                                        
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form asp-action="CadastroCliente" class="form-group">
+
+                                            <!--Validação-->
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                            <div class="row">
+
+                                                <!--Nome Completo-->
+                                                <div class="col-md-12">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Nome Completo:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                                        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                                                        <input asp-for="NomeCompleto" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <!--CPF-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">CPF:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite um CPF válido.">
+
+                                                        <span asp-validation-for="CPF" class="text-danger"></span>
+                                                        <input asp-for="CPF" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Data de Nascimento-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Data Nascimento:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite ou escolha sua data de nascimento.">
+
+                                                        <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                                                        <input asp-for="DataNascimento" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <!--Telefone 1-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Telefone 1:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu Telefone n° 01.">
+
+                                                        <span asp-validation-for="Telefone1" class="text-danger"></span>
+                                                        <input asp-for="Telefone1" class="form-control" />
+
+                                                    </div>
+
+                                                    <div class="col-md-auto">
+
+                                                        <div class="form-check" title="Marque se esse Telefone for WhatsApp">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" asp-for="WhatsApp" /> Esse Telefone é WhatsApp?
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Telefone 2-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Telefone 2:</b>                                                            
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu Telefone n° 02.">
+
+                                                        <span asp-validation-for="Telefone2" class="text-danger"></span>
+                                                        <input asp-for="Telefone2" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!--Endereço-->
+                                            <div class="row">
+
+                                                <!--Logradouro-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Logradouro:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite o Logradouro.">
+
+                                                        <span asp-validation-for="Endereco.Logradouro" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Logradouro" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Número-->
+                                                <div class="col-md-3">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Número:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite o Numero do Logradouro.">
+
+                                                        <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Numero" class="form-control" />
+
+                                                    </div>
+
+                                                    <div class="col-md-auto">
+
+                                                        <div class="form-check" title="Marque se esse endereço for sem número.">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" asp-for="Endereco.SemNumero" /> Sem número
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Complemento-->
+                                                <div class="col-md-3">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Complemento:</b>                                                            
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite o Complemento.">
+
+                                                        <span asp-validation-for="Endereco.Complemento" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Complemento" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <!--Bairro-->
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Bairro:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                                        <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Bairro" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--Cidade-->
+                                                <div class="col-md-4">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Cidade:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                                        <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Cidade" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--UF-->
+                                                <div class="col-md-2">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">UF:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                                        <span asp-validation-for="Endereco.UF" class="text-danger"></span>
+                                                        <input asp-for="Endereco.UF" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--CEP-->
+                                                <div class="col-md-2">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">CEP:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                                        <span asp-validation-for="Endereco.CEP" class="text-danger"></span>
+                                                        <input asp-for="Endereco.CEP" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <!--Ponto de Referencia-->
+                                                <div class="col-md-12">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Ponto de Referência:</b>                                                            
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite uma Referencia.">
+
+                                                        <span asp-validation-for="Endereco.Referencia" class="text-danger"></span>
+                                                        <input asp-for="Endereco.Referencia" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            @*<div class="form-group">
+                                            <input type="submit" value="Create" class="btn btn-primary" />
+                                            </div>*@
+
+                                            <hr />
+                                            <p>Você está prestes a Incluir seus Dados Pessoais. Você Confirma a inclusão?</p>                                            
+
+                                            <div class="modal-footer justify-content-between">
+
+                                                <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                                <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+                                                <button id="buttonConfirmarVisible" type="submit" value="Create" class="btn btn-success">Confirmar</button>
+                                                <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+                                            </div>
+
+                                        </form>
+
+                                    </div>                                    
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
             </div>
-            <div class="form-group">
-                <label asp-for="CPF" class="control-label"></label>
-                <input asp-for="CPF" class="form-control" />
-                <span asp-validation-for="CPF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataNascimento" class="control-label"></label>
-                <input asp-for="DataNascimento" class="form-control" />
-                <span asp-validation-for="DataNascimento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone1" class="control-label"></label>
-                <input asp-for="Telefone1" class="form-control" />
-                <span asp-validation-for="Telefone1" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="WhatsApp" /> @Html.DisplayNameFor(model => model.WhatsApp)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Telefone2" class="control-label"></label>
-                <input asp-for="Telefone2" class="form-control" />
-                <span asp-validation-for="Telefone2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
+
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
