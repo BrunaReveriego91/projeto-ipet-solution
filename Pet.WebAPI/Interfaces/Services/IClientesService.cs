@@ -10,6 +10,7 @@ namespace Pet.WebAPI.Interfaces.Services
         //Task Delete(int id);
         void Delete(int id);
         Cliente? Get(int id);
+        Cliente? GetByUserId(string idUsuario);
         IEnumerable<Cliente> GetClientes();
     }
 }

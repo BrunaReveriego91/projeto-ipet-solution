@@ -59,6 +59,24 @@ namespace Pet.WebAPI.Repositories
             return clienteList;
         }
 
+        public Cliente? GetByUserId(string idUsuario)
+        {
+            var cliente = (from p in DataContext.Clientes
+                           where p.IdUsuario == idUsuario
+                           select p).FirstOrDefault();
+
+            if (cliente == null)
+                return null;
+
+            var enderecoCliente = (from e in DataContext.EnderecosClientes
+                                   where e.ClienteId == cliente.Id
+                                   select e).FirstOrDefault();
+
+            cliente.Endereco = enderecoCliente;
+
+            return cliente;
+        }
+
         public override Task Update(Cliente cliente)
         {
             return base.Update(cliente);

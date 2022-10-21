@@ -66,5 +66,11 @@ namespace Pet.WebAPI.Controllers
 
             return Ok();
         }
+
+        [HttpGet("idUsuario")]
+        public IActionResult GetClienteByUserId(string idUsuario)
+        {
+            return Ok(_clientPetService.GetByUserId(idUsuario));
+        }
     }
 }

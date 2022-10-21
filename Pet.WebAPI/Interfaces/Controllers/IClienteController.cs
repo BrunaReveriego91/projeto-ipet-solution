@@ -7,6 +7,7 @@ namespace Pet.WebAPI.Interfaces.Controllers
     public interface IClienteController
     {
         IActionResult GetCliente(int id);
+        IActionResult GetClienteByUserId(string idUsuario);
         Task<IActionResult> PostCliente([FromBody] NovoCliente cliente);
         Task<IActionResult> PutCliente(int id, AlterarCliente cliente);
         Task<IActionResult> DeleteCliente(int id);
