@@ -9,7 +9,12 @@ namespace Pet.WebAPI.Interfaces.Controllers
         Task<IActionResult> PostAgendamento(NovoAgendamento novoAgendamento);
         Task<IActionResult> PutAgendamento(int id, AlterarAgendamento alterarAgendamento);
         IActionResult DeleteAgendamento(int id);
-        //ActionResult<List<ServicoAgenda>> GetServicosAgenda(int id);
         ActionResult<Agenda?> GetAgendamento(int id);
+
+        #region "Serviço Agenda"
+        Task<IActionResult> PutServicoAgendamento(AlterarServicoAgenda servicoAgenda, int id_agenda, int id_servico);
+        Task<IActionResult> PostConcluirServicoAgendamento(ConcluirServicoAgenda servicoAgenda, int id_agenda, int id_servico);
+        Task<IActionResult> CancelarServicoAgendamento(int id_agenda, int id_servico);
+        #endregion
     }
 }

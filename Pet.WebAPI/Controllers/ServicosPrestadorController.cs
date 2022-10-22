@@ -26,9 +26,9 @@ namespace Pet.WebAPI.Controllers
             {
                 _service.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                return Problem(ex.Message);
             }
             return Ok();
         }
@@ -49,18 +49,13 @@ namespace Pet.WebAPI.Controllers
                 var result = await _service.Add(servico);
                 return CreatedAtAction(nameof(GetServicosPrestador), new { prestador_id = result.PrestadorId }, result);
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException ex)
             {
-                return NotFound();
+                return Problem(detail: ex.Message, statusCode: 404);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return new StatusCodeResult(StatusCodes.Status500InternalServerError);
-                //var retorno = new
-                //{
-                //    teste = ""
-                //};
-                //return new JsonResult(retorno);
+                return Problem(ex.Message);
             }
         }
 

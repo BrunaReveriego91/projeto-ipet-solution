@@ -25,9 +25,9 @@ namespace Pet.WebAPI.Controllers
             {
                 _service.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                return Problem(ex.Message);
             }
             return Ok();
         }
@@ -35,13 +35,19 @@ namespace Pet.WebAPI.Controllers
         [HttpGet]
         public IActionResult GetAllPrestadores()
         {
-            return Ok(_service.GetPrestadores());
+            return Ok(_service.GetAllPrestadores());
         }
 
         [HttpGet("{id}")]
         public IActionResult GetPrestador(int id)
         {
             return Ok(_service.Get(id));
+        }
+
+        [HttpGet("{prestador_id}/Agendamentos")]
+        public IActionResult GetAgendamentosPrestador(int prestador_id)
+        {
+            return Ok(_service.GetAgendamentosPrestador(prestador_id));
         }
 
         [HttpPost]

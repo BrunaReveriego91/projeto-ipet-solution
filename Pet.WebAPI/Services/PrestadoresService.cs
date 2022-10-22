@@ -44,7 +44,12 @@ namespace Pet.WebAPI.Services
             return _repository.Get(id);
         }
 
-        public IEnumerable<Prestador> GetPrestadores()
+        public IEnumerable<Agenda> GetAgendamentosPrestador(int prestador_id)
+        {
+            return _repository.GetAgendamentosPrestador(prestador_id);
+        }
+
+        public IEnumerable<Prestador> GetAllPrestadores()
         {
             return _repository.GetAll();
         }

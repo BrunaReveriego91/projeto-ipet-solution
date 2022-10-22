@@ -7,11 +7,13 @@ namespace Pet.WebAPI.Interfaces.Services
     {
         Task<EnderecoCliente> Add(NovoEnderecoCliente novoEndereco);
 
-        List<EnderecoCliente>? GetAll(int cliente_id);
+        //List<EnderecoCliente>? GetAll(int cliente_id);
+
+        EnderecoCliente Get(int id);
 
         Task Update(int id, AlterarEnderecoCliente endereco);
 
         //Task Delete(int id);
-        void Delete(int id);
+        //void Delete(int id);
     }
 }

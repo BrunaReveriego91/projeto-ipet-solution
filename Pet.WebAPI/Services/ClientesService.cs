@@ -49,7 +49,6 @@ namespace Pet.WebAPI.Services
                     Cidade = clientPet.Endereco.Cidade,
                     SemNumero = clientPet.Endereco.SemNumero,
                     Complemento = clientPet.Endereco.Complemento,
-                    Data_Cadastro = clientPet.Endereco.Data_Cadastro,
                     Numero = clientPet.Endereco.Numero,
                     Referencia = clientPet.Endereco.Referencia,
                     UF = clientPet.Endereco.UF
@@ -63,20 +62,28 @@ namespace Pet.WebAPI.Services
 
         public void Delete(int id)
         {
-            var entry = _clientPetRepository.Get(id);
+            try
+            {
+                var entry = _clientPetRepository.Get(id);
 
-            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
-            //Pode retornar nulo mesmo que redireciono para a pág de Create
+                //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+                //Pode retornar nulo mesmo que redireciono para a pág de Create
 
-            //if (entry is null)
-            //{
-            //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
-            //}
+                //if (entry is null)
+                //{
+                //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
+                //}
 
-            _clientPetRepository.Delete(entry);
+                _clientPetRepository.Delete(entry);
 
-            if (entry.Endereco != null)
-                _enderecoClienteRepository.Delete(entry.Endereco);
+                // Comentado, pois quando apaga o cliente o SQL Server já apaga da tabela filha.
+                //if (entry.Endereco != null)
+                //    _enderecoClienteRepository.Delete(entry.Endereco);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Cliente? Get(int id)
@@ -129,45 +136,8 @@ namespace Pet.WebAPI.Services
             try
             {
                 await _clientPetRepository.Update(cliente);
-
-                if (cliente.Endereco != null)
-                {
-                    var endereco = _enderecoClienteRepository.Get(cliente.Endereco.Id);
-
-                    endereco.Logradouro = clientPet.Endereco.Logradouro;
-                    endereco.Bairro = clientPet.Endereco.Bairro;
-                    endereco.CEP = clientPet.Endereco.CEP;
-                    endereco.Cidade = clientPet.Endereco.Cidade;
-                    endereco.SemNumero = clientPet.Endereco.SemNumero;
-                    endereco.Complemento = clientPet.Endereco.Complemento;
-                    endereco.Numero = clientPet.Endereco.Numero;
-                    endereco.Referencia = clientPet.Endereco.Referencia;
-                    endereco.UF = clientPet.Endereco.UF;
-
-                    await _enderecoClienteRepository.Update(endereco);
-                }
-                else
-                {
-                    var enderecoCliente = new EnderecoCliente()
-                    {
-                        Logradouro = clientPet.Endereco.Logradouro,
-                        Bairro = clientPet.Endereco.Bairro,
-                        CEP = clientPet.Endereco.CEP,
-                        Cidade = clientPet.Endereco.Cidade,
-                        SemNumero = clientPet.Endereco.SemNumero,
-                        Complemento = clientPet.Endereco.Complemento,
-                        Numero = clientPet.Endereco.Numero,
-                        Referencia = clientPet.Endereco.Referencia,
-                        UF = clientPet.Endereco.UF,
-                        ClienteId = cliente.Id,
-                        Data_Cadastro = DateTime.Now
-                    };
-
-                    await _enderecoClienteRepository.Add(enderecoCliente);
-                }
-
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception)
             {
                 throw;
             }

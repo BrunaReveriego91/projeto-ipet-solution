@@ -11,20 +11,20 @@ namespace Pet.WebAPI.Repositories
         {
         }
 
-        public override IEnumerable<EnderecoPrestador> GetAll(Expression<Func<EnderecoPrestador, bool>>? expression = null)
-        {
-            return base.GetAll(expression);
-        }
+        //public override IEnumerable<EnderecoPrestador> GetAll(Expression<Func<EnderecoPrestador, bool>>? expression = null)
+        //{
+        //    return base.GetAll(expression);
+        //}
 
-        public override EnderecoPrestador? Get(int id)
-        {
-            return base.Get(id);
-        }
+        //public override EnderecoPrestador? Get(int id)
+        //{
+        //    return base.Get(id);
+        //}
 
-        public override Task Update(EnderecoPrestador entity)
-        {
-            return base.Update(entity);
-        }
+        //public override Task Update(EnderecoPrestador entity)
+        //{
+        //    return base.Update(entity);
+        //}
 
         //public override Task Delete(EnderecoPrestador entity)
         //{

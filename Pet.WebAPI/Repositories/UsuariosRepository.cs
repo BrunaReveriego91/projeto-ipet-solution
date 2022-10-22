@@ -51,10 +51,10 @@ namespace Pet.WebAPI.Repositories
             return await _usuariosPrestadoresRepository.Add(usu_prest);
         }
 
-        public override Task<Usuario> Add(Usuario entity)
-        {
-            return base.Add(entity);
-        }
+        //public override Task<Usuario> Add(Usuario entity)
+        //{
+        //    return base.Add(entity);
+        //}
 
         //public async Task<Usuario> Add(NovoUsuario usuario, TiposUsuario tipo)
         //{

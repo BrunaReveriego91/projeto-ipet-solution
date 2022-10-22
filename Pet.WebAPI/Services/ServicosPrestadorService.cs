@@ -19,6 +19,7 @@ namespace Pet.WebAPI.Services
             _prestadoresRepository = prestadoresRepository;
             _servicosRepository = servicosRepository;
         }
+
         public async Task<ServicoPrestador> Add(NovoServicoPrestador novoServico)
         {
             // Verifica se o Prestador existe
@@ -49,18 +50,43 @@ namespace Pet.WebAPI.Services
 
             try
             {
-                return await _repository.Add(srv_prest);
+                try
+                {
+                    return await _repository.Add(srv_prest);
+                }
+                catch (DbUpdateException dbupdate)
+                {
+                    if (dbupdate.InnerException is null)
+                    {
+                        throw;
+                    }
+                    if (dbupdate.InnerException.GetType() == typeof(SqlException))
+                    {
+                        // Relança SqlException.
+                        throw dbupdate.InnerException;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
             catch (SqlException sqlEx)
             {
-                switch (sqlEx.ErrorCode)
+                var collection = sqlEx.Errors.GetEnumerator();
+                while (collection.MoveNext())
                 {
-                    case 2601:
-                        throw new Exception($"Serviço Id {novoServico.Servico_Id} duplicado para o Prestador {novoServico.Prestador_Id}.");
+                    var erro = collection.Current as SqlError;
+                    switch (erro.Number)
+                    {
+                        case 2601:
+                            throw new Exception($"Serviço Id {novoServico.Servico_Id} duplicado para o Prestador {novoServico.Prestador_Id}.");
 
-                    default:
-                        throw;
+                        default:
+                            throw;
+                    }
                 }
+                throw;
             }
             catch (Exception)
             {
@@ -82,8 +108,7 @@ namespace Pet.WebAPI.Services
 
         public List<ServicoPrestador>? GetAllFromPrestador(int prestador_id)
         {
-            var servicos = _repository.GetAll(p => p.PrestadorId == prestador_id);
-            return servicos.ToList();
+            return _repository.GetAll(p => p.PrestadorId == prestador_id).ToList();
         }
 
         public async Task Update(int id, AlterarServicoPrestador servico)
@@ -105,7 +130,7 @@ namespace Pet.WebAPI.Services
             {
                 await _repository.Update(entry);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException)
             {
                 throw;
             }

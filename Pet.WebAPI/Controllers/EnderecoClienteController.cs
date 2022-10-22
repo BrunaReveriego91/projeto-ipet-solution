@@ -10,7 +10,7 @@ namespace Pet.WebAPI.Controllers
     [Produces("application/json")]
     [Consumes("application/json")]
     [ApiController]
-    public class EnderecoClienteController : Controller,IEnderecoClienteController
+    public class EnderecoClienteController : Controller, IEnderecoClienteController
     {
         private readonly IEnderecosClienteService _service;
 
@@ -19,34 +19,43 @@ namespace Pet.WebAPI.Controllers
             _service = service;
         }
 
-        [HttpDelete("{id}")]
-        public IActionResult DeleteEnderecoCliente(int id)
+        [HttpGet("{id}")]
+        public ActionResult<EnderecoCliente?> Get(int id)
         {
-            try
-            {
-                _service.Delete(id);
-            }
-            catch (Exception)
-            {
-                return NoContent();
-            }
-            return Ok();
-        }
-
-        [HttpGet("{cliente_id}")]
-        public ActionResult<List<EnderecoCliente>> GetEnderecosCliente(int cliente_id)
-        {
-            var dados = _service.GetAll(cliente_id);
+            var dados = _service.Get(id);
             if (dados is null) return NoContent();
             return Ok(dados);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostEnderecoCliente(NovoEnderecoCliente endereco)
-        {
-            var result = await _service.Add(endereco);
-            return CreatedAtAction(nameof(GetEnderecosCliente), new { cliente_id = result.ClienteId }, result);
-        }
+        //Não pode apagar o endereço do cliente.
+        //[HttpDelete("{id}")]
+        //public IActionResult DeleteEnderecoCliente(int id)
+        //{
+        //    try
+        //    {
+        //        _service.Delete(id);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return NoContent();
+        //    }
+        //    return Ok();
+        //}
+
+        //[HttpGet("{cliente_id}")]
+        //public ActionResult<List<EnderecoCliente>> GetEnderecosCliente(int cliente_id)
+        //{
+        //    var dados = _service.GetAll(cliente_id);
+        //    if (dados is null) return NoContent();
+        //    return Ok(dados);
+        //}
+
+        //[HttpPost]
+        //public async Task<IActionResult> PostEnderecoCliente(NovoEnderecoCliente endereco)
+        //{
+        //    var result = await _service.Add(endereco);
+        //    return CreatedAtAction(nameof(GetEnderecosCliente), new { cliente_id = result.ClienteId }, result);
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEnderecoCliente(int id, AlterarEnderecoCliente endereco)
