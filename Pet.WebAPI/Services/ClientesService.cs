@@ -21,6 +21,7 @@ namespace Pet.WebAPI.Services
         {
             var cliente = new Cliente()
             {
+                IdUsuario = clientPet.IdUsuario,
                 NomeCompleto = clientPet.NomeCompleto,
                 CPF = clientPet.CPF,
                 DataNascimento = Convert.ToDateTime(clientPet.DataNascimento),
@@ -88,7 +89,7 @@ namespace Pet.WebAPI.Services
 
         public Cliente? Get(int id)
         {
-            var cliente = _clientPetRepository.Get(id);
+            return _clientPetRepository.Get(id);
 
             //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
             //Pode retornar nulo mesmo que redireciono para a pág de Create
@@ -96,9 +97,12 @@ namespace Pet.WebAPI.Services
             //if (cliente is null)
             //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
 
-            return cliente;
         }
 
+        public Cliente? GetByUserId(string idUsuario)
+        {
+            return _clientPetRepository.GetByUserId(idUsuario);
+        }
 
         public IEnumerable<Cliente> GetClientes()
         {

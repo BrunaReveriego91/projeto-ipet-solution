@@ -5,6 +5,19 @@ namespace Pet.WebAPI.Domain.Model
 {
     public class NovoCliente
     {
+        //public NovoCliente(string? nomeCompleto, string? cpf, DateTime? dataNascimento, string? telefone1, bool whatsApp, string? telefone2, EnderecoCliente? endereco)
+        //{
+        //    NomeCompleto = nomeCompleto;
+        //    CPF = cpf;
+        //    DataNascimento = dataNascimento;
+        //    Telefone1 = telefone1;
+        //    WhatsApp = whatsApp;
+        //    Telefone2 = telefone2;
+        //    Endereco = endereco;
+        //}
+
+        public string? IdUsuario { get; set; }
+
         public string? NomeCompleto { get; set; }
         public string? CPF { get; set; }
         public string DataNascimento { get; set; } = "";
