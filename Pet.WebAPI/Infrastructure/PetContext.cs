@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Entities.Enums;
 using Pet.WebAPI.Domain.Settings;
-using System.Reflection.Metadata;
 
 namespace Pet.Repository.Infrastructure
 {
@@ -31,8 +31,10 @@ namespace Pet.Repository.Infrastructure
         public DbSet<UsuarioPrestador> UsuariosPrestadores { get; set; }
         public DbSet<ServicoPrestador> ServicosPrestador { get; set; }
         public DbSet<EnderecoCliente> EnderecosClientes { get; set; }
+
         //public DbSet<UsuarioCliente>? UsuariosClientes { get; set; }
         public DbSet<Agenda> Agendamentos { get; set; }
+
         public DbSet<ServicoAgenda> ServicosAgendamento { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -64,7 +66,6 @@ namespace Pet.Repository.Infrastructure
 
                 var connectionString = configuration.GetSection("AzureSqlConnection:DefaultConnection").Value;
                 optionsBuilder.UseSqlServer(connectionString);
-
             }
         }
 
@@ -93,6 +94,21 @@ namespace Pet.Repository.Infrastructure
                     Descricao = e.ToString()
                 })
                 );
+
+            #region "Serviços iniciais"
+
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 1, Nome = "Consulta Veterinaria", Descricao = "Consulta Veterinária ", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 2, Nome = "Aplicacao de medicamentos", Descricao = "Aplicação de Medicamentos", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 3, Nome = "Aplicacao de vacinas", Descricao = "Aplicacao de Vacinas", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 4, Nome = "Hotelaria de Pets", Descricao = "Hotelaria de Pets", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 5, Nome = "Entrega de medicamentos / Vacinas", Descricao = "Entrega de Medicamentos / Vacinas ", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 6, Nome = "Banho / Tosa", Descricao = "Banho / Tosa", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 7, Nome = "Entrega de Ração", Descricao = "Entrega de Ração", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 8, Nome = "Utensilios pets", Descricao = "Utensílios Pets (Coleiras, Gaiolas, Etc)", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 9, Nome = "Passeador de animais", Descricao = "Passeador de animais (Pet Walker)", Ativo = true });
+            modelBuilder.Entity<Servico>().HasData(new Servico { Id = 10, Nome = "Adestrador de Pets", Descricao = "Adestrador de Pets", Ativo = true });
+
+            #endregion
 
             modelBuilder
             .Entity<TipoPet>().HasData(

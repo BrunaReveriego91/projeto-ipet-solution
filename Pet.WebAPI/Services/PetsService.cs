@@ -30,7 +30,6 @@ namespace Pet.WebAPI.Services
                 Raca = novoPet.Raca
             };
 
-
             return await _petsRepository.Add(pet);
         }
 
@@ -82,7 +81,6 @@ namespace Pet.WebAPI.Services
             entry.Genero = pet.Genero;
             entry.Cor = pet.Cor;
             entry.Raca = pet.Raca;
-
 
             try
             {

@@ -19,6 +19,7 @@ namespace Pet.WebAPI.Services
         {
             var prestador = new Prestador()
             {
+                Id_Prestador = novoPrestador.Id_Prestador,
                 NomeCompleto = novoPrestador.NomeCompleto,
                 CPF_CNPJ = novoPrestador.CPF_CNPJ,
                 Telefone = novoPrestador.Telefone,
