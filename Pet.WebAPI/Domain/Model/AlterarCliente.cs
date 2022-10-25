@@ -10,8 +10,6 @@ namespace Pet.WebAPI.Domain.Model
         public string? Telefone1 { get; set; }
         public bool WhatsApp { get; set; }
         public string? Telefone2 { get; set; }
-        
-        // Alteração do endereço do cliente na controller de Endereço Cliente.
-        //public EnderecoCliente? Endereco { get; set; }
+        public EnderecoCliente? Endereco { get; set; }
     }
 }
