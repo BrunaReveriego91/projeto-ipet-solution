@@ -107,15 +107,13 @@ namespace Pet.WebAPI.Services
 
         public IEnumerable<Cliente> GetClientes()
         {
-            var clientes = _clientPetRepository.GetAll();
+            return _clientPetRepository.GetAll();
 
             //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
             //Pode retornar nulo mesmo que redireciono para a pág de Create
 
             //if(clientes is null)
             //    throw new Exception($"Não há clientes cadastrados na base.");
-
-            return clientes;
 
         }
 
