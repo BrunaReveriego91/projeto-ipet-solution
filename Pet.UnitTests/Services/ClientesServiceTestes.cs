@@ -106,6 +106,7 @@ namespace Pet.UnitTests.Services
             };
 
             var resultado = await service.Add(novoCliente);
+            
 
             //Assert
             Assert.NotNull(resultado);

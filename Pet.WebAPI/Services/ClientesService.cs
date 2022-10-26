@@ -56,9 +56,10 @@ namespace Pet.WebAPI.Services
                 };
 
                 await _enderecoClienteRepository.Add(enderecoCliente);
+                response.Endereco = enderecoCliente;
             }
 
-            return _clientPetRepository.Get(response.Id);
+            return response;
         }
 
         public void Delete(int id)
