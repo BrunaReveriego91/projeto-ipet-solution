@@ -14,41 +14,54 @@ namespace Pet.WebAPI.Services
     public class MapsService : IMapsService
     {
         private IMapsRepository _mapsRepository;
+        private IServicosPrestadorService _servicosPrestadorService;
         private readonly EarthAPIConnection _apiConnection;
 
-        public MapsService(IMapsRepository mapsRepository, IOptions<EarthAPIConnection> apiConnection)
+        public MapsService(IMapsRepository mapsRepository, IOptions<EarthAPIConnection> apiConnection, IServicosPrestadorService servicosPrestadorService)
         {
             _mapsRepository = mapsRepository;
             _apiConnection = apiConnection.Value;
+            _servicosPrestadorService = servicosPrestadorService;
         }
 
-        public IEnumerable<Maps> GetPrestadoresByUserLocation(int userId)
+        public async Task<IEnumerable<PrestadorMaps>> GetPrestadoresByUserLocation(int userId)
         {
-            var prestadores = _mapsRepository.GetPrestadoresByUserLocation(userId);
+            var prestadores = _mapsRepository.GetPrestadoresByUserLocation(userId).Where(x => x.Enderecos != null);
             if (prestadores is null)
                 throw new Exception($"Não foram localizados prestadores próximos ou cliente não foi localizado.");
 
-            var mapsLocations = new List<Maps>();
+            var prestadoresMaps = new List<PrestadorMaps>();
 
             foreach (var prestador in prestadores)
             {
+                var listaServicoPrestador = _servicosPrestadorService.GetAllFromPrestador(prestador.Id);
                 foreach (var enderecoPrestador in prestador.Enderecos)
                 {
-                    var localizacao = ProcuraGeolocalizacaoPrestador(enderecoPrestador);
+                    var localizacao = await ProcuraGeolocalizacaoPrestador(enderecoPrestador);
+                    if(localizacao != null)
+                    {
+                        var prestadorMap = new PrestadorMaps();
+                        prestadorMap.NomeCompleto = prestador.NomeCompleto;
+                        prestadorMap.Servicos = listaServicoPrestador;
+                        prestadorMap.Latitude = localizacao[0];
+                        prestadorMap.Longitude = localizacao[1];
+
+                        prestadoresMaps.Add(prestadorMap);
+                    }
                 }
             }
 
-            return null;
+            return prestadoresMaps;
         }
 
-        private async Task<List<double>> ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)
+        private async Task<double[]> ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)
         {
 
             var key = _apiConnection.Key;
 
             var postal_code = enderecoPrestador.CEP;
             var address = string.Concat(enderecoPrestador.Logradouro, ' ', enderecoPrestador.Numero);
-            var coordenadas = new List<double>();
+            var coordenadas = new double[2];
             var url = "http://dev.virtualearth.net/REST/v1/Locations?postalCode=" + postal_code + "&key=" + key + "&addressLine=" + address;
 
             using (var httpClient = new HttpClient())
@@ -63,8 +76,8 @@ namespace Pet.WebAPI.Services
 
                         foreach (var item in maps.resourceSets.ToList())
                         {
-                            coordenadas.Add(item.resources.FirstOrDefault().point.coordinates[0]);
-                            coordenadas.Add(item.resources.FirstOrDefault().point.coordinates[1]);
+                            coordenadas[0] = item.resources.FirstOrDefault().point.coordinates[0];
+                            coordenadas[1] = item.resources.FirstOrDefault().point.coordinates[1];
                         }
                     }
                 }
