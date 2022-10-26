@@ -99,7 +99,10 @@ namespace Pet.WebAPI.Services
             //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
 
         }
-
+        public Cliente? GetByUserId(string idUsuario)
+        {
+            return _clientPetRepository.GetByUserId(idUsuario);
+        }
 
         public IEnumerable<Cliente> GetClientes()
         {

@@ -28,11 +28,6 @@ namespace Pet.WebAPI.Repositories
             return cliente;
         }
 
-        public Cliente? GetByUserName(string userName)
-        {
-            return null;
-        }
-
 
         //public override async Task Delete(Cliente cliente)
         //{
