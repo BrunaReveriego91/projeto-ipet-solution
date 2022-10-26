@@ -23,13 +23,17 @@ namespace SysIPetUI.Controllers
                 HttpResponseMessage? response = await cliente.GetAsync(url + '/' + idUsuario);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                                   
+
+                EstabelecimentosLists model = new EstabelecimentosLists();
+
                 List<EstabelecimentoViewModel>? estabelecimentos = new List<EstabelecimentoViewModel>();
                 estabelecimentos = JsonConvert.DeserializeObject<List<EstabelecimentoViewModel>>(responseBody);
 
                 if (estabelecimentos != null)
                 {
-                    return View(estabelecimentos);
+                    model.EstabelecimentosList = estabelecimentos;
+
+                    return View(model);
 
                 }
 
