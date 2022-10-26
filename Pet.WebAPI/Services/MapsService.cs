@@ -1,13 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Entities.Maps;
 using Pet.WebAPI.Domain.Settings;
 using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
-using System.Configuration;
-using System.Dynamic;
 
 namespace Pet.WebAPI.Services
 {
@@ -16,17 +13,20 @@ namespace Pet.WebAPI.Services
         private IMapsRepository _mapsRepository;
         private IServicosPrestadorService _servicosPrestadorService;
         private readonly EarthAPIConnection _apiConnection;
+        private IServicosServices _servicosService;
 
-        public MapsService(IMapsRepository mapsRepository, IOptions<EarthAPIConnection> apiConnection, IServicosPrestadorService servicosPrestadorService)
+        public MapsService(IMapsRepository mapsRepository, IOptions<EarthAPIConnection> apiConnection, IServicosPrestadorService servicosPrestadorService, IServicosServices servicosService)
         {
             _mapsRepository = mapsRepository;
             _apiConnection = apiConnection.Value;
             _servicosPrestadorService = servicosPrestadorService;
+            _servicosService = servicosService;
         }
 
-        public async Task<IEnumerable<PrestadorMaps>> GetPrestadoresByUserLocation(int userId)
+        public async Task<List<PrestadorMaps>> GetPrestadoresByUserLocation(int userId)
         {
-            var prestadores = _mapsRepository.GetPrestadoresByUserLocation(userId).Where(x => x.Enderecos != null);
+            var prestadores = _mapsRepository.GetPrestadoresByUserLocation(userId);
+
             if (prestadores is null)
                 throw new Exception($"Não foram localizados prestadores próximos ou cliente não foi localizado.");
 
@@ -34,24 +34,36 @@ namespace Pet.WebAPI.Services
 
             foreach (var prestador in prestadores)
             {
-                var listaServicoPrestador = _servicosPrestadorService.GetAllFromPrestador(prestador.Id);
-                foreach (var enderecoPrestador in prestador.Enderecos)
+                var listaServicoPrestador = _servicosPrestadorService.GetAllFromPrestador(prestador.Id).Where(x => x.Ativo == true);
+                if (listaServicoPrestador is not null)
                 {
-                    var localizacao = await ProcuraGeolocalizacaoPrestador(enderecoPrestador);
-                    if(localizacao != null)
-                    {
-                        var prestadorMap = new PrestadorMaps();
-                        prestadorMap.NomeCompleto = prestador.NomeCompleto;
-                        prestadorMap.Servicos = listaServicoPrestador;
-                        prestadorMap.Latitude = localizacao[0];
-                        prestadorMap.Longitude = localizacao[1];
+                    List<Servico> listaservicosPrestadorDetalhes = GetServicosDetalhesPrestadores(listaServicoPrestador);
 
-                        prestadoresMaps.Add(prestadorMap);
+                    foreach (var enderecoPrestador in prestador.Enderecos)
+                    {
+                        var localizacao = await ProcuraGeolocalizacaoPrestador(enderecoPrestador);
+                        if (localizacao is not null)
+                            prestadoresMaps.Add(PrestadorMaps.CriaPrestadorMaps(prestador.NomeCompleto, listaservicosPrestadorDetalhes, localizacao[0], localizacao[1]));
+
                     }
                 }
             }
 
             return prestadoresMaps;
+        }
+
+        private List<Servico> GetServicosDetalhesPrestadores(IEnumerable<ServicoPrestador> listaServicoPrestador)
+        {
+            var servicosPrestador = new List<Servico>();
+
+            foreach (var servicoPrestador in listaServicoPrestador)
+            {
+                var servico = _servicosService.Get(servicoPrestador.Id);
+                if (servico is not null && servico.Ativo == true)
+                    servicosPrestador.Add(servico);
+            }
+
+            return servicosPrestador;
         }
 
         private async Task<double[]> ProcuraGeolocalizacaoPrestador(EnderecoPrestador? enderecoPrestador)

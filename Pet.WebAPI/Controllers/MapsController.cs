@@ -18,9 +18,9 @@ namespace Pet.WebAPI.Controllers
         }
 
         [HttpGet("{userId}")]
-        public IActionResult GetPrestadoresByUserLocation(int userId)
+        public async Task<IActionResult> GetPrestadoresByUserLocation(int userId)
         {
-            return Ok(_service.GetPrestadoresByUserLocation(userId));
+            return Ok(await _service.GetPrestadoresByUserLocation(userId));
             //return Ok(_service.GetPrestadoresByUserLocation(userId));
         }
 

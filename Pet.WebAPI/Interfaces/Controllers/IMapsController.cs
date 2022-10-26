@@ -4,6 +4,6 @@ namespace Pet.WebAPI.Interfaces.Controllers
 {
     public interface IMapsController
     {
-        IActionResult GetPrestadoresByUserLocation(int userId);
+        Task<IActionResult> GetPrestadoresByUserLocation(int userId);
     }
 }

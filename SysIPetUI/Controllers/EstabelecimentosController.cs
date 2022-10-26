@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SysIPetUI.Models;
 using System.Security.Claims;
 using static SysIPetUI.Models.EstabelecimentoViewModel;
@@ -11,24 +12,28 @@ namespace SysIPetUI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+
             var cliente = new HttpClient();
 
             try
             {
                 var userName = User.GetUserName();
+                int idUsuario = 1;
 
-                EstabelecimentosLists model = new EstabelecimentosLists();
-                var locations = new List<EstabelecimentoViewModel>()
+                HttpResponseMessage? response = await cliente.GetAsync(url + '/' + idUsuario);
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                                   
+                List<EstabelecimentoViewModel>? estabelecimentos = new List<EstabelecimentoViewModel>();
+                estabelecimentos = JsonConvert.DeserializeObject<List<EstabelecimentoViewModel>>(responseBody);
+
+                if (estabelecimentos != null)
                 {
-                new EstabelecimentoViewModel(1, "Teste","Teste", -23.594786699313218, -46.68442189606897),
-                new EstabelecimentoViewModel(2, "Hyderabad","Hyderabad, Telengana", 17.387140, 78.491684),
-                new EstabelecimentoViewModel(3, "Bengaluru","Bengaluru, Karnataka", 12.972442, 77.580643)
-                };
-                model.EstabelecimentosList = locations;
+                    return View(estabelecimentos);
 
-                return View(model);
+                }
 
+                return View("Error");
                 //int id = 15;
 
                 //HttpResponseMessage? response = await cliente.GetAsync(url + '/' + id);
