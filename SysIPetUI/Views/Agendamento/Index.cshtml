@@ -13,28 +13,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ClienteId)
+                @Html.DisplayNameFor(model => model.Agenda.ClienteId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cliente)
+                @Html.DisplayNameFor(model => model.Agenda.Cliente)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PrestadorId)
+                @Html.DisplayNameFor(model => model.Agenda.PrestadorId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Prestador)
+                @Html.DisplayNameFor(model => model.Agenda.Prestador)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_Agenda)
+                @Html.DisplayNameFor(model => model.Agenda.Data_Agenda)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_Cancelamento)
+                @Html.DisplayNameFor(model => model.Agenda.Data_Cancelamento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Data_Cadastro)
+                @Html.DisplayNameFor(model => model.Agenda.Data_Cadastro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Servicos)
+                @Html.DisplayNameFor(model => model.Agenda.Servicos)
             </th>
             <th></th>
         </tr>
@@ -43,28 +43,28 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ClienteId)
+                @Html.DisplayFor(modelItem => item.Agenda.ClienteId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Cliente)
+                @Html.DisplayFor(modelItem => item.Agenda.Cliente)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PrestadorId)
+                @Html.DisplayFor(modelItem => item.Agenda.PrestadorId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Prestador)
+                @Html.DisplayFor(modelItem => item.Agenda.Prestador)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data_Agenda)
+                @Html.DisplayFor(modelItem => item.Agenda.Data_Agenda)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data_Cancelamento)
+                @Html.DisplayFor(modelItem => item.Agenda.Data_Cancelamento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Data_Cadastro)
+                @Html.DisplayFor(modelItem => item.Agenda.Data_Cadastro)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Servicos)
+                @Html.DisplayFor(modelItem => item.Agenda.Servicos)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

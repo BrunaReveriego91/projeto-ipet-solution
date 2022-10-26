@@ -30,63 +30,6 @@ namespace SysIPetUI.Controllers
             }
 
             return View(viewModel);
-
-            //var pet = new HttpClient();
-
-            //try
-            //{
-            //    // Recebendo as informações da API
-            //    // HttpResponseMensage? Trata se o Retorno for Vazio
-            //    // await realiza as consultas varias vezes se necessário
-            //    HttpResponseMessage? response = await pet.GetAsync(url);
-
-            //    // EnsureSuccessStatusCode Trata os erros:
-            //    // Nesse caso a Aplicação se vira sem um tratamento de erro personalizado
-            //    response.EnsureSuccessStatusCode();
-
-            //    // Obtendo os dados
-            //    // Estatus 200 conseguiu fazer a solicitação e tras os dados serializados em formato texto
-            //    string responseBody = await response.Content.ReadAsStringAsync();
-
-            //    // Criando a Lista e Deserializando o Arquivo Json
-            //    // O Interrogação trata os nulls                
-            //    List<PetsListViewModel>? viewModel = new List<PetsListViewModel>();
-            //    viewModel = JsonConvert.DeserializeObject<List<PetsListViewModel>>(responseBody);
-
-            //    if (viewModel?.Count == 0)
-            //    {
-            //        return RedirectToAction("CadastroPet");
-            //    }
-
-            //    return View(viewModel);
-            //}
-            //catch (Exception)
-            //{
-            //    return View("Error");
-            //}
-
-            //Criando uma nova Instância
-            //PetsListViewModel? viewModel = new PetsListViewModel();
-
-            //using (var httpClient = new HttpClient())
-            //{
-            //    //Aqui realizamos o GetAsync que Utiliza a Pet.WebAPI para Retornar o Pet que será Excluído pelo Id na Tabela do SQL
-            //    //Dessa forma exibimos no Modal os Detalhes do Pet que será Editado.
-            //    using (var response = await httpClient.GetAsync(url))
-            //    {
-            //        //Lê os dados e salva no responseBody
-            //        string responseBody = await response.Content.ReadAsStringAsync();
-
-            //        //Preenche a PetsViewModelInstancia com os Dados do DB
-            //        viewModel.PetsViewModelInstancia = JsonConvert.DeserializeObject<PetsViewModel>(responseBody);
-            //    }
-            //}
-
-            ////Preenchendo as Listas            
-            //viewModel.PetsList = GetPetsList();
-
-            //return View(viewModel);
-
         }              
 
         // GET: PetController/Create
@@ -110,6 +53,9 @@ namespace SysIPetUI.Controllers
         {
             try
             {
+                //Passando o Id do Cliente
+                viewModel.PetsViewModelInstancia.ClienteId = GetIdCliente();
+
                 //Preenchendo as Listas
                 viewModel.TipoPetList = GetTipoPetList();
                 viewModel.TamanhoPetList = GetTamanhoPetList();
@@ -117,15 +63,13 @@ namespace SysIPetUI.Controllers
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Como a API precisará dos novos dados do Pet no formato JSON, estamos serializando os dados
-                    //da ViewModel PetsListViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    //Serializando os dados da ViewModel PetsListViewModel para JSON e depois convertendo-os em um objeto StringContent:
                     StringContent content = new StringContent(JsonConvert.SerializeObject(viewModel?.PetsViewModelInstancia), Encoding.UTF8, "application/json");
 
                     //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Pet na Tabela do SQL
                     using (var response = await httpClient.PostAsync(url, content))
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        //viewModel = JsonConvert.DeserializeObject<PetsListViewModel>(responseBody);
                     }
                 }
                 return RedirectToAction("Index");
@@ -158,6 +102,9 @@ namespace SysIPetUI.Controllers
         {
             try
             {
+                //Passando o Id do Cliente
+                viewModel.PetsViewModelInstancia.ClienteId = GetIdCliente();
+
                 //Preenchendo as Listas
                 viewModel.TipoPetList = GetTipoPetList();
                 viewModel.TamanhoPetList = GetTamanhoPetList();
@@ -165,15 +112,13 @@ namespace SysIPetUI.Controllers
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Como a API precisará dos novos dados do Pet no formato JSON, estamos serializando os dados
-                    //da ViewModel PetsListViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    //Serializando os dados da ViewModel PetsListViewModel para JSON e depois convertendo-os em um objeto StringContent:
                     StringContent content = new StringContent(JsonConvert.SerializeObject(viewModel?.PetsViewModelInstancia), Encoding.UTF8, "application/json");
 
                     //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Pet na Tabela do SQL
                     using (var response = await httpClient.PostAsync(url, content))
                     {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        //viewModel = JsonConvert.DeserializeObject<PetsListViewModel>(responseBody);
+                        string responseBody = await response.Content.ReadAsStringAsync();                        
                     }
                 }
                 return RedirectToAction("Index");
@@ -183,6 +128,38 @@ namespace SysIPetUI.Controllers
                 return View("Error");
             }
 
+        }
+
+        //Pegando o Id do Cliente
+        public int GetIdCliente()
+        {
+            //Obtem Id do Usuário logado
+            var usuarioId = User.GetIdUsuario();
+
+            //Encontra e faz a leitura do arquivo appsettings.json:
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();            
+
+            //Conexão com o LocalDB
+            var stringConexao = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection con = new SqlConnection(stringConexao);
+
+            //Select na Tabela
+            SqlCommand cmd = new SqlCommand("Select Id From Clientes Where IdUsuario = @IdUsuario", con);
+            con.Open();
+
+            //Parâmetros do Where
+            cmd.Parameters.AddWithValue("@IdUsuario", usuarioId);
+
+            //Executa a consulta e armazena o resultado            
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
+
+            //Fecha a conexão
+            con.Close();
+
+            return result;
         }
 
         //DropdownList TipoPet

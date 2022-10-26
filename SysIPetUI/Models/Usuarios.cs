@@ -19,6 +19,18 @@ namespace SysIPetUI.Models
             return tipoUsuario;
         }
 
+        public static string GetIdUsuario(this ClaimsPrincipal claimsPrincipal)
+        {
+            if (claimsPrincipal == null)
+            {
+                throw new ArgumentNullException(nameof(claimsPrincipal));
+            }
+
+            var userId = claimsPrincipal.FindFirst(ClaimTypes.NameIdentifier)?.Value;            
+
+            return userId;
+        }
+
         public static string GetUserName(this ClaimsPrincipal claimsPrincipal)
         {
             if (claimsPrincipal == null)
