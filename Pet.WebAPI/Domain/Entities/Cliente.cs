@@ -10,6 +10,9 @@ namespace Pet.WebAPI.Domain.Entities
         public int Id { get; set; }
 
         [Required]
+        public string? IdUsuario { get; set; }
+
+        [Required]
         [StringLength(256)]
         public string? NomeCompleto { get; set; }
 

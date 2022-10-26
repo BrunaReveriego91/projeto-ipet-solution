@@ -46,7 +46,6 @@ namespace Pet.WebAPI
             services.AddScoped<IEnderecosClienteRepository, EnderecosClienteRepository>();
             services.AddTransient<IEnderecosClienteService, EnderecosClienteService>();
 
-
             services.AddScoped<IUsuariosRepository, UsuariosRepository>();
             services.AddTransient<IUsuariosService, UsuariosService>();
 
@@ -67,6 +66,9 @@ namespace Pet.WebAPI
 
             services.AddScoped<IMapsRepository, MapsRepository>();
             services.AddTransient<IMapsService, MapsService>();
+
+            services.AddScoped<IServicosAgendaRepository, ServicosAgendaRepository>();
+            services.AddTransient<IServicosAgendaService, ServicosAgendaService>();
 
             services.AddScoped<IServicosAgendaRepository, ServicosAgendaRepository>();
         }

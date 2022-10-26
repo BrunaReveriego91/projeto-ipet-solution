@@ -10,5 +10,6 @@ namespace Pet.WebAPI.Interfaces.Controllers
         Task<IActionResult> PutPrestador(int id, AlterarPrestador prestador);
         IActionResult DeletePrestador(int id);
         IActionResult GetAllPrestadores();
+        IActionResult GetAgendamentosPrestador(int prestador_id);
     }
 }

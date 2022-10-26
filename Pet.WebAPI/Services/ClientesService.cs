@@ -21,6 +21,7 @@ namespace Pet.WebAPI.Services
         {
             var cliente = new Cliente()
             {
+                IdUsuario = clientPet.IdUsuario,
                 NomeCompleto = clientPet.NomeCompleto,
                 CPF = clientPet.CPF,
                 DataNascimento = Convert.ToDateTime(clientPet.DataNascimento),
@@ -49,39 +50,47 @@ namespace Pet.WebAPI.Services
                     Cidade = clientPet.Endereco.Cidade,
                     SemNumero = clientPet.Endereco.SemNumero,
                     Complemento = clientPet.Endereco.Complemento,
-                    Data_Cadastro = clientPet.Endereco.Data_Cadastro,
                     Numero = clientPet.Endereco.Numero,
                     Referencia = clientPet.Endereco.Referencia,
                     UF = clientPet.Endereco.UF
                 };
 
                 await _enderecoClienteRepository.Add(enderecoCliente);
+                response.Endereco = enderecoCliente;
             }
 
-            return _clientPetRepository.Get(response.Id);
+            return response;
         }
 
         public void Delete(int id)
         {
-            var entry = _clientPetRepository.Get(id);
+            try
+            {
+                var entry = _clientPetRepository.Get(id);
 
-            //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
-            //Pode retornar nulo mesmo que redireciono para a pág de Create
+                //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
+                //Pode retornar nulo mesmo que redireciono para a pág de Create
 
-            //if (entry is null)
-            //{
-            //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
-            //}
+                //if (entry is null)
+                //{
+                //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
+                //}
 
-            _clientPetRepository.Delete(entry);
+                _clientPetRepository.Delete(entry);
 
-            if (entry.Endereco != null)
-                _enderecoClienteRepository.Delete(entry.Endereco);
+                // Comentado, pois quando apaga o cliente o SQL Server já apaga da tabela filha.
+                //if (entry.Endereco != null)
+                //    _enderecoClienteRepository.Delete(entry.Endereco);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public Cliente? Get(int id)
         {
-            var cliente = _clientPetRepository.Get(id);
+            return _clientPetRepository.Get(id);
 
             //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
             //Pode retornar nulo mesmo que redireciono para a pág de Create
@@ -89,26 +98,18 @@ namespace Pet.WebAPI.Services
             //if (cliente is null)
             //    throw new Exception($"Cliente não encontrado pelo Id {id}.");
 
-            return cliente;
         }
 
-        public Cliente? Get(string userName)
-        {
-            var cliente = _clientPetRepository.GetByUserName(userName);
-            return cliente;
-        }
 
         public IEnumerable<Cliente> GetClientes()
         {
-            var clientes = _clientPetRepository.GetAll();
+            return _clientPetRepository.GetAll();
 
             //Bruna, comentei todos os Ifs com throw new Exception que vc adicionou
             //Pode retornar nulo mesmo que redireciono para a pág de Create
 
             //if(clientes is null)
             //    throw new Exception($"Não há clientes cadastrados na base.");
-
-            return clientes;
 
         }
 

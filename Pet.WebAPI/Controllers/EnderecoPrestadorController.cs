@@ -26,9 +26,9 @@ namespace Pet.WebAPI.Controllers
             {
                 _service.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                return Problem(ex.Message);
             }
             return Ok();
         }

@@ -17,12 +17,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SysIPetUI.Models;
 
 namespace SysIPetUI.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class ExternalLoginModel : PageModel
     {
+        // Pegando o endereço com HttpClient        
+        private readonly string urlCliente = "https://localhost:44321/api/Cliente";
+        private readonly string urlPet = "https://localhost:44321/api/Pets";
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
@@ -116,6 +122,33 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+
+                //Acessa a API e Verifica se o Cliente e o Pet ainda não foram cadastrados
+                var cliente = new HttpClient();
+                var pet = new HttpClient();
+                HttpResponseMessage responseCliente = await cliente.GetAsync(urlCliente);
+                HttpResponseMessage responsePet = await pet.GetAsync(urlPet);
+                responseCliente.EnsureSuccessStatusCode();
+                responsePet.EnsureSuccessStatusCode();
+                string responseBodyCliente = await responseCliente.Content.ReadAsStringAsync();
+                string responseBodyPet = await responsePet.Content.ReadAsStringAsync();
+                List<ClienteViewModel> listaCliente = new List<ClienteViewModel>();
+                List<PetsListViewModel> listaPets = new List<PetsListViewModel>();
+                listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBodyCliente);
+                listaPets = JsonConvert.DeserializeObject<List<PetsListViewModel>>(responseBodyPet);
+
+                //Se for Nulo Direciona o Cliente para completar o cadastro
+                if (listaCliente == null)
+                {
+                    return RedirectToAction("CadastroCliente", "Cliente");
+                }
+
+                //Se for Nulo Direciona o Cliente para completar o cadastro do Pet
+                if (listaPets.Count == 0)
+                {
+                    return RedirectToAction("CadastroPet", "Pets");
+                }
+
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)

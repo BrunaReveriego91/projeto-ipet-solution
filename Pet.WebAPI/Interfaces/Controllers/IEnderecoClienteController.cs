@@ -6,9 +6,10 @@ namespace Pet.WebAPI.Interfaces.Controllers
 {
     public interface IEnderecoClienteController
     {
-        Task<IActionResult> PostEnderecoCliente(NovoEnderecoCliente endereco);
-        ActionResult<List<EnderecoCliente>> GetEnderecosCliente(int cliente_id);
+        //Task<IActionResult> PostEnderecoCliente(NovoEnderecoCliente endereco);
+        //ActionResult<List<EnderecoCliente>> GetEnderecosCliente(int cliente_id);
+        ActionResult<EnderecoCliente> Get(int id);
         Task<IActionResult> PutEnderecoCliente(int id, AlterarEnderecoCliente endereco);
-        IActionResult DeleteEnderecoCliente(int id);
+        //IActionResult DeleteEnderecoCliente(int id);
     }
 }

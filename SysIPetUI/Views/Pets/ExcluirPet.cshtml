@@ -40,106 +40,66 @@
 
             <!--Detalhes da Conta-->
             <div class="col-lg-auto">
+                
+                @Html.HiddenFor(model => model.PetsViewModelInstancia.Id)
 
-                @for (int i = 0; i < Model.PetsList.Count; i++)
-                {
-                    @Html.HiddenFor(model => model.PetsList[i].Id)
+                <form asp-action="ExcluirPet" class="form-group">
 
-                    <form asp-action="ExcluirPet" class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <ul class="nav nav-pills nav-sidebar flex-column">
 
-                        <ul class="nav nav-pills nav-sidebar flex-column">
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Nome do Pet:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(modelItem => modelItem.PetsViewModelInstancia.NomeCompleto)
+                        </li>
+                             
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Cor:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(modelItem => modelItem.PetsViewModelInstancia.Cor)
+                        </li>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Nome do Pet:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].NomeCompleto)
-                            </li>
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Data Nascimento:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(modelItem => modelItem.PetsViewModelInstancia.DataNascimento)
+                        </li>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Tipo Pet:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].TipoPetNome)
-                            </li>
+                        <li>
+                            <label class="control-label">
+                                <span class="brand-text">
+                                    <b class="text-blue">Raça:</b>
+                                </span>
+                            </label>
+                            @Html.DisplayFor(modelItem => modelItem.PetsViewModelInstancia.Raca)
+                        </li>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Tamanho Pet:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].TamanhoPetNome)
-                            </li>
+                    </ul>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Peso:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Peso)
-                            </li>
+                    <p>Tem certeza que deseja excluir os Dados Pessoais de <b>@Html.DisplayFor(modelItem => modelItem.PetsViewModelInstancia.NomeCompleto)</b>?</p>
+                    <p>Esse registro será excluído desta e de todas as outras páginas. <b>Essa ação não poderá ser desfeita.</b></p>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Genero Pet:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].GeneroPetNome)
-                            </li>
+                    <div class="modal-footer justify-content-between">
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Cor:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Cor)
-                            </li>
+                        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+                        <button id="buttonConfirmarVisible" type="submit" value="Excluir" class="btn btn-danger">Confirmar</button>
+                        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Data Nascimento:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].DataNascimento)
-                            </li>
+                    </div>
 
-                            <li>
-                                <label class="control-label">
-                                    <span class="brand-text">
-                                        <b class="text-blue">Raça:</b>
-                                    </span>
-                                </label>
-                                @Html.DisplayFor(modelItem => modelItem.PetsList[i].Raca)
-                            </li>
-
-                        </ul>
-
-                        <p>Tem certeza que deseja excluir os Dados Pessoais de <b>@Html.DisplayFor(modelItem => modelItem.PetsList[i].NomeCompleto)</b>?</p>
-                        <p>Esse registro será excluído desta e de todas as outras páginas. <b>Essa ação não poderá ser desfeita.</b></p>
-
-                        <div class="modal-footer justify-content-between">
-
-                            <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
-                            <button id="buttonConfirmarVisible" type="submit" value="Excluir" class="btn btn-danger">Confirmar</button>
-                            <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
-
-                        </div>
-
-                    </form>
-
-                }
+                </form>                
 
             </div>            
 

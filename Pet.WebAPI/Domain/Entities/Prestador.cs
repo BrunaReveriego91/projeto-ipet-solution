@@ -21,6 +21,12 @@ namespace Pet.WebAPI.Domain.Entities
 
         public bool WhatsApp { get; set; } = false;
 
+        /// <summary>
+        /// Chave com o Login do AspNetUsers.
+        /// </summary>
+        [Required]
+        public string? Id_Prestador { get; set; }
+
         public List<EnderecoPrestador> Enderecos { get; set; }
         public List<ServicoPrestador> Servicos { get; set; }
 

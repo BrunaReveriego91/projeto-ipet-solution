@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Model;
 using Pet.WebAPI.Interfaces.Controllers;
+using Pet.WebAPI.Interfaces.Repositories;
 using Pet.WebAPI.Interfaces.Services;
 
 namespace Pet.WebAPI.Controllers
@@ -14,10 +15,12 @@ namespace Pet.WebAPI.Controllers
     public class AgendamentoController : Controller, IAgendamentoController
     {
         private readonly IAgendamentoService _service;
+        private readonly IServicosAgendaService _serviceAgendaService;
 
-        public AgendamentoController(IAgendamentoService service)
+        public AgendamentoController(IAgendamentoService service, IServicosAgendaService serviceAgendaService)
         {
             _service = service;
+            _serviceAgendaService = serviceAgendaService;
         }
 
         [HttpDelete("{id}")]
@@ -27,9 +30,9 @@ namespace Pet.WebAPI.Controllers
             {
                 _service.Delete(id);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return NoContent();
+                return Problem(ex.Message);
             }
             return Ok();
         }
@@ -72,6 +75,64 @@ namespace Pet.WebAPI.Controllers
 
             return Ok();
         }
+
+        #region "SERVIÇOS AGENDA"
+
+        /// <summary>
+        /// Alterar Serviço do Agendamento
+        /// </summary>
+        /// <param name="servicoAgenda"></param>
+        /// <param name="id_agenda"></param>
+        /// <param name="id_servico"></param>
+        /// <returns></returns>
+        [HttpPut("{id_agenda}/Servico/{id_servico}")]
+        public async Task<IActionResult> PutServicoAgendamento([FromBody] AlterarServicoAgenda servicoAgenda, [FromRoute] int id_agenda, [FromRoute] int id_servico)
+        {
+            try
+            {
+                await _serviceAgendaService.Update(id_servico, servicoAgenda);
+            }
+            catch (Exception)
+            {
+                return NoContent();
+            }
+
+            return Ok();
+        }
+
+        [HttpPost("{id_agenda}/Servico/{id_servico}")]
+        public async Task<IActionResult> PostConcluirServicoAgendamento([FromBody] ConcluirServicoAgenda servicoAgenda, [FromRoute] int id_agenda, [FromRoute] int id_servico)
+        {
+            try
+            {
+                await _serviceAgendaService.Complete(id_agenda, id_servico, servicoAgenda);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+            return Ok();
+        }
+
+        [HttpDelete("{id_agenda}/Servico/{id_servico}")]
+        public async Task<IActionResult> CancelarServicoAgendamento([FromRoute] int id_agenda, [FromRoute] int id_servico)
+        {
+            try
+            {
+                await _serviceAgendaService.Delete(id_agenda, id_servico);
+            }
+            catch (Exception ex)
+            {
+                return Problem(ex.Message);
+            }
+
+            return Ok();
+        }
+
+        #endregion
+
+
     }
 
 }

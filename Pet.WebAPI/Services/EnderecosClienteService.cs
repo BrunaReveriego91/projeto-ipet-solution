@@ -35,19 +35,24 @@ namespace Pet.WebAPI.Services
             return await _enderecosClienteRepository.Add(endereco);
         }
 
-        public void Delete(int id)
+        public EnderecoCliente? Get(int id)
         {
-            var entry = _enderecosClienteRepository.Get(id);
-
-            if (entry == null) return;
-
-            _enderecosClienteRepository.Delete(entry);
+            return _enderecosClienteRepository.Get(id);
         }
 
-        public List<EnderecoCliente>? GetAll(int cliente_id)
-        {
-            return _enderecosClienteRepository.GetAll(p => p.ClienteId == cliente_id).ToList();
-        }
+        //public void Delete(int id)
+        //{
+        //    var entry = _enderecosClienteRepository.Get(id);
+
+        //    if (entry == null) return;
+
+        //    _enderecosClienteRepository.Delete(entry);
+        //}
+
+        //public List<EnderecoCliente>? GetAll(int cliente_id)
+        //{
+        //    return _enderecosClienteRepository.GetAll(p => p.ClienteId == cliente_id).ToList();
+        //}
 
         public async Task Update(int id, AlterarEnderecoCliente endereco)
         {

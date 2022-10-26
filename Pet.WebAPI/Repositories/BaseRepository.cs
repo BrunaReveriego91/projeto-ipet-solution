@@ -27,7 +27,7 @@ namespace Pet.WebAPI.Repositories
         //    await _context.SaveChangesAsync();
         //}
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
             _context.SaveChanges();

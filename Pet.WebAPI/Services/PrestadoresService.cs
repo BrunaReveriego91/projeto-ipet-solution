@@ -19,6 +19,7 @@ namespace Pet.WebAPI.Services
         {
             var prestador = new Prestador()
             {
+                Id_Prestador = novoPrestador.Id_Prestador,
                 NomeCompleto = novoPrestador.NomeCompleto,
                 CPF_CNPJ = novoPrestador.CPF_CNPJ,
                 Telefone = novoPrestador.Telefone,
@@ -44,7 +45,12 @@ namespace Pet.WebAPI.Services
             return _repository.Get(id);
         }
 
-        public IEnumerable<Prestador> GetPrestadores()
+        public IEnumerable<Agenda> GetAgendamentosPrestador(int prestador_id)
+        {
+            return _repository.GetAgendamentosPrestador(prestador_id);
+        }
+
+        public IEnumerable<Prestador> GetAllPrestadores()
         {
             return _repository.GetAll();
         }

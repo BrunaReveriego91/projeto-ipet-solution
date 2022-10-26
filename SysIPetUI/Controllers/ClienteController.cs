@@ -64,19 +64,19 @@ namespace SysIPetUI.Controllers
         {
             try
             {
-                ClienteViewModel? clienteIncluido = new ClienteViewModel();
+                //Obtem Id do Usuário logado
+                var usuarioId = User.GetIdUsuario();
+                cliente.IdUsuario = usuarioId;
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Como a API precisará dos novos dados do Cliente no formato JSON, estamos serializando os dados
-                    //da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    //Serializando os dados da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
                     StringContent content = new StringContent(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
 
                     //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Cliente na Tabela do SQL
                     using (var response = await httpClient.PostAsync(url, content))
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
-                        clienteIncluido = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
                     }
                 }
                 return RedirectToAction("Index");
@@ -101,19 +101,19 @@ namespace SysIPetUI.Controllers
         {
             try
             {
-                ClienteViewModel? clienteIncluido = new ClienteViewModel();
+                //Obtem Id do Usuário logado
+                var usuarioId = User.GetIdUsuario();
+                cliente.IdUsuario = usuarioId;
 
                 using (var httpClient = new HttpClient())
                 {
-                    //Como a API precisará dos novos dados do Cliente no formato JSON, estamos serializando os dados
-                    //da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
+                    //Serializando os dados da ViewModel ClienteViewModel para JSON e depois convertendo-os em um objeto StringContent:
                     StringContent content = new StringContent(JsonConvert.SerializeObject(cliente), Encoding.UTF8, "application/json");
 
                     //Aqui realizamos o PostAsync que Utiliza a Pet.WebAPI para inserir um novo Cliente na Tabela do SQL
                     using (var response = await httpClient.PostAsync(url, content))
                     {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-                        clienteIncluido = JsonConvert.DeserializeObject<ClienteViewModel>(responseBody);
+                        string responseBody = await response.Content.ReadAsStringAsync();                        
                     }
                 }
                 return RedirectToAction("Index");

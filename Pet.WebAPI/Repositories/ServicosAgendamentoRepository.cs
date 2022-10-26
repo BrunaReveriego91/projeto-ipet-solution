@@ -1,6 +1,8 @@
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Pet.Repository.Infrastructure;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Interfaces.Repositories;
+using System.Linq.Expressions;
 
 namespace Pet.WebAPI.Repositories
 {
@@ -42,6 +44,11 @@ namespace Pet.WebAPI.Repositories
             };
 
             return base.Add(servico_agendamento);
+        }
+
+        public Task Complete(ServicoAgenda entity)
+        {
+            return base.Update(entity);
         }
     }
 }

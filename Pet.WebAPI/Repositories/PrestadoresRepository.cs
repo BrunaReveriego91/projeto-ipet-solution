@@ -23,5 +23,26 @@ namespace Pet.WebAPI.Repositories
                          .FirstOrDefault();
             return query;
         }
+
+        public override void Delete(Prestador prestador)
+        {
+            try
+            {
+                base.Delete(prestador);
+            }
+            catch (DbUpdateException)
+            {
+                throw new Exception($"Não é possível excluir o Prestador, o mesmo já deve ter Agendamentos cadastrados.");
+            }
+        }
+
+        public IEnumerable<Agenda> GetAgendamentosPrestador(int prestador_id)
+        {
+            return (from a in DataContext.Agendamentos
+                    where a.PrestadorId == prestador_id
+                    select a)
+                    .Include(x => x.Servicos)
+                    .ToList();
+        }
     }
 }

@@ -14,11 +14,17 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SysIPetUI.Models;
 
 namespace SysIPetUI.Areas.Identity.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        // Pegando o endereço com HttpClient        
+        private readonly string urlCliente = "https://localhost:44321/api/Cliente";
+        private readonly string urlPet = "https://localhost:44321/api/Pets";
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
@@ -112,15 +118,45 @@ namespace SysIPetUI.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+                    //Acessa a API e Verifica se o Cliente e o Pet ainda não foram cadastrados
+                    var cliente = new HttpClient();
+                    var pet = new HttpClient();
+                    HttpResponseMessage responseCliente = await cliente.GetAsync(urlCliente);
+                    HttpResponseMessage responsePet = await pet.GetAsync(urlPet);
+                    responseCliente.EnsureSuccessStatusCode();
+                    responsePet.EnsureSuccessStatusCode();
+                    string responseBodyCliente = await responseCliente.Content.ReadAsStringAsync();
+                    string responseBodyPet = await responsePet.Content.ReadAsStringAsync();
+                    List<ClienteViewModel> listaCliente = new List<ClienteViewModel>();
+                    List<PetsListViewModel> listaPets = new List<PetsListViewModel>();
+                    listaCliente = JsonConvert.DeserializeObject<List<ClienteViewModel>>(responseBodyCliente);
+                    listaPets = JsonConvert.DeserializeObject<List<PetsListViewModel>>(responseBodyPet);
+
+                    //Se for Nulo Direciona o Cliente para completar o cadastro
+                    if (listaCliente == null)
+                    {
+                        return RedirectToAction("CadastroCliente", "Cliente");
+                    }
+
+                    //Se for Nulo Direciona o Cliente para completar o cadastro do Pet
+                    if (listaPets.Count == 0)
+                    {
+                        return RedirectToAction("CadastroPet", "Pets");
+                    }
+
                     return LocalRedirect(returnUrl);
                 }
+
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
