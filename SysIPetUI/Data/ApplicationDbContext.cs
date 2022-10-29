@@ -16,5 +16,7 @@ namespace SysIPetUI.Data
         public DbSet<SysIPetUI.Models.EnderecoClienteViewModel> EnderecoClienteViewModel { get; set; }
         public DbSet<SysIPetUI.Models.PetsListViewModel> PetsDropdownListViewModel { get; set; }
         public DbSet<SysIPetUI.Models.PetsListItem> PetsListItem { get; set; }
+        public DbSet<SysIPetUI.Models.PrestadorViewModel> PrestadorViewModel { get; set; }
+        public DbSet<SysIPetUI.Models.ServicoViewModel> ServicosViewModel { get; set; }
     }
 }

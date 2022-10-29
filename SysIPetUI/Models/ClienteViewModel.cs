@@ -10,6 +10,15 @@
         public string? Telefone1 { get; set; }
         public bool WhatsApp { get; set; }
         public string? Telefone2 { get; set; }
-        public EnderecoClienteViewModel? Endereco { get; set; }
+        public EnderecoClienteViewModel? Endereco { get; set; }        
+
+        //Construtor:
+        public ClienteViewModel()
+        {
+            this.ClienteList = new List<ClienteListItem>();
+        }
+
+        //Get Listas
+        public List<ClienteListItem>? ClienteList { get; set; }
     }
 }
