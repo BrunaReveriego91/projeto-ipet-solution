@@ -20,39 +20,56 @@ namespace Pet.WebAPI.Services
             _servicosRepository = servicosRepository;
         }
 
-        public async Task<ServicoPrestador> Add(NovoServicoPrestador novoServico)
+        public async Task<List<ServicoPrestador>> Add(List<NovoServicoPrestador> novoServico)
         {
+            List<ServicoPrestador> listaServicoPrestador = new List<ServicoPrestador>();
             // Verifica se o Prestador existe
-            var prestador = _prestadoresRepository.Get(novoServico.Prestador_Id);
+            var prestador = _prestadoresRepository.Get(novoServico.FirstOrDefault().Prestador_Id);
 
             if (prestador is null)
             {
-                throw new NullReferenceException($"Prestador não encontrado pelo Id {novoServico.Prestador_Id}.");
+                throw new NullReferenceException($"Prestador não encontrado pelo Id {novoServico.FirstOrDefault().Prestador_Id}.");
             }
 
             // Verifica se o Serviço existe
-            var servico = _servicosRepository.Get(novoServico.Servico_Id);
 
-            if (servico is null)
-            {
-                throw new NullReferenceException($"Serviço não encontrado pelo Id {novoServico.Servico_Id}.");
-            }
+            //TODO: Verificar se servico existe na lista 
+            //Eberton estou comentando pois precisa ser refeito
+            //var servico = _servicosRepository.Get(novoServico.FirstOrDefault().Servico_Id);
 
-            var srv_prest = new ServicoPrestador()
-            {
-                Prestador = prestador,
-                Servico = servico,
-                PrestadorId = novoServico.Prestador_Id,
-                ServicoId = novoServico.Servico_Id,
-                Ativo = novoServico.Ativo,
-                Valor = novoServico.Valor,
-            };
+            //if (servico is null)
+            //{
+            //    throw new NullReferenceException($"Serviço não encontrado pelo Id {novoServico.FirstOrDefault().Servico_Id}.");
+            //}
+
 
             try
             {
                 try
                 {
-                    return await _repository.Add(srv_prest);
+                    foreach (var servicoPrestador in novoServico)
+                    {
+                        var servico = _servicosRepository.Get(servicoPrestador.Servico_Id);
+
+                        if (servico is null)
+                        {
+                            throw new NullReferenceException($"Serviço não encontrado pelo Id {servicoPrestador.Servico_Id}.");
+                        }
+
+                        var srv_prest = new ServicoPrestador()
+                        {
+                            Prestador = prestador,
+                            Servico = servico,
+                            PrestadorId = servicoPrestador.Prestador_Id,
+                            ServicoId = servicoPrestador.Servico_Id,
+                            Ativo = servicoPrestador.Ativo,
+                            Valor = servicoPrestador.Valor
+                        };
+                        listaServicoPrestador.Add(srv_prest);            
+                        await _repository.Add(srv_prest);
+                    }
+
+                    return listaServicoPrestador;
                 }
                 catch (DbUpdateException dbupdate)
                 {
@@ -80,7 +97,7 @@ namespace Pet.WebAPI.Services
                     switch (erro.Number)
                     {
                         case 2601:
-                            throw new Exception($"Serviço Id {novoServico.Servico_Id} duplicado para o Prestador {novoServico.Prestador_Id}.");
+                            throw new Exception($"Serviço Id {novoServico.FirstOrDefault().Servico_Id} duplicado para o Prestador {novoServico.FirstOrDefault().Prestador_Id}.");
 
                         default:
                             throw;

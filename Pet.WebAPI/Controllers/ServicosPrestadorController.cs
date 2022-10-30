@@ -42,12 +42,12 @@ namespace Pet.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostServicoPrestador([FromBody] NovoServicoPrestador servico)
+        public async Task<IActionResult> PostServicoPrestador([FromBody] List<NovoServicoPrestador> servico)
         {
             try
             {
                 var result = await _service.Add(servico);
-                return CreatedAtAction(nameof(GetServicosPrestador), new { prestador_id = result.PrestadorId }, result);
+                return CreatedAtAction(nameof(GetServicosPrestador), new { prestador_id = result.FirstOrDefault().PrestadorId }, result);
             }
             catch (NullReferenceException ex)
             {

@@ -136,8 +136,8 @@ namespace SysIPetUI.Controllers
                         Nome = Convert.ToString(idr["Nome"]),
                         Descricao = Convert.ToString(idr["Descricao"]),                        
                         Ativo = Convert.ToBoolean(idr["Ativo"]),
-                        PrestadorId = Convert.ToInt32(PrestadorId),
-                        ServicoId = Convert.ToInt32(idr["Id"]),
+                        Prestador_Id = Convert.ToInt32(PrestadorId),
+                        Servico_Id = Convert.ToInt32(idr["Id"]),
                     });
                 }
             }
