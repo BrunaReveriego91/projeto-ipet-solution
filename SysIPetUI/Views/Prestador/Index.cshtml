@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SysIPetUI.Models.PrestadorViewModel>
+﻿@model SysIPetUI.Models.PrestadorViewModel
 
 @{
     ViewData["Title"] = "Casdastro Prestador";
@@ -23,7 +23,7 @@
                         <div class="row">
 
                             <!-- Divisão da Pág Lado Esquerdo -->
-                            <section class="col-lg-7 connectedSortable">
+                            <section class="col-lg-12 connectedSortable">
 
                                 <div class="card">
 
@@ -63,47 +63,70 @@
                                                     <th>
                                                         CPF-CNPJ
                                                     </th>
+                                                    <th>
+                                                        Telefone
+                                                    </th>
+                                                    <th>
+                                                        Logradouro
+                                                    </th>
+                                                    <th>
+                                                        Bairro
+                                                    </th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
 
                                             <tbody class="todo-list" data-widget="todo-list">
-                                                @foreach (var item in Model)
+
+                                                @if (Model.PrestadorList.Count > 0) 
                                                 {
-                                                    <tr>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.NomeCompleto)
-                                                        </td>
-                                                        <td>
-                                                            @Html.DisplayFor(modelItem => item.CPF_CNPJ)
-                                                        </td>
-                                                        <td>
+                                                    @for (int i = 0; i < Model.PrestadorList.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].NomeCompleto)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].CPF_CNPJ)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Telefone)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Logradouro)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Bairro)
+                                                            </td>
 
-                                                            <!-- Ferramentas gerais, como editar ou excluir-->
-                                                            <span class="tools">
+                                                            <td>
 
-                                                                <button type="button"
+                                                                <!-- Ferramentas gerais, como editar ou excluir-->
+                                                                <span class="tools">
+
+                                                                    <button type="button"
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
                                                                     data-target="#modalEditarPrestador"
-                                                                    data-url="@Url.Action("EditPrestador", new { id = @item.Id })">
-                                                                    <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
-                                                                </button>
+                                                                    data-url="@Url.Action("EditPrestador", new { id = @Model.PrestadorList[i].Id })">
+                                                                        <i class="btn-tool fas fa-edit" title="Editar Lançamento"></i>
+                                                                    </button>
 
-                                                                <button type="button"
+                                                                    <button type="button"
                                                                     class="btn btn-tool"
                                                                     data-toggle="ajax-modal"
                                                                     data-target="#modalExcluirPrestador"
-                                                                    data-url="@Url.Action("ExcluirPrestador", new { id = @item.Id })">
-                                                                    <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
-                                                                </button>                                                                
+                                                                    data-url="@Url.Action("ExcluirPrestador", new { id = @Model.PrestadorList[i].Id })">
+                                                                        <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                                    </button>
 
-                                                            </span>
+                                                                </span>
 
-                                                        </td>
+                                                            </td>
 
-                                                    </tr>
-                                                }
+                                                        </tr>
+                                                    }
+                                                }                                                
 
                                             </tbody>
 

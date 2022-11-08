@@ -42,36 +42,265 @@
 
                 <div class="form-group">
 
+                    <!--Validação-->
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <label class="control-label col-md-auto">
-                        <span class="brand-text font-weight-light">
-                            <b class="text-blue">Nome do Prestador</b>
-                            <b class="text-red">*</b>
-                        </span>
-                    </label>
+                    <div class="row">
 
-                    <div class="col-md-auto" title="Digite um novo Prestador.">
+                        <!--Nome Completo-->
+                        <div class="col-md-12">
 
-                        <input asp-for="NomeCompleto" class="form-control" />
-                        <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Nome Completo:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+                                <input asp-for="NomeCompleto" class="form-control" />
+
+                            </div>
+
+                        </div>
 
                     </div>
 
-                    <label class="control-label col-md-auto">
-                        <span class="brand-text font-weight-light">
-                            <b class="text-blue">CPF/CNPJ</b>
-                            <b class="text-red">*</b>
-                        </span>
-                    </label>
+                    <div class="row">
 
-                    <div class="col-md-auto" title="Digite um CPF ou CNPJ.">
+                        <!--CPF_CNPJ-->
+                        <div class="col-md-6">
 
-                        <input asp-for="CPF_CNPJ" class="form-control" />
-                        <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">CPF_CNPJ:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
 
-                    </div>                   
-                    
+                            <div class="col-md-auto" title="Digite um CPF válido.">
+
+                                <span asp-validation-for="CPF_CNPJ" class="text-danger"></span>
+                                <input asp-for="CPF_CNPJ" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--Telefone-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Telefone:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu Telefone.">
+
+                                <span asp-validation-for="Telefone" class="text-danger"></span>
+                                <input asp-for="Telefone" class="form-control" />
+
+                            </div>
+
+                            <div class="col-md-auto">
+
+                                <div class="form-check" title="Marque se esse Telefone for WhatsApp">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="WhatsApp" /> Esse Telefone é WhatsApp?
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!--Endereço-->
+                    <div class="row">
+
+                        <!--Logradouro-->
+                        <div class="col-md-12">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Logradouro:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite o Logradouro.">
+
+                                <span asp-validation-for="Logradouro" class="text-danger"></span>
+                                <input asp-for="Logradouro" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Número-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Número:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite o Numero do Logradouro.">
+
+                                <span asp-validation-for="Numero" class="text-danger"></span>
+                                <input asp-for="Numero" class="form-control" />
+
+                            </div>
+
+                            <div class="col-md-auto">
+
+                                <div class="form-check" title="Marque se esse endereço for sem número">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="SemNumero" /> Sem número
+                                    </label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--Complemento-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Complemento:</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite o Complemento.">
+
+                                <span asp-validation-for="Complemento" class="text-danger"></span>
+                                <input asp-for="Complemento" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Bairro-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Bairro:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="Bairro" class="text-danger"></span>
+                                <input asp-for="Bairro" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--Cidade-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Cidade:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="Cidade" class="text-danger"></span>
+                                <input asp-for="Cidade" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--UF-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">UF:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="UF" class="text-danger"></span>
+                                <input asp-for="UF" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                        <!--CEP-->
+                        <div class="col-md-6">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">CEP:</b>
+                                    <b class="text-red">*</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite seu nome completo.">
+
+                                <span asp-validation-for="CEP" class="text-danger"></span>
+                                <input asp-for="CEP" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!--Ponto de Referencia-->
+                        <div class="col-md-12">
+
+                            <label class="control-label col-md-auto">
+                                <span class="brand-text font-weight-light">
+                                    <b class="text-blue">Ponto de Referência:</b>
+                                </span>
+                            </label>
+
+                            <div class="col-md-auto" title="Digite uma Referencia.">
+
+                                <span asp-validation-for="Referencia" class="text-danger"></span>
+                                <input asp-for="Referencia" class="form-control" />
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
