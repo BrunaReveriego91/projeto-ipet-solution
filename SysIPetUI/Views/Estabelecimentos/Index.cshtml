@@ -56,10 +56,13 @@
     {
         foreach (var item in Model.EstabelecimentosList)
         {
-            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@item.Servicos');
+            foreach (var servico in item.Servicos)
+            {
+                @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@servico');
+            }
         }
     }
-                    }
+                            }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
