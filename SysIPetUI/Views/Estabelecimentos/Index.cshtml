@@ -1,4 +1,5 @@
-﻿@model SysIPetUI.Models.EstabelecimentosLists
+﻿@using System.Text
+@model SysIPetUI.Models.EstabelecimentosLists
 @{
     ViewBag.Title = "Estabelecimentos";
 }
@@ -54,15 +55,24 @@
         //add markers to map
     @if (Model.EstabelecimentosList != null)
     {
+        StringBuilder s = new StringBuilder();
         foreach (var item in Model.EstabelecimentosList)
         {
             foreach (var servico in item.Servicos)
             {
-                @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@servico');
+
+                s.Append("- ");
+                s.Append(servico.Nome);
+                s.Append(" ");
+                s.Append(" R$ 50.00    ");
+                s.Append(@"\n");
+
             }
+
+            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()');
         }
     }
-                            }
+                                            }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 

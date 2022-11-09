@@ -58,7 +58,7 @@ namespace Pet.WebAPI.Services
 
             foreach (var servicoPrestador in listaServicoPrestador)
             {
-                var servico = _servicosService.Get(servicoPrestador.Id);
+                var servico = _servicosService.Get(servicoPrestador.ServicoId);
                 if (servico is not null && servico.Ativo == true)
                     servicosPrestador.Add(servico);
             }

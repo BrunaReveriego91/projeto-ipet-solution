@@ -24,6 +24,17 @@ namespace Pet.WebAPI.Repositories
             return query;
         }
 
+        public override IEnumerable<Prestador> GetAll()
+        {
+            var query = (from p in DataContext.Prestadores
+                         select p)
+                         .Include(e => e.Enderecos)
+                         .Include(s => s.Servicos);
+
+            return query;
+        }
+
+
         public override void Delete(Prestador prestador)
         {
             try
