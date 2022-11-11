@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Pet.WebAPI.Domain;
 using Pet.WebAPI.Domain.Entities;
 using Pet.WebAPI.Domain.Entities.Maps;
 using Pet.WebAPI.Domain.Settings;
@@ -37,7 +38,7 @@ namespace Pet.WebAPI.Services
                 var listaServicoPrestador = _servicosPrestadorService.GetAllFromPrestador(prestador.Id).Where(x => x.Ativo == true);
                 if (listaServicoPrestador is not null)
                 {
-                    List<Servico> listaservicosPrestadorDetalhes = GetServicosDetalhesPrestadores(listaServicoPrestador);
+                    List<ServicoMaps> listaservicosPrestadorDetalhes = GetServicosDetalhesPrestadores(listaServicoPrestador);
 
                     foreach (var enderecoPrestador in prestador.Enderecos)
                     {
@@ -52,15 +53,15 @@ namespace Pet.WebAPI.Services
             return prestadoresMaps;
         }
 
-        private List<Servico> GetServicosDetalhesPrestadores(IEnumerable<ServicoPrestador> listaServicoPrestador)
+        private List<ServicoMaps> GetServicosDetalhesPrestadores(IEnumerable<ServicoPrestador> listaServicoPrestador)
         {
-            var servicosPrestador = new List<Servico>();
+            var servicosPrestador = new List<ServicoMaps>();
 
             foreach (var servicoPrestador in listaServicoPrestador)
             {
                 var servico = _servicosService.Get(servicoPrestador.ServicoId);
                 if (servico is not null && servico.Ativo == true)
-                    servicosPrestador.Add(servico);
+                    servicosPrestador.Add(new ServicoMaps(servico.Id, servico.Nome, servico.Descricao, servicoPrestador.Ativo, servicoPrestador.Valor));
             }
 
             return servicosPrestador;

@@ -9,7 +9,8 @@
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
             credentials: 'Aps_5kSQcUT8FGgG-RMhSjc71DfwtZEee7IYbz__tU1BuLRh8dyDwj2oj72aQUW_',
             mapTypeId: Microsoft.Maps.MapTypeId.road,
-            zoom: 5
+            zoom: 5,
+            theme: new window.Microsoft.Maps.Themes.BingTheme()
         });
 
         // Create the infobox for the pushpin
@@ -20,7 +21,20 @@
             var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
 
             infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
-                visible: false
+                visible: false,
+                showPointer: false, 
+                showCloseButton: false,
+                actions: [{
+                    label: 'Handler1',
+                    eventHandler: function () {
+                    alert('Handler1');
+                }
+                }, {
+                label: 'Handler2',
+                eventHandler: function () {
+                    alert('Handler2');
+                }
+            }]
             });
 
             marker.metadata = {
@@ -52,7 +66,7 @@
             infobox.setOptions({ visible: false });
         }
 
-        //add markers to map
+    //add markers to map
     @if (Model.EstabelecimentosList != null)
     {
         StringBuilder s = new StringBuilder();
@@ -60,11 +74,13 @@
         {
             foreach (var servico in item.Servicos)
             {
+                string valor;
 
                 s.Append("- ");
                 s.Append(servico.Nome);
                 s.Append(" ");
-                s.Append(" R$ 50.00    ");
+                s.Append(" R$");
+                s.Append(valor = servico.Valor.ToString().Length <= 2 ? (servico.Valor.ToString() + ".00") : servico.Valor.ToString());
                 s.Append(@"\n");
 
             }
@@ -72,7 +88,9 @@
             @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()');
         }
     }
-                                            }
+
+
+ }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
