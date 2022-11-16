@@ -10,9 +10,12 @@
 
         //Serviço Prestador        
         public int Prestador_Id { get; set; }
-        //public string? Prestador { get; set; }
+        public string? Prestador { get; set; }
         public int Servico_Id { get; set; }
-        //public string? Servico { get; set; }
+        public string? Servico { get; set; }
         public float Valor { get; set; }
+        public int Id_Servico_Prestador { get; set; }
+        public int Id_Endereco_Prestador { get; set; }
+        public string? Mensagem_Cliente { get; set; }
     }
 }

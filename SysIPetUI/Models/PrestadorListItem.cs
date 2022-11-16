@@ -8,6 +8,7 @@
         public string? CPF_CNPJ { get; set; }
         public string? Telefone { get; set; }
         public bool WhatsApp { get; set; }
+        public bool Ativo { get; set; }
 
         public int PrestadorId { get; set; }
         public string? Logradouro { get; set; }
