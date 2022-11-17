@@ -2,7 +2,7 @@
 {
     public class EstabelecimentoViewModel
     {
-        public EstabelecimentoViewModel(string? nomeCompleto, List<ServicoListItem> servicos, double latitude, double longitude)
+        public EstabelecimentoViewModel(string? nomeCompleto, List<ServicoListItem> servicos, string latitude, string longitude)
         {
             NomeCompleto = nomeCompleto;
             Servicos = servicos;
@@ -12,8 +12,8 @@
 
         public string? NomeCompleto { get; set; }
         public List<ServicoListItem> Servicos { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
 
     }
 

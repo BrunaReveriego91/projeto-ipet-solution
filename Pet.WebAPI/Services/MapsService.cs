@@ -89,8 +89,8 @@ namespace Pet.WebAPI.Services
 
                         foreach (var item in maps.resourceSets.ToList())
                         {
-                            coordenadas[0] = item.resources.FirstOrDefault().point.coordinates[0];
-                            coordenadas[1] = item.resources.FirstOrDefault().point.coordinates[1];
+                            coordenadas[0] = item.resources.FirstOrDefault().bbox[0];
+                            coordenadas[1] = item.resources.FirstOrDefault().bbox[1];
                         }
                     }
                 }

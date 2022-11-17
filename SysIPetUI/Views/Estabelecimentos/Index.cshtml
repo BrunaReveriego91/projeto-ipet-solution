@@ -16,25 +16,42 @@
         // Create the infobox for the pushpin
         var infobox = null;
 
+        function SendToScheduleService() {
+            fetch('https://example.com/profile', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+
         //declare addMarker function
         function addMarker(latitude, longitude, title, description, pid) {
             var marker = new Microsoft.Maps.Pushpin(new Microsoft.Maps.Location(latitude, longitude), { color: 'green' });
 
             infobox = new Microsoft.Maps.Infobox(marker.getLocation(), {
                 visible: false,
-                showPointer: false, 
+                showPointer: false,
                 showCloseButton: false,
                 actions: [{
                     label: 'Handler1',
-                    eventHandler: function () {
-                    alert('Handler1');
-                }
+                    eventHandler: function() {
+                        SendToScheduleService();
+                    }
                 }, {
-                label: 'Handler2',
-                eventHandler: function () {
-                    alert('Handler2');
-                }
-            }]
+                    label: 'Handler2',
+                    eventHandler: function() {
+                        alert('Handler2');
+                    }
+                }]
             });
 
             marker.metadata = {
@@ -42,6 +59,8 @@
                 title: title,
                 description: description
             };
+
+            console.log(marker.metadata.title);
 
             Microsoft.Maps.Events.addHandler(marker, 'mouseout', hideInfobox);
             Microsoft.Maps.Events.addHandler(marker, 'mouseover', showInfobox);
@@ -66,7 +85,7 @@
             infobox.setOptions({ visible: false });
         }
 
-    //add markers to map
+        //add markers to map
     @if (Model.EstabelecimentosList != null)
     {
         StringBuilder s = new StringBuilder();
@@ -90,7 +109,7 @@
     }
 
 
- }
+         }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
