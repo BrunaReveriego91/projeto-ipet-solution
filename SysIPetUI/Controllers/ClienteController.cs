@@ -15,7 +15,7 @@ namespace SysIPetUI.Controllers
         private readonly string url = "https://localhost:44321/api/Cliente";
 
         // GET: ClienteController
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
             //Criando uma nova Instância
             ClienteViewModel? viewModel = new ClienteViewModel();

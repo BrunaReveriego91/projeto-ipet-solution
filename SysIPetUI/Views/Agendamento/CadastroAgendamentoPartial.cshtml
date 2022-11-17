@@ -1,0 +1,310 @@
+﻿@model SysIPetUI.Models.AgendamentoViewModel
+
+@{
+    ViewData["Title"] = "Agendamento de Serviços";
+}
+
+<div class="wrapper">
+
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-9 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-1">
+
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
+                                            <span class="brand-text font-weight-light">
+
+                                                <b class="text-gray text-lg">
+                                                    @ViewData["Title"]
+                                                </b>
+
+                                                <b class="text-warning text-lg">
+                                                    <i class="ion ion-ios-cart-outline"></i> +
+                                                </b>
+
+                                            </span>
+
+                                        </h3>                                        
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form asp-action="CadastroAgendamentoPartial" class="form-group">
+
+                                            <!--Campo oculto: Guada o ID - Expressão Lâmbida: (m=> m)-->
+                                            @Html.HiddenFor(m => m.Id_Prestador)
+
+                                            <!--Validação-->
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                            
+                                            
+                                            <!--Prestador Escolhido-->
+                                            <div class="row">
+
+                                                <div class="card card-gray card-outline elevation-2 col-lg-12">
+
+                                                    <div class="card-header border-1">
+
+                                                        <h3 class="card-title">
+
+                                                            <span class="brand-text font-weight-light">
+                                                                <b class="text-gray"><i class="fas fa-tools"></i> Prestador de Serviços Escolhido</b>
+                                                            </span>
+
+                                                        </h3>
+
+                                                    </div>
+
+                                                    <div class="card-body">
+
+                                                        <table id="prestadorEscolhido" class="table table-hover">
+
+                                                            <thead class="bg-light">
+                                                                <tr>
+                                                                    <th>
+                                                                        Nome
+                                                                    </th>
+                                                                    <th>
+                                                                        CPF-CNPJ
+                                                                    </th>
+                                                                    <th>
+                                                                        Telefone
+                                                                    </th>
+                                                                    <th>
+                                                                        Logradouro
+                                                                    </th>
+                                                                    <th>
+                                                                        Bairro
+                                                                    </th>
+                                                                    <th>
+                                                                        Opção
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody class="todo-list" data-widget="todo-list">
+
+                                                                @if (Model.PrestadorList.Count > 0)
+                                                                {
+                                                                    @for (int i = 0; i < Model.PrestadorList.Count; i++)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].NomeCompleto)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].CPF_CNPJ)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Telefone)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Logradouro)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Bairro)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Ativo)
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    }
+                                                                }
+
+                                                            </tbody>
+
+                                                        </table>                                                                                                            
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <!--Seleção dos Serviços-->
+                                            <div class="row">
+
+                                                <div class="card card-success card-outline elevation-2 col-lg-12">
+
+                                                    <div class="card-header border-1">
+
+                                                        <h3 class="card-title">
+
+                                                            <span class="brand-text font-weight-light">
+                                                                <b class="text-gray"><i class="fas fa-tools"></i> Excolha um ou mais Serviços</b>
+                                                            </span>
+
+                                                        </h3>
+
+                                                    </div>
+
+                                                    <div class="card-body">
+
+                                                        <table id="servicos" class="table table-hover">
+
+                                                            <thead class="bg-green">
+                                                                <tr>
+                                                                    <th>
+                                                                        Nome
+                                                                    </th>
+                                                                    <th>
+                                                                        Descrição
+                                                                    </th>
+                                                                    <th>
+                                                                        Valor
+                                                                    </th>
+                                                                    <th>
+                                                                        Mensagem
+                                                                    </th>
+                                                                    <th>
+                                                                        Opção
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody class="todo-list" data-widget="todo-list">
+
+                                                                @if (Model.Servicos.Count > 0)
+                                                                {
+                                                                    @for (int i = 0; i < Model.Servicos.Count; i++)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.Servicos[i].Nome)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.Servicos[i].Descricao)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.Servicos[i].Valor)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.EditorFor(modelItem => modelItem.Servicos[i].Mensagem_Cliente)
+                                                                            </td>
+                                                                            <td title="Marque se deseja escolher este Serviço.">
+                                                                                @Html.CheckBoxFor(model => model.Servicos[i].Ativo)
+                                                                                @Html.HiddenFor(model => model.Servicos[i].Id)
+                                                                                @Html.HiddenFor(model => model.Servicos[i].Id_Servico_Prestador)
+                                                                                @Html.HiddenFor(model => model.Servicos[i].Id_Endereco_Prestador)
+                                                                            </td>
+
+                                                                        </tr>
+                                                                    }
+                                                                }
+
+                                                            </tbody>
+
+                                                        </table>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <!--Data de Agendamento-->
+                                                <div class="col-md-6">
+
+                                                    <label class="control-label col-md-auto">
+                                                        <span class="brand-text font-weight-light">
+                                                            <b class="text-blue">Data Agendamento:</b>
+                                                            <b class="text-red">*</b>
+                                                        </span>
+                                                    </label>
+
+                                                    <div class="col-md-auto" title="Digite ou escolha a data de Agendamento do Serviço.">
+
+                                                        <span asp-validation-for="Data_Agendamento" class="text-danger"></span>
+                                                        <input asp-for="Data_Agendamento" class="form-control" />
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="text-danger text-right">@Html.ViewData["Message"]</div>
+
+                                            <hr />
+                                            <p>Você está prestes a Incluir um Agendamento de Serviço. Você Confirma a inclusão?</p>
+
+                                            <hr />
+                                            <div class="form-group justify-content-between text-right">
+                                                
+                                                <button id="buttonConfirmarVisible" type="submit" value="Incluir" class="btn btn-success">Confirmar</button>
+                                                <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+                                            </div>
+                                        </form>
+
+                                    </div>                                    
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@*<script type="text/javascript">
+
+    $(function () {
+        'use strict'        
+
+        //------------------------------------------------------------------
+        // Agendamento Exibir
+        //------------------------------------------------------------------
+        //Mostrar Ocultar Botão click
+        $('#buttonSelecionarProsseguir').click(mostrarCardsAgendamento);
+
+        //Função Mostrar card Serviços
+        function mostrarCardsAgendamento() {
+            $('#formPrestador').toggle();
+            $('#formPrestadorEscolhido').toggle();
+            $('#formServicos').toggle();
+            $('#FormDataAgendamento').toggle();
+            $('#formConcluir').toggle();
+        }
+
+        
+
+    });
+
+</script>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

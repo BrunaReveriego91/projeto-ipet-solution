@@ -1,0 +1,57 @@
+﻿@model SysIPetUI.Models.ServicoViewModel
+
+@{
+    ViewData["Title"] = "ServicoPrestador";
+}
+
+<h1>ServicoPrestador</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+
+    <thead>
+
+        <tr>
+            <th></th>
+            <th>Servico</th>
+            <th>Descrição dos Servicos</th>
+            <th>Preço R$</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model.ServicoList)
+        {
+            <tr>
+                <td title="Marque se deseja Prestar esse Serviço.">
+                    @Html.CheckBoxFor(modelItem => item.Ativo)
+                    @Html.HiddenFor(modelItem => item.Servico_Id)
+                    @Html.HiddenFor(modelItem => item.Prestador_Id)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>                
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>

@@ -321,7 +321,7 @@
                                     $('#modalIncluirCliente').modal('show');
                                     $('#modalIncluirPet').modal('show');
                                     $('#modalCadastroPet').modal('show');
-
+                                    $('#modalIncluirAgendamento').modal('show');
                                 }
                             );
                         });
@@ -602,7 +602,7 @@
                 <script src="~/js/site.js"></script>
 
                 @*<!-- Functions -->
-        <script src="~/lib/functions/js/functionsApp.js"></script>*@
+                <script src="~/lib/functions/js/functionsApp.js"></script>*@
 
                 <script type="text/javascript">
 
@@ -671,7 +671,7 @@
                                     $('#modalIncluirCliente').modal('show');
                                     $('#modalIncluirPet').modal('show');
                                     $('#modalCadastroPet').modal('show');
-
+                                    $('#modalIncluirAgendamento').modal('show');
                                 }
                             );
                         });
@@ -695,7 +695,60 @@
                             $('#buttonDarkMode').toggle();
                             $('#buttonLightMode').toggle();
                             $('body').removeClass('dark-mode');
-                        }
+                        }                        
+
+                        //------------------------------------------------------------------
+                        // Data Table - Responsável pelos botões de Exportação da Tabela Prestadores
+                        //------------------------------------------------------------------
+                        $("#prestadores").DataTable({
+                            "paging": true,
+                            "lengthChange": true,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": false,
+                            "responsive": true
+                        }).buttons().container().appendTo('#prestadores_wrapper .col-md-6:eq(0)');
+
+                        //------------------------------------------------------------------
+                        // Data Table - Responsável pelos botões de Exportação da Tabela prestadorEscolhido
+                        //------------------------------------------------------------------
+                        $("#prestadorEscolhido").DataTable({
+                            "paging": false,
+                            "lengthChange": false,
+                            "searching": false,
+                            "ordering": false,
+                            "info": false,
+                            "autoWidth": false,
+                            "responsive": true
+                        }).buttons().container().appendTo('#prestadorEscolhido_wrapper .col-md-6:eq(0)');
+
+                        //------------------------------------------------------------------
+                        // Data Table - Responsável pelos botões de Exportação da Tabela Agendamento
+                        //------------------------------------------------------------------
+                        $("#agendamento").DataTable({
+                            "paging": true,
+                            "lengthChange": false,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": false,
+                            "responsive": true,
+                            "buttons": ["print"]
+                        }).buttons().container().appendTo('#agendamento_wrapper .col-md-6:eq(0)');
+
+                        //------------------------------------------------------------------
+                        // Data Table - Responsável pelos botões de Exportação da Tabela servicos
+                        //------------------------------------------------------------------
+                        $("#servicos").DataTable({
+                            "paging": true,
+                            "lengthChange": true,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": false,
+                            "responsive": true
+                        }).buttons().container().appendTo('#servicos_wrapper .col-md-6:eq(0)');
 
                     });
 

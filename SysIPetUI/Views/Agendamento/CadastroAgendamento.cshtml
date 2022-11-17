@@ -1,0 +1,176 @@
+﻿@model SysIPetUI.Models.AgendamentoViewModel
+
+@{
+    ViewData["Title"] = "Agendamento de Serviços";
+}
+
+<div class="wrapper">
+
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-9 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-1">
+
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
+                                            <span class="brand-text font-weight-light">
+
+                                                <b class="text-gray text-lg">
+                                                    @ViewData["Title"]
+                                                </b>
+
+                                                <b class="text-warning text-lg">
+                                                    <i class="ion ion-ios-cart-outline"></i> +
+                                                </b>
+
+                                            </span>
+
+                                        </h3>                                        
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form asp-action="CadastroAgendamento" class="form-group">                                            
+
+                                            <!--Validação-->
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>                                            
+
+                                            <!--Seleção do Prestador-->
+                                            <div id="formPrestador" class="row">                                                
+
+                                                <div class="card card-success card-outline elevation-2">
+
+                                                    <div class="card-header border-1">
+
+                                                        <h3 class="card-title">
+
+                                                            <span class="brand-text font-weight-light">
+                                                                <b class="text-gray"><i class="fas fa-tools"></i> Escolha um Prestador de Serviços</b>
+                                                            </span>
+
+                                                        </h3>                                                        
+
+                                                    </div>
+
+                                                    <div class="card-body">
+
+                                                        <table id="prestadores" class="table table-hover">
+
+                                                            <thead class="bg-green">
+                                                                <tr>
+                                                                    <th>
+                                                                        Nome
+                                                                    </th>
+                                                                    <th>
+                                                                        CPF-CNPJ
+                                                                    </th>
+                                                                    <th>
+                                                                        Telefone
+                                                                    </th>
+                                                                    <th>
+                                                                        Logradouro
+                                                                    </th>
+                                                                    <th>
+                                                                        Bairro
+                                                                    </th>
+                                                                    <th>
+                                                                        Opção
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            <tbody class="todo-list" data-widget="todo-list">
+
+                                                                @if (Model.PrestadorList.Count > 0)
+                                                                {
+                                                                    @for (int i = 0; i < Model.PrestadorList.Count; i++)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].NomeCompleto)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].CPF_CNPJ)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Telefone)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Logradouro)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => modelItem.PrestadorList[i].Bairro)
+                                                                            </td>
+
+                                                                            <td type="submit" value="Incluir" title="Marque se deseja escolher este Prestador.">
+                                                                                @Html.CheckBoxFor(model => model.PrestadorList[i].Ativo)
+                                                                                @Html.HiddenFor(model => model.PrestadorList[i].Id)                                                                                
+                                                                            </td>                                                                           
+
+                                                                        </tr>
+                                                                    }
+                                                                }
+
+                                                            </tbody>
+
+                                                        </table>
+
+                                                        <div class="text-danger text-center">@Html.ViewData["Message"]</div>
+
+                                                        <hr />                                                        
+                                                        <div class="form-group justify-content-between text-right">
+                                                        
+                                                            <button id="buttonSelecionarProsseguir" type="submit" value="Incluir" class="btn btn-success">Selecionar e Prosseguir</button>                                                            
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                    
+                                            </div>
+                                            
+                                        </form>
+
+                                    </div>                                    
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

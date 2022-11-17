@@ -1,0 +1,112 @@
+﻿@model SysIPetUI.Models.AgendamentoViewModel
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Excluir Serviço Agendado";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header">
+
+        <!-- Título -->
+        <h3 class="card-title">
+
+            <span class="brand-text font-weight-light">
+
+                <b class="text-danger text-lg">
+                    <i class="fas fa-trash-alt"></i>
+                </b>
+
+                <b class="text-gray text-lg">                    
+                    @ViewData["Title"]
+                </b>
+
+            </span>
+
+        </h3>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+
+    </div>
+
+    <div class="modal-body">
+
+        <div class="row">
+
+            <!--Detalhes da Conta-->
+            <div class="col-lg-auto">
+
+                <div class="form-group">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    @if (Model.AgendamentoList.Count > 0)
+                    {
+                        @foreach (var item in Model.AgendamentoList)
+                        {
+                            <ul class="nav nav-pills nav-sidebar flex-column">
+
+                                <li>
+                                    <label class="control-label">
+                                        <span class="brand-text">
+                                            <b class="text-blue">Nome:</b>
+                                        </span>
+                                    </label>
+                                    @Html.DisplayFor(modelItem => item.Servico)
+                                </li>
+
+                                <li>
+                                    <label class="control-label">
+                                        <span class="brand-text">
+                                            <b class="text-blue">Descrição:</b>
+                                        </span>
+                                    </label>
+                                    @Html.DisplayFor(modelItem => item.Servico_Descricao)
+                                </li>
+
+                                <li>
+                                    <label class="control-label">
+                                        <span class="brand-text">
+                                            <b class="text-blue">Serviço_R$:</b>
+                                        </span>
+                                    </label>
+                                    @Html.DisplayFor(modelItem => item.Valor_Servico)
+                                </li>
+
+                                <li>
+                                    <label class="control-label">
+                                        <span class="brand-text">
+                                            <b class="text-blue">Prestador:</b>
+                                        </span>
+                                    </label>
+                                    @Html.DisplayFor(modelItem => item.Nome_Prestador)
+                                </li>
+
+                            </ul>
+
+                            <p>Tem certeza que deseja excluir o Serviço <b>@Html.DisplayFor(modelItem => item.Servico)</b> Agendado?</p>
+                            <p>Esse registro será excluído desta e de todas as outras páginas. <b>Essa ação não poderá ser desfeita.</b></p>
+                        }
+                    }                                        
+
+                </div>
+
+            </div>            
+
+        </div>        
+
+    </div>
+
+    <div class="modal-footer justify-content-between">
+
+        <button id="buttonCancelarVisible" type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="buttonCancelarDisabled" style="display:none" type="button" class="btn btn-default disabled">Cancelar</button>
+        <button id="buttonConfirmarVisible" type="submit" value="Excluir" class="btn btn-danger">Confirmar</button>
+        <button id="buttonConfirmarDisabled" style="display:none" type="button" class="btn btn-success disabled">Confirmar</button>
+
+    </div>
+}

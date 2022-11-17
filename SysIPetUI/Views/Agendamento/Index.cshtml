@@ -1,77 +1,237 @@
-﻿@model IEnumerable<SysIPetUI.Models.AgendamentoViewModel>
+﻿@model SysIPetUI.Models.AgendamentoViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Serviços Agendados";
 }
 
-<h1>Index</h1>
+<div class="wrapper">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.ClienteId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.PrestadorId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Prestador)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Data_Agenda)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Data_Cancelamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Data_Cadastro)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agenda.Servicos)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.ClienteId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Cliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.PrestadorId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Prestador)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Data_Agenda)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Data_Cancelamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Data_Cadastro)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agenda.Servicos)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="content-wrapper">
+
+        <!-- Cabeçalho do Conteúdo da Página -->
+        <div class="content-header">
+
+            <div class="container-fluid">
+
+                <!-- Conteúdo da Página -->
+                <!-- Main content -->
+                <section class="content">
+
+                    <div class="container-fluid">
+
+                        <!--Main Row-->
+                        <div class="row">
+
+                            <!-- Divisão da Pág Lado Esquerdo -->
+                            <section class="col-lg-8 connectedSortable">
+
+                                <div class="card">
+
+                                    <div class="card-header border-0">
+
+                                        <h3 class="card-title">                                                                                      
+                                                                                        
+                                            <span class="brand-text font-weight-light">
+                                                <b class="text-gray"><i class="fas fa-tools"></i> @ViewData["Title"]</b>
+                                            </span>                                           
+
+                                        </h3>
+
+                                        <div class="card-tools">                                            
+                                                                                        
+                                            <span class="brand-text font-weight-light">                                                
+                                                <a asp-controller="Agendamento" asp-action="CadastroAgendamento">
+                                                    <i class="btn-tool fas fa-plus-circle" title="Agendar Novo Serviço"></i>
+                                                </a>
+                                            </span>                                            
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <table id="agendamento" class="table table-hover">
+
+                                            <thead class="bg-lightblue">
+                                                <tr>
+                                                    <th>
+                                                        Agendamento
+                                                    </th>
+                                                    <th>
+                                                        Serviço
+                                                    </th>
+                                                    <th>
+                                                        Descrição
+                                                    </th>
+                                                    <th>
+                                                        Mensagem
+                                                    </th>
+                                                    <th>
+                                                        Descontos
+                                                    </th>
+                                                    <th>
+                                                        Serviço_R$
+                                                    </th>
+                                                    <th>
+                                                        Ação
+                                                    </th>
+                                                    <th>
+                                                        Prestador
+                                                    </th>
+                                                    <th>
+                                                        Telefone Prestador
+                                                    </th>
+                                                    <th>
+                                                        Endereço Prestador
+                                                    </th>
+                                                    <th>
+                                                        Bairro Prestador
+                                                    </th>
+                                                    <th>
+                                                        Data Conclusão do Serviço
+                                                    </th>
+                                                    <th>
+                                                        Mensagem do Prestador
+                                                    </th>                                                    
+                                                </tr>
+                                            </thead>
+
+                                            <tbody class="todo-list" data-widget="todo-list">
+
+                                                @if (Model.AgendamentoList.Count > 0)
+                                                {
+                                                    @for (int i = 0; i < Model.AgendamentoList.Count; i++)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Data_Agendamento)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Servico)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Servico_Descricao)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Mensagem_Cliente)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Desconto_Servico)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Valor_Servico)
+                                                            </td>
+
+                                                            <td>
+
+                                                                <!-- Ferramentas gerais, como editar ou excluir-->
+                                                                <span class="tools">                                                                    
+
+                                                                    <button type="button"
+                                                                    class="btn btn-tool"
+                                                                    data-toggle="ajax-modal"
+                                                                    data-target="#modalExcluirAgendamento"
+                                                                    data-url="@Url.Action("ExcluirAgendamento", new { id = @Model.AgendamentoList[i].AgendamentoId })">
+                                                                        <i class="btn-tool fas fa-trash-alt" title="Excluir Lançamento"></i>
+                                                                    </button>
+
+                                                                </span>
+
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Nome_Prestador)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Telefone_Prestador)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Rua_Prestador)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Bairro_Prestador)
+                                                            </td>
+                                                                                                                        
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Data_Conclusao)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => modelItem.AgendamentoList[i].Mensagem_Prestador)
+                                                            </td>
+                                                            
+                                                        </tr>
+                                                    }
+                                                }                                                
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>                                    
+
+                                </div>
+
+                            </section>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Incluir Agendamento -->
+<div id="modalIncluirAgendamento" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Editar Agendamento -->
+<div id="modalEditarAgendamento" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Excluir Agendamento -->
+<div id="modalExcluirAgendamento" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-keyboard="false" data-backdrop="static">
+
+    <div class="modal-dialog" role="document">
+
+        <!-- Partial View Load Dynamically -->
+        <div id="conteudoModal" class="modal-content">
+        </div>
+
+    </div>
+
+</div>

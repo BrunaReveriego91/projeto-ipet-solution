@@ -15,13 +15,11 @@ namespace SysIPetUI.Controllers
     public class PrestadorController : Controller
     {
         // Pegando o endereço com HttpClient        
-        private readonly string urlPrestadores = "https://localhost:44321/api/Prestadores";
-        private readonly string urlServicos = "https://localhost:44321/api/Servicos";
-        private readonly string urlServicosPrestador = "https://localhost:44321/api/ServicosPrestador";
+        private readonly string urlPrestadores = "https://localhost:44321/api/Prestadores";        
         private readonly string urlEnderecoPrestador = "https://localhost:44321/api/EnderecoPrestador";        
 
         // GET: PrestadorController
-        public async Task<IActionResult> Index()
+        public ActionResult Index()
         {
             //Criando uma nova Instância
             PrestadorViewModel? viewModel = new PrestadorViewModel();            
@@ -145,24 +143,7 @@ namespace SysIPetUI.Controllers
         {
             PrestadorViewModel? viewModel = new PrestadorViewModel();
             viewModel = GetPrestadorViewModel();
-            return View(viewModel);
-
-            //PrestadorViewModel? viewModel = new PrestadorViewModel();
-            //viewModel.PrestadorList = GetPrestadorList();
-            //return View(viewModel);
-
-            //PrestadorViewModel? viewModel = new PrestadorViewModel();
-
-            //using (var httpClient = new HttpClient())
-            //{
-            //    using (var response = await httpClient.GetAsync(urlPrestadores + "/" + Id))
-            //    {
-            //        string responseBody = await response.Content.ReadAsStringAsync();
-            //        viewModel = JsonConvert.DeserializeObject<PrestadorViewModel>(responseBody);
-            //    }
-            //}
-
-            //return View(viewModel);
+            return View(viewModel);            
         }
 
         // POST: PrestadorController/Edit/5
