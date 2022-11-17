@@ -38,7 +38,26 @@ namespace SysIPetUI.Controllers
             {
                 return View("Error");
             }
-        }               
+        }
+
+        // GET: Agendamento do Lado do Prestador
+        public IActionResult PrestadorAgendamento()
+        {
+            try
+            {
+                //Criando uma nova Instância
+                AgendamentoViewModel? viewModel = new AgendamentoViewModel();
+
+                //Preenchendo as Listas            
+                viewModel.AgendamentoList = GetPrestadorAgendamentosList();                
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return View("Error");
+            }
+        }
 
         // GET: Agendamento/CadastroAgendamento
         public IActionResult CadastroAgendamento()
@@ -216,6 +235,38 @@ namespace SysIPetUI.Controllers
 
             //Select na Tabela
             SqlCommand cmd = new SqlCommand("Select Id From Clientes Where IdUsuario = @IdUsuario", con);
+            con.Open();
+
+            //Parâmetros do Where
+            cmd.Parameters.AddWithValue("@IdUsuario", usuarioId);
+
+            //Executa a consulta e armazena o resultado            
+            var result = Convert.ToInt32(cmd.ExecuteScalar());
+
+            //Fecha a conexão
+            con.Close();
+
+            return result;
+        }
+
+        //Pegando o Id do Prestador
+        public int GetIdPrestador()
+        {
+            //Obtem Id do Usuário logado
+            var usuarioId = User.GetIdUsuario();
+
+            //Encontra e faz a leitura do arquivo appsettings.json:
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            //Conexão com o LocalDB
+            var stringConexao = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection con = new SqlConnection(stringConexao);
+
+            //Select na Tabela
+            SqlCommand cmd = new SqlCommand("Select Id From Prestadores Where Id_Prestador = @IdUsuario", con);
             con.Open();
 
             //Parâmetros do Where
@@ -552,6 +603,136 @@ namespace SysIPetUI.Controllers
 
             //Parâmetros do Where
             cmd.Parameters.AddWithValue("@IdCliente", clienteId);
+
+            SqlDataReader idr = cmd.ExecuteReader();
+            List<AgendamentoListItem> agendamentoListItem = new List<AgendamentoListItem>();
+
+            if (idr.HasRows)
+            {
+                while (idr.Read())
+                {
+                    agendamentoListItem.Add(new AgendamentoListItem
+                    {
+                        AgendamentoId = Convert.ToInt32(idr["AgendamentoId"]),
+                        Data_Agendamento = Convert.ToDateTime(idr["Data_Agendamento"]),
+                        Servico = Convert.ToString(idr["Servico"]),
+                        Servico_Descricao = Convert.ToString(idr["Servico_Descricao"]),
+                        Nome_Prestador = Convert.ToString(idr["Nome_Prestador"]),
+                        Rua_Prestador = Convert.ToString(idr["Rua_Prestador"]),
+                        Numero_Prestador = Convert.ToInt32(idr["Numero_Prestador"]),
+                        Bairro_Prestador = Convert.ToString(idr["Bairro_Prestador"]),
+                        Cidade_Prestador = Convert.ToString(idr["Cidade_Prestador"]),
+                        UF_Prestador = Convert.ToString(idr["UF_Prestador"]),
+                        Telefone_Prestador = Convert.ToString(idr["Telefone_Prestador"]),
+                        Data_Cadastro_Prestador = Convert.ToDateTime(idr["Data_Cadastro_Prestador"]),
+                        Valor_Servico = Convert.ToInt32(idr["Valor_Servico"]),
+                        Desconto_Servico = Convert.ToInt32(idr["Desconto_Servico"]),
+                        //Data_Conclusao = Convert.ToDateTime(idr["Data_Conclusao"]),
+                        //Data_Cancelamento = Convert.ToDateTime(idr["Data_Cancelamento"]),
+                        Mensagem_Prestador = Convert.ToString(idr["Mensagem_Prestador"]),
+                        Nome_Cliente = Convert.ToString(idr["Nome_Cliente"]),
+                        CPF_Cliente = Convert.ToString(idr["CPF_Cliente"]),
+                        DataNascimento = Convert.ToDateTime(idr["DataNascimento"]),
+                        Telefone_Cliente = Convert.ToString(idr["Telefone_Cliente"]),
+                        Data_Cadastro_Cliente = Convert.ToDateTime(idr["Data_Cadastro_Cliente"]),
+                        Nome_Pet = Convert.ToString(idr["Nome_Pet"]),
+                        Tipo_Pet = Convert.ToString(idr["Tipo_Pet"]),
+                        Genero_Pet = Convert.ToString(idr["Genero_Pet"]),
+                        Tamanho_Pet = Convert.ToString(idr["Tamanho_Pet"]),
+                        Mensagem_Cliente = Convert.ToString(idr["Mensagem_Cliente"]),
+                        Rua_Cliente = Convert.ToString(idr["Rua_Cliente"]),
+                        Numero_Cliente = Convert.ToInt32(idr["Numero_Cliente"]),
+                        Bairro_Cliente = Convert.ToString(idr["Bairro_Cliente"]),
+                        Cidade_Cliente = Convert.ToString(idr["Cidade_Cliente"]),
+                        UF_Cliente = Convert.ToString(idr["UF_Cliente"]),
+                    });
+                }
+            }
+            con.Close();
+            return agendamentoListItem;
+        }
+
+        //Lista de Agendamentos do Lado Prestador
+        public List<AgendamentoListItem> GetPrestadorAgendamentosList()
+        {
+            //Passando o Id do Prestador com base no Id do Usuário logado
+            var prestadorId = GetIdPrestador();
+
+            //Encontra e faz a leitura do arquivo appsettings.json:
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            //Conexão com o LocalDB
+            var stringConexao = configuration.GetConnectionString("DefaultConnection");
+            SqlConnection con = new SqlConnection(stringConexao);
+
+            //Select na Tabela
+            SqlCommand cmd = new SqlCommand
+            (
+                "SELECT Agendamentos.Id AS AgendamentoId" +
+                ", Agendamentos.Data_Agenda AS Data_Agendamento" +
+                ", Servicos.Nome AS Servico" +
+                ", Servicos.Descricao AS Servico_Descricao" +
+                ", Prestadores.NomeCompleto AS Nome_Prestador" +
+                ", EnderecosPrestadores.Logradouro AS Rua_Prestador" +
+                ", EnderecosPrestadores.Numero AS Numero_Prestador" +
+                ", EnderecosPrestadores.Bairro AS Bairro_Prestador" +
+                ", EnderecosPrestadores.Cidade AS Cidade_Prestador" +
+                ", EnderecosPrestadores.UF AS UF_Prestador" +
+                ", Prestadores.Telefone AS Telefone_Prestador" +
+                ", Prestadores.Data_Cadastro AS Data_Cadastro_Prestador" +
+                ", ServicosPrestador.Valor AS Valor_Servico" +
+                ", ServicosAgendamento.Valor_Desconto AS Desconto_Servico" +
+                ", ServicosAgendamento.Data_Conclusao" +
+                ", ServicosAgendamento.Data_Cancelamento" +
+                ", ServicosAgendamento.Mensagem_Profissional_Executante AS Mensagem_Prestador" +
+                ", Clientes.NomeCompleto AS Nome_Cliente" +
+                ", Clientes.CPF AS CPF_Cliente" +
+                ", Clientes.DataNascimento" +
+                ", Clientes.Telefone1 AS Telefone_Cliente" +
+                ", Clientes.Data_Cadastro AS Data_Cadastro_Cliente" +
+                ", Pets.NomeCompleto AS Nome_Pet" +
+                ", TipoPet.Descricao AS Tipo_Pet" +
+                ", Generos.Descricao AS Genero_Pet" +
+                ", TamanhosPet.Descricao AS Tamanho_Pet" +
+                ", ServicosAgendamento.Mensagem_Cliente" +
+                ", EnderecosClientes.Logradouro AS Rua_Cliente" +
+                ", EnderecosClientes.Numero AS Numero_Cliente" +
+                ", EnderecosClientes.Bairro AS Bairro_Cliente" +
+                ", EnderecosClientes.Cidade AS Cidade_Cliente" +
+                ", EnderecosClientes.UF AS UF_Cliente " +
+                "FROM Agendamentos " +
+                "INNER JOIN " +
+                "Prestadores ON Agendamentos.PrestadorId = Prestadores.Id " +
+                "INNER JOIN " +
+                "ServicosPrestador ON Prestadores.Id = ServicosPrestador.PrestadorId " +
+                "INNER JOIN " +
+                "ServicosAgendamento ON Agendamentos.Id = ServicosAgendamento.AgendaId AND ServicosPrestador.Id = ServicosAgendamento.ServicoPrestadorId " +
+                "INNER JOIN " +
+                "Servicos ON ServicosPrestador.ServicoId = Servicos.Id " +
+                "INNER JOIN " +
+                "EnderecosPrestadores ON Prestadores.Id = EnderecosPrestadores.PrestadorId " +
+                "INNER JOIN " +
+                "Clientes ON Agendamentos.ClienteId = Clientes.Id " +
+                "INNER JOIN " +
+                "EnderecosClientes ON Clientes.Id = EnderecosClientes.ClienteId " +
+                "INNER JOIN " +
+                "Pets ON Clientes.Id = Pets.ClienteId " +
+                "INNER JOIN " +
+                "TipoPet ON Pets.TipoPet = TipoPet.TipoPetId " +
+                "INNER JOIN " +
+                "TamanhosPet ON Pets.TamanhoPet = TamanhosPet.TamanhoPetId " +
+                "INNER JOIN " +
+                "Generos ON Pets.Genero = Generos.GeneroId " +
+                "WHERE Agendamentos.PrestadorId = @IdPrestador"
+              , con);
+
+            con.Open();
+
+            //Parâmetros do Where
+            cmd.Parameters.AddWithValue("@IdPrestador", prestadorId);
 
             SqlDataReader idr = cmd.ExecuteReader();
             List<AgendamentoListItem> agendamentoListItem = new List<AgendamentoListItem>();
