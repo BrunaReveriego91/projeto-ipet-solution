@@ -4,6 +4,9 @@ namespace Pet.WebAPI.Domain.Entities
 {
     public class Prestador : BaseEFObject
     {
+        /// <summary>
+        /// Chave Id Prestador.
+        /// </summary>
         [Key]
         public int Id { get; set; }
 

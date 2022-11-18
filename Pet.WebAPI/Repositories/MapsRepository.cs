@@ -16,11 +16,13 @@ namespace Pet.WebAPI.Repositories
             _enderecosPrestadorRepository = enderecosPrestadorRepository;
         }
 
-        public IEnumerable<Prestador> GetPrestadoresByUserLocation(int userId)
+        public IEnumerable<Prestador> GetPrestadoresByUserLocation(string userId)
         {
             var prestadoresList = new List<Prestador>();
 
-            var cliente = _clientesRepository.Get(userId);
+            var cliente = _clientesRepository.GetByUserId(userId);
+
+
             if (cliente is null || cliente.Endereco is null)
                 return null;
 

@@ -24,7 +24,7 @@ namespace Pet.WebAPI.Services
             _servicosService = servicosService;
         }
 
-        public async Task<List<PrestadorMaps>> GetPrestadoresByUserLocation(int userId)
+        public async Task<List<PrestadorMaps>> GetPrestadoresByUserLocation(string userId)
         {
             var prestadores = _mapsRepository.GetPrestadoresByUserLocation(userId);
 
@@ -44,7 +44,7 @@ namespace Pet.WebAPI.Services
                     {
                         var localizacao = await ProcuraGeolocalizacaoPrestador(enderecoPrestador);
                         if (localizacao is not null)
-                            prestadoresMaps.Add(PrestadorMaps.CriaPrestadorMaps(prestador.NomeCompleto, listaservicosPrestadorDetalhes, localizacao[0], localizacao[1]));
+                            prestadoresMaps.Add(PrestadorMaps.CriaPrestadorMaps(prestador.Id,prestador.NomeCompleto, listaservicosPrestadorDetalhes, localizacao[0], localizacao[1]));
 
                     }
                 }

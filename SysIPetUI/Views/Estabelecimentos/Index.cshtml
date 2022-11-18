@@ -4,6 +4,13 @@
     ViewBag.Title = "Estabelecimentos";
 }
 
+<style>
+    .MicrosoftMap .Infobox .infobox-actions {
+        height: 50px !important;
+    }
+
+</style>
+
 <script type='text/javascript'>
     function loadMapScenario() {
         var map = new Microsoft.Maps.Map(document.getElementById('myMap'), {
@@ -16,21 +23,8 @@
         // Create the infobox for the pushpin
         var infobox = null;
 
-        function SendToScheduleService() {
-            fetch('https://example.com/profile', {
-                method: 'POST', // or 'PUT'
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log('Success:', data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
+        function SendToScheduleService(idPrestador) {
+            window.location.href = 'https://localhost:44346/Agendamento/CadastroAgendamentoPartial?idPrestador=' + idPrestador;
         }
 
         //declare addMarker function
@@ -41,15 +35,12 @@
                 visible: false,
                 showPointer: false,
                 showCloseButton: false,
+                maxHeight: 500,
                 actions: [{
-                    label: 'Handler1',
+                    label: 'Clique aqui para agendar um serviço',
                     eventHandler: function() {
-                        SendToScheduleService();
-                    }
-                }, {
-                    label: 'Handler2',
-                    eventHandler: function() {
-                        alert('Handler2');
+                        //console.log(pid);
+                        SendToScheduleService(pid);
                     }
                 }]
             });
@@ -104,12 +95,12 @@
 
             }
 
-            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()');
+            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()', @item.IdPrestador);
         }
     }
 
 
-         }
+                     }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
