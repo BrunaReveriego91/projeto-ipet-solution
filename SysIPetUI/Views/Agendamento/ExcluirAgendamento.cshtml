@@ -1,4 +1,7 @@
-﻿@model SysIPetUI.Models.AgendamentoViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model SysIPetUI.Models.AgendamentoViewModel
 
 @{
     Layout = null;
@@ -77,14 +80,35 @@
                                     @Html.DisplayFor(modelItem => item.Valor_Servico)
                                 </li>
 
-                                <li>
-                                    <label class="control-label">
-                                        <span class="brand-text">
-                                            <b class="text-blue">Prestador:</b>
-                                        </span>
-                                    </label>
-                                    @Html.DisplayFor(modelItem => item.Nome_Prestador)
-                                </li>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <!--Obtem o usuário logado e valida o TipoUsuario-->
+                                    var tipoUsuario = User.GetUserId();
+
+                                    <!--Se o TipoUsuario for igual a true então exibe a Tela de Prestador Se Não, exibe como Consumidor-->
+                                    @if (tipoUsuario == "True")
+                                    {
+                                        <li>
+                                            <label class="control-label">
+                                                <span class="brand-text">
+                                                    <b class="text-blue">Cliente:</b>
+                                                </span>
+                                            </label>
+                                            @Html.DisplayFor(modelItem => item.Nome_Cliente)
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <label class="control-label">
+                                                <span class="brand-text">
+                                                    <b class="text-blue">Prestador:</b>
+                                                </span>
+                                            </label>
+                                            @Html.DisplayFor(modelItem => item.Nome_Prestador)
+                                        </li>
+                                    }
+                                }
 
                             </ul>
 
