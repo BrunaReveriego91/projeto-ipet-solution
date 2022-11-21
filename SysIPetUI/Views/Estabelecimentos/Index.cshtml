@@ -79,9 +79,10 @@
         //add markers to map
     @if (Model.EstabelecimentosList != null)
     {
-        StringBuilder s = new StringBuilder();
+        
         foreach (var item in Model.EstabelecimentosList)
         {
+            StringBuilder s = new StringBuilder();
             foreach (var servico in item.Servicos)
             {
                 string valor;
