@@ -3,7 +3,7 @@
   <Class Name="SysIPetUI.Models.AgendamentoViewModel">
     <Position X="2.25" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAIAEAAIAAAAAAAAAAAAQAAABAAAAAACAgAA=</HashCode>
+      <HashCode>CQAGEAAAgEBEACIAADCIgACEKAAAAAQABAAAAJEJGAA=</HashCode>
       <FileName>Models\AgendamentoViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,7 +17,7 @@
   <Class Name="SysIPetUI.Models.ClienteViewModel">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAQAgAAAAAAAAAAAAACAAAIAAAAAAAAAAJAAEAA=</HashCode>
+      <HashCode>AAADAAQAgAAAAAAAAAAAAACAAAIAAAAAAAAAAJAAEAA=</HashCode>
       <FileName>Models\ClienteViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -45,7 +45,7 @@
   <Class Name="SysIPetUI.Models.PrestadorViewModel">
     <Position X="0.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAIAAA=</HashCode>
+      <HashCode>CQACAAAAgIBFACIAACEAgACACAAQAAQAAAAAAJEJGAA=</HashCode>
       <FileName>Models\PrestadorViewModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -66,7 +66,7 @@
   <Class Name="SysIPetUI.Models.Usuarios">
     <Position X="7.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAACAAABAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAABAAAQAAAIAAAACAAABAAAAAgAAAAQA=</HashCode>
       <FileName>Models\Usuarios.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -89,13 +89,6 @@
     <TypeIdentifier>
       <HashCode>AAACAAAgAAAIAAAAAAAAAAAAAAAAIAAAAAAAACQAAAA=</HashCode>
       <FileName>Models\PetsListViewModel.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SysIPetUI.Models.Agenda">
-    <Position X="9.25" Y="2.25" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAACEAAAAAAEAAAAADCAAAAAAAAAAAAAAAAQQAAAAAA=</HashCode>
-      <FileName>Models\Agenda.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
