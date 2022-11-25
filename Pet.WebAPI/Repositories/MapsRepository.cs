@@ -26,7 +26,7 @@ namespace Pet.WebAPI.Repositories
             if (cliente is null || cliente.Endereco is null)
                 return null;
 
-            var enderecosPrestadores = _enderecosPrestadorRepository.GetAll().Where(x => x.Cidade == cliente.Endereco.Cidade && x.UF == cliente.Endereco.UF).ToList();
+            var enderecosPrestadores = _enderecosPrestadorRepository.GetAll().Where(x => x.Cidade?.Trim() == cliente.Endereco.Cidade?.Trim() && x.UF?.Trim() == cliente.Endereco.UF?.Trim()).ToList();
             if (enderecosPrestadores is null)
                 return null;
 
