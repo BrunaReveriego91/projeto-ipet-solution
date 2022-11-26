@@ -20,10 +20,6 @@ namespace Pet.WebAPI.Domain.Entities
         [StringLength(15)]
         public string? CPF { get; set; }
 
-        [Required]
-        [StringLength(59)]
-        public string? Email { get; set; }
-
         [StringLength(20)]
         public DateTime? DataNascimento { get; set; }
 

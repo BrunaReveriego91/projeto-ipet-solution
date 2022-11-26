@@ -39,7 +39,7 @@
                 actions: [{
                     label: 'Clique aqui para agendar um serviço',
                     eventHandler: function() {
-                        //console.log(pid);
+                        console.log(pid);
                         SendToScheduleService(pid);
                     }
                 }]
@@ -79,13 +79,13 @@
         //add markers to map
     @if (Model.EstabelecimentosList != null)
     {
-        
+
         foreach (var item in Model.EstabelecimentosList)
         {
             StringBuilder s = new StringBuilder();
             foreach (var servico in item.Servicos)
             {
-                string valor;
+                string valor = "";
 
                 s.Append("- ");
                 s.Append(servico.Nome);
@@ -96,12 +96,12 @@
 
             }
 
-            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()', @item.IdPrestador);
+            @:addMarker(@item.Latitude, @item.Longitude, '@item.NomeCompleto', '@s.ToString()', '@item.IdPrestador');
         }
     }
 
 
-                     }
+                         }
 </script>
 <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?branch=release&callback=loadMapScenario' async defer></script>
 
